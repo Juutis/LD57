@@ -65,7 +65,7 @@ public class LevelManager : MonoBehaviour
 
         Debug.Log("Level loaded");
 
-        LevelInfo[] infos = (LevelInfo[])FindObjectsByType<LevelInfo>(FindObjectsSortMode.None);
+        LevelInfo[] infos = FindObjectsByType<LevelInfo>(FindObjectsSortMode.None);
 
         foreach (LevelInfo info in infos)
         {
@@ -97,7 +97,7 @@ public class LevelManager : MonoBehaviour
             nextLevel.transform.position = Vector3.Lerp(nextPos, nextTargetPos, i);
             Debug.Log(i);
         }
-        Debug.Log("Lerp finished");
+        Debug.Log("Lerp finished ");
 
         nextLevel.transform.position = new Vector3(0, 0, 0);
 
