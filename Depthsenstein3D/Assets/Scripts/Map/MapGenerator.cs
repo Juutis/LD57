@@ -16,6 +16,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     private Tilemap floorMap;
     [SerializeField]
+    private Tilemap ceilingMap;
+    [SerializeField]
     private Tilemap wallMap;
     [SerializeField]
     private List<Tilemap> objectMaps;
@@ -25,19 +27,24 @@ public class MapGenerator : MonoBehaviour
     private Transform mapContainer;
 
     [SerializeField]
+
     private Transform containerPrefab;
 
+    [SerializeField]
+    private PlayerTest playerCharacterPrefab;
+    private PlayerTest player;
+
     Transform floorContainer;
+    Transform ceilingContainer;
     Transform wallContainer;
     Transform objectContainer;
 
     [SerializeField]
     private MapManager mapManager;
 
+
     void Start()
     {
-        mapManager.Initialize();
-        SetupContainers();
         Generate();
     }
 
@@ -45,6 +52,9 @@ public class MapGenerator : MonoBehaviour
         floorContainer = Instantiate(containerPrefab, mapContainer);
         floorContainer.transform.localPosition = new Vector3(0, -1, 0f);
         floorContainer.name = "FLOOR";
+        ceilingContainer = Instantiate(containerPrefab, mapContainer);
+        ceilingContainer.transform.localPosition = new Vector3(0, 1, 0f);
+        ceilingContainer.name = "CEILING";
         wallContainer = Instantiate(containerPrefab, mapContainer);
         wallContainer.name = "WALL";
         objectContainer = Instantiate(containerPrefab, mapContainer);
@@ -53,11 +63,24 @@ public class MapGenerator : MonoBehaviour
 
     public void Generate()
     {
+        mapManager.Initialize();
+        SetupContainers();
         int mapId = 0;
         LoopTiles(floorMap, mapId++, SpawnFloorTile);
+        LoopTiles(ceilingMap, mapId++, SpawnCeilingTile);
         LoopTiles(wallMap, mapId++, SpawnWallTile);
         foreach(var objectMap in objectMaps) {
             LoopTiles(objectMap, mapId++, SpawnObject);
+        }
+        SpawnPlayer();
+    }
+
+    public void SpawnPlayer() {
+        if (player == null) {
+            MapPrefab spawn = mapManager.GetSpawnPoint();
+            player = Instantiate(playerCharacterPrefab, mapContainer);
+            player.transform.localPosition = new Vector3(spawn.Position.x, 0, spawn.Position.y);
+            player.transform.rotation = mapManager.SpawnRotation();
         }
     }
 
@@ -77,6 +100,17 @@ public class MapGenerator : MonoBehaviour
             prefab = mapTileData.Tile.Prefab;
         }
         MapPrefab spawnedTile = Instantiate(prefab, floorContainer);
+        spawnedTile.Spawn(mapTileData);
+    }
+
+    private void SpawnCeilingTile(TileMapTileData mapTileData)
+    {
+        var prefab = tileConfig.DefaultTexturedCube;
+        if (mapTileData.Tile != null && mapTileData.Tile.Prefab != null)
+        {
+            prefab = mapTileData.Tile.Prefab;
+        }
+        MapPrefab spawnedTile = Instantiate(prefab, ceilingContainer);
         spawnedTile.Spawn(mapTileData);
     }
 

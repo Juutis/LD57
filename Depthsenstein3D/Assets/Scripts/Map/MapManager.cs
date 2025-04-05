@@ -6,19 +6,28 @@ public class MapManager : MonoBehaviour
 {
     private List<MapPrefab> mapObjects = new();
     private List<MapPrefab> mapWalls = new();
+    private MapPrefab spawn = null;
     public void Initialize()
     {
         mapObjects = new();
         mapWalls = new();
+        spawn = null;
     }
 
     public void AddObject(MapPrefab mapPrefab) {
+        if (mapPrefab.Type == MapPrefabType.Spawn) {
+            spawn = mapPrefab;
+        }
         mapObjects.Add(mapPrefab);
     }
 
     public void AddWall(MapPrefab mapPrefab)
     {
         mapWalls.Add(mapPrefab);
+    }
+
+    public MapPrefab GetSpawnPoint() {
+        return spawn;
     }
 
     public void TriggerSecret(int secretId) {
@@ -30,6 +39,40 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    public Quaternion SpawnRotation() {
+        Vector2Int pos = spawn.Position;
+        Vector2Int emptyPos = Vector2Int.up;
+        for(int xPos = -1; xPos <= 1; xPos += 1) {
+            for (int yPos = -1; yPos <= 1; yPos += 1) {
+                Vector2Int neighborPos = new Vector2Int(xPos + pos.x, yPos + pos.y);
+                MapPrefab wall = mapWalls.Find(mapWall => mapWall.Position == neighborPos);
+                if (wall == null) {
+                    emptyPos = neighborPos;
+                    break;
+                }
+            }
+        }
+
+        Debug.Log($"Pos: {pos} & emptyPos: {emptyPos}");
+        // Convert Vector2Int to Vector3 (assuming Y is 0)
+        Vector3 positionA = new Vector3(pos.x, 0, pos.y);
+        Vector3 positionB = new Vector3(emptyPos.x, 0, emptyPos.y);
+
+        // Calculate the direction vector from A to B
+        Vector3 direction = positionB - positionA;
+
+        // Check if the direction is zero
+        if (direction == Vector3.zero)
+        {
+            // If the direction is zero, return the identity rotation
+            return Quaternion.identity;
+        }
+
+        // Calculate the rotation using LookRotation
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        return rotation;
+    }
+
     public void ClearWall(Vector2Int position) {
         MapPrefab wallPrefab = mapWalls.FirstOrDefault(wall => wall.Position == position);
         if (wallPrefab != null) {
@@ -38,7 +81,4 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    public void GetTriggerTarger(int triggerId) {
-
-    }
 }

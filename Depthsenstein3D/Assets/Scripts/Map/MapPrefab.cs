@@ -6,6 +6,8 @@ public class MapPrefab : MonoBehaviour
 {
     [SerializeField]
     private MapPrefabType mapPrefabType;
+
+    public MapPrefabType Type { get { return mapPrefabType;}}
     [SerializeField]
     private VisualizationType visualizationType;
 
