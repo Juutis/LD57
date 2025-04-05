@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class LockedDoorKey : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private int mapId;
+    public int MapId { get { return mapId; } }
+    public void Initialize(int mapId)
     {
-        
+        this.mapId = mapId;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

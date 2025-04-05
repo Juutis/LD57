@@ -16,7 +16,6 @@ public class SecretTrigger : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Secret id {secretId} triggered!");
         MapGenerator.main.TriggerSecret(secretId);
 
         hasTriggered = true;

@@ -7,9 +7,14 @@ public class Pickup : MonoBehaviour
     private float distanceCheckInterval = 0.1f;
     private float distanceCheckTimer = 0.1f;
 
+    private bool isActive = true;
+
 
     void Update()
     {
+        if (!isActive) {
+            return;
+        }
         distanceCheckTimer += Time.deltaTime;
         if (distanceCheckTimer > distanceCheckInterval) {
             distanceCheckTimer = 0f;
@@ -17,9 +22,21 @@ public class Pickup : MonoBehaviour
                 return;
             }
             if (Vector3.Distance(MapGenerator.main.Player.transform.position, transform.position) <= minDistance) {
-                Debug.Log($"hi! You found {gameObject.name}");
-                Destroy(gameObject);
+                HandlePickup();
+                Kill();
             }
+        }
+    }
+
+    private void Kill() {
+        isActive = false;
+        gameObject.SetActive(false);
+    }
+
+    void HandlePickup() {
+        LockedDoorKey key = GetComponent<LockedDoorKey>();
+        if (key != null) {
+            MapGenerator.main.PickupKey(key);
         }
     }
 }
