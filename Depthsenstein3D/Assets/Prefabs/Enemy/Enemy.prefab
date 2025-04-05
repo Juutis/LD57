@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1581036201790347782}
   - component: {fileID: 6627153243584554700}
   - component: {fileID: 2924348174009459701}
-  - component: {fileID: 499290573121348112}
   - component: {fileID: 703625126274421578}
   m_Layer: 6
   m_Name: Enemy
@@ -81,7 +80,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
@@ -109,19 +108,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &499290573121348112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1893043045533641910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47afd630efcd2054d8c29a4fc7bc8ac7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DieEffect: {fileID: 2397607349339124801, guid: 256cd4a79cad32a4ab6a9e97b92bb3c2, type: 3}
 --- !u!114 &703625126274421578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +125,7 @@ MonoBehaviour:
   DieEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 499290573121348112}
+      - m_Target: {fileID: 1893043045533641910}
         m_TargetAssemblyTypeName: MeleeEnemy, Assembly-CSharp
         m_MethodName: Die
         m_Mode: 1

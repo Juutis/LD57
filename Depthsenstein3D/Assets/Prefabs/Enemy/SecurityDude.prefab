@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5946802527270840060
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: MaxHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: CurrentHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7519508525666953269}
+    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Die
+      objectReference: {fileID: 0}
+    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RangedEnemy, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581036201790347782, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ba1dbdf2732c12a4b9005782c24287ff, type: 2}
+    - target: {fileID: 1893043045533641910, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_Name
+      value: SecurityDude
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731509159151640254, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2136104429, guid: 48992f260c556a8459e57c594de24723, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1893043045533641910, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7519508525666953269}
+  m_SourcePrefab: {fileID: 100100000, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+--- !u!1 &5242816665788467786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1893043045533641910, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+  m_PrefabInstance: {fileID: 5946802527270840060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7519508525666953269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242816665788467786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc50f59099ac594ba39f16e1143835d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DieEffect: {fileID: 2397607349339124801, guid: 256cd4a79cad32a4ab6a9e97b92bb3c2, type: 3}
