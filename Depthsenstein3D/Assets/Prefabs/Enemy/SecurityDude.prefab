@@ -121,4 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc50f59099ac594ba39f16e1143835d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DieEffect: {fileID: 2397607349339124801, guid: 256cd4a79cad32a4ab6a9e97b92bb3c2, type: 3}
+  DieEffect: {fileID: 2963091402831274226, guid: b038b65d0c5e78f4cb95ff3f4cf8ff86, type: 3}
