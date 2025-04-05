@@ -6,10 +6,11 @@ public class FpsManager : MonoBehaviour
     public static FpsManager Main;
 
     public List<Gun> Guns;
-    public Gun SelectedGun;
+    public Gun SelectedGun = null;
 
     void Awake()
     {
+        SelectedGun = null;
         if (Main != null) {
             Destroy(gameObject);
         }

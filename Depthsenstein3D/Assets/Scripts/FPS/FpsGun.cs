@@ -60,6 +60,14 @@ public class FpsGun : MonoBehaviour
         fillMagazine();
     }
 
+    public void Stow() {
+        anim.Play("Stow");
+    }
+
+    public void Arm() {
+        anim.Play("Arm");
+    }
+
     private void fillMagazine() {
         gun.CurrentStatus.AmmoInMagazine = Mathf.Min(gun.CurrentStatus.CurrentAmmo, gun.Config.MagazineSize);
     }
