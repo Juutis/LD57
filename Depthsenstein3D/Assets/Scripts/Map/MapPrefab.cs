@@ -1,0 +1,84 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+public class MapPrefab : MonoBehaviour
+{
+    [SerializeField]
+    private MapPrefabType mapPrefabType;
+    [SerializeField]
+    private VisualizationType visualizationType;
+
+    private TileMapTileData tileMapTileData;
+
+
+    public Vector2Int Position {get {return tileMapTileData.Position; }}
+    public int MapId { get {return tileMapTileData.MapId; }}
+
+    public void Spawn(TileMapTileData mapTileData)
+    {
+        tileMapTileData = mapTileData;
+
+        Sprite sprite = tileMapTileData.Tile?.Sprite ?? tileMapTileData.Sprite;
+        // visualization
+        if (visualizationType == VisualizationType.TexturedCube)
+        {
+            GameObject cube = MapPrefabHelper.main.CreateTexturedCube(sprite, transform);
+        }
+        else if (visualizationType == VisualizationType.Billboard)
+        {
+            GameObject billboard = MapPrefabHelper.main.CreateBillboardSprite(sprite, transform);
+        }
+
+        // custom
+        if (mapPrefabType == MapPrefabType.SecretTrigger) {
+            SecretTrigger secretTrigger = GetComponent<SecretTrigger>();
+            secretTrigger.Initialize(tileMapTileData.MapId);
+        }
+        if (mapPrefabType == MapPrefabType.SecretTarget) {
+            SecretTarget secretTarget = GetComponent<SecretTarget>();
+            secretTarget.Initialize(tileMapTileData.MapId, tileMapTileData.Position);
+        }
+
+        // positioning & naming
+        SpawnPrefab(new Vector3(tileMapTileData.Position.x, 0, tileMapTileData.Position.y));
+    }
+
+    private void SpawnPrefab(Vector3 position)
+    {
+        transform.localPosition = position;
+        string typeName = mapPrefabType != MapPrefabType.None ? $"{mapPrefabType}" : "-";
+        name = $"[X{position.x} Y{position.z}] {typeName}";
+    }
+}
+
+
+public enum VisualizationType
+{
+    TexturedCube,
+    Billboard,
+    Custom
+}
+
+
+public enum MapPrefabType
+{
+    None,
+    Floor,
+    Wall,
+    Door,
+    Spawn,
+    Elevator,
+    SecretTrigger,
+    SecretTarget,
+    Ammo,
+    Gun,
+    HP,
+    Money,
+    Key,
+    LockedDoor,
+    BasicMeleeMob,
+    BasicRangedMob,
+    Clutter
+
+}
