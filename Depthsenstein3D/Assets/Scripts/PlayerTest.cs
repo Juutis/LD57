@@ -8,7 +8,7 @@ public class PlayerTest : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -37,7 +37,8 @@ public class PlayerTest : MonoBehaviour
                 {
                     Destroy(door.gameObject);
                 }
-                else if (target.TryGetComponent(out SecretTrigger secretTrigger)) {
+                else if (target.TryGetComponent(out SecretTrigger secretTrigger))
+                {
                     secretTrigger.Trigger();
                 }
                 else if (target.TryGetComponent(out LockedDoor lockedDoor))

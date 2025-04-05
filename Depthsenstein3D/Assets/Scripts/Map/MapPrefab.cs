@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -39,24 +40,28 @@ public class MapPrefab : MonoBehaviour
             SecretTrigger secretTrigger = GetComponent<SecretTrigger>();
             secretTrigger.Initialize(tileMapTileData.MapId);
         }
-        if (mapPrefabType == MapPrefabType.SecretTarget) {
+        else if (mapPrefabType == MapPrefabType.SecretTarget) {
             SecretTarget secretTarget = GetComponent<SecretTarget>();
             secretTarget.Initialize(tileMapTileData.MapId, tileMapTileData.Position);
         }
-        if (mapPrefabType == MapPrefabType.LockedDoor)
+        else if (mapPrefabType == MapPrefabType.Door)
+        {
+            transform.GetChild(0).AddComponent<Door>();
+        }
+        else if (mapPrefabType == MapPrefabType.LockedDoor)
         {
             LockedDoor lockedDoor = GetComponent<LockedDoor>();
             lockedDoor.Initialize(tileMapTileData.MapId);
         }
-        if (mapPrefabType == MapPrefabType.Key)
+        else if (mapPrefabType == MapPrefabType.Key)
         {
             LockedDoorKey key = GetComponent<LockedDoorKey>();
             key.Initialize(tileMapTileData.MapId);
         }
-
-        if (mapPrefabType == MapPrefabType.Elevator)
+        else if (mapPrefabType == MapPrefabType.Elevator)
         {
             MapGenerator.main.SetupElevator(this);
+            transform.GetChild(0).AddComponent<ElevatorSwitch>();
         }
 
         // positioning & naming

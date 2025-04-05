@@ -43,6 +43,7 @@ public class MapPrefabHelper : MonoBehaviour
 
         // Create a new texture with the size of the sprite
         Texture2D subTexture = new Texture2D((int)spriteRect.width, (int)spriteRect.height);
+        subTexture.filterMode = FilterMode.Point;
 
         // Copy the pixels from the original texture to the new texture
         Color[] pixels = originalTexture.GetPixels((int)spriteRect.x, (int)spriteRect.y, (int)spriteRect.width, (int)spriteRect.height);
