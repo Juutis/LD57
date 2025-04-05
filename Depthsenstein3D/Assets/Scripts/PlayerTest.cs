@@ -1,26 +1,39 @@
+using System;
 using UnityEngine;
 
 public class PlayerTest : MonoBehaviour
 {
     float rotateSpeed = 120f;
+    float mouseSensitivity = 1f;
     float moveSpeed = 3f;
+    private Rigidbody rb;
+    private Vector2 moveInput;
+    public bool UseMouse = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        if (UseMouse) {
+            float x = Input.GetAxisRaw("Horizontal");
+            float y = Input.GetAxisRaw("Vertical");
+            moveInput = new Vector2(x, y);
 
-        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + h * rotateSpeed * Time.deltaTime, 0);
-        transform.position = transform.position + transform.forward * v * moveSpeed * Time.deltaTime;
-
-
+            float rot = Input.GetAxisRaw("Mouse X");
+            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + rot * mouseSensitivity, 0);
+        } else {
+            float h = Input.GetAxisRaw("Horizontal");
+            float v = Input.GetAxisRaw("Vertical");
+            moveInput = new Vector2(0.0f, v);
+            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + h * rotateSpeed * Time.deltaTime, 0);
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -52,5 +65,10 @@ public class PlayerTest : MonoBehaviour
                 }
             }
         }
+    }
+
+    void FixedUpdate()
+    {
+        rb.linearVelocity = (transform.forward * moveInput.y + transform.right * moveInput.x).normalized * moveSpeed;
     }
 }
