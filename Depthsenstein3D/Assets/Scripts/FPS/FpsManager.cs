@@ -7,6 +7,8 @@ public class FpsManager : MonoBehaviour
 
     public List<Gun> Guns;
     public Gun SelectedGun = null;
+    public Transform bulletOrigin;
+    public GameObject HitEffect;
 
     void Awake()
     {
@@ -16,7 +18,7 @@ public class FpsManager : MonoBehaviour
         }
         Main = this;
         foreach(var gun in Guns) {
-            gun.GunModel.Init(gun);
+            gun.GunModel.Init(gun, bulletOrigin);
         }
     }
 
@@ -46,6 +48,9 @@ public class FpsManager : MonoBehaviour
         public int MagazineSize;
         public int MaxAmmo;
         public int InitialAmmo;
+        public float AccuracyDegrees;
+        public int ProjectileCount;
+        public float Damage;
     }
 
     [System.Serializable]

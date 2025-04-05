@@ -196,6 +196,9 @@ MonoBehaviour:
       MagazineSize: 10
       MaxAmmo: 100
       InitialAmmo: 50
+      AccuracyDegrees: 3
+      ProjectileCount: 1
+      Damage: 5
     CurrentStatus:
       CurrentAmmo: 0
       AmmoInMagazine: 0
@@ -206,6 +209,9 @@ MonoBehaviour:
       MagazineSize: 2
       MaxAmmo: 30
       InitialAmmo: 20
+      AccuracyDegrees: 10
+      ProjectileCount: 12
+      Damage: 2
     CurrentStatus:
       CurrentAmmo: 0
       AmmoInMagazine: 0
@@ -217,10 +223,15 @@ MonoBehaviour:
       MagazineSize: 0
       MaxAmmo: 0
       InitialAmmo: 0
+      AccuracyDegrees: 0
+      ProjectileCount: 0
+      Damage: 0
     CurrentStatus:
       CurrentAmmo: 0
       AmmoInMagazine: 0
     GunModel: {fileID: 0}
+  bulletOrigin: {fileID: 0}
+  HitEffect: {fileID: 5930714590066344127, guid: 1d897d9300c4f3243a4fd109b1c0b752, type: 3}
 --- !u!114 &8102796783397365644
 MonoBehaviour:
   m_ObjectHideFlags: 0

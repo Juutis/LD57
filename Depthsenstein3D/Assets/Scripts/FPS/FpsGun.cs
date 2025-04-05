@@ -8,9 +8,11 @@ public class FpsGun : MonoBehaviour
     private bool reloading = false;
 
     private FpsManager.Gun gun;
+    private Transform bulletOrigin;
 
-    public void Init(FpsManager.Gun gun) {
+    public void Init(FpsManager.Gun gun, Transform bulletOrigin) {
         this.gun = gun;
+        this.bulletOrigin = bulletOrigin;
         gun.CurrentStatus.CurrentAmmo = gun.Config.InitialAmmo;
         fillMagazine();
     }
@@ -35,6 +37,7 @@ public class FpsGun : MonoBehaviour
             gun.CurrentStatus.AmmoInMagazine--;
             gun.CurrentStatus.CurrentAmmo--;
             lastShot = Time.time;
+            fireBullet();
         }
     }
 
@@ -70,5 +73,19 @@ public class FpsGun : MonoBehaviour
 
     private void fillMagazine() {
         gun.CurrentStatus.AmmoInMagazine = Mathf.Min(gun.CurrentStatus.CurrentAmmo, gun.Config.MagazineSize);
+    }
+
+    private void fireBullet() {
+        for(var i = 0; i < gun.Config.ProjectileCount; i++) {
+            var dir = bulletOrigin.forward;
+            var inAccuracy = Random.Range(0.0f, 1.0f) * gun.Config.AccuracyDegrees;
+            var randomRoll = Random.Range(0.0f, 360.0f);
+            dir = Quaternion.AngleAxis(inAccuracy, bulletOrigin.up) * dir;
+            dir = Quaternion.AngleAxis(randomRoll, bulletOrigin.forward) * dir;
+            if (Physics.Raycast(bulletOrigin.position, dir, out RaycastHit hitInfo, 1000f, ~0)) {
+                var effect = Instantiate(FpsManager.Main.HitEffect);
+                effect.transform.position = hitInfo.point;
+            }
+        }
     }
 }
