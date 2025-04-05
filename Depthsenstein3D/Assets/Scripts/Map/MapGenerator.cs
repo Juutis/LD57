@@ -104,6 +104,11 @@ public class MapGenerator : MonoBehaviour
         mapManager.TriggerSecret(secretId);
     }
 
+    public void SetupElevator(MapPrefab elevator)
+    {
+        mapManager.SetupElevator(elevator);
+    }
+
     private void SpawnFloorTile(TileMapTileData mapTileData)
     {
         var prefab = tileConfig.DefaultTexturedCube;
@@ -113,6 +118,7 @@ public class MapGenerator : MonoBehaviour
         }
         MapPrefab spawnedTile = Instantiate(prefab, floorContainer);
         spawnedTile.Spawn(mapTileData);
+        mapManager.AddFloor(spawnedTile);
     }
 
     private void SpawnCeilingTile(TileMapTileData mapTileData)
@@ -124,6 +130,7 @@ public class MapGenerator : MonoBehaviour
         }
         MapPrefab spawnedTile = Instantiate(prefab, ceilingContainer);
         spawnedTile.Spawn(mapTileData);
+        mapManager.AddCeiling(spawnedTile);
     }
 
     private void SpawnWallTile(TileMapTileData mapTileData)

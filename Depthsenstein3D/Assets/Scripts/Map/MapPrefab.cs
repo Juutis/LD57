@@ -13,6 +13,8 @@ public class MapPrefab : MonoBehaviour
 
     private TileMapTileData tileMapTileData;
 
+    public TileMapTileData TileMapTileData { get { return tileMapTileData; } }
+
 
     public Vector2Int Position {get {return tileMapTileData.Position; }}
     public int MapId { get {return tileMapTileData.MapId; }}
@@ -50,6 +52,11 @@ public class MapPrefab : MonoBehaviour
         {
             LockedDoorKey key = GetComponent<LockedDoorKey>();
             key.Initialize(tileMapTileData.MapId);
+        }
+
+        if (mapPrefabType == MapPrefabType.Elevator)
+        {
+            MapGenerator.main.SetupElevator(this);
         }
 
         // positioning & naming

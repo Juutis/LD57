@@ -6,8 +6,13 @@ public class MapManager : MonoBehaviour
 {
     private List<MapPrefab> mapObjects = new();
     private List<MapPrefab> mapWalls = new();
+    private List<MapPrefab> mapCeilings = new();
+    private List<MapPrefab> mapFloors = new();
+    private GameObject elevatorParent;
+
     private MapPrefab spawn = null;
-    private List<LockedDoorKey> pickedUpKeys = new ();
+    private List<LockedDoorKey> pickedUpKeys = new();
+
     public void Initialize()
     {
         mapObjects = new();
@@ -16,11 +21,14 @@ public class MapManager : MonoBehaviour
         spawn = null;
     }
 
-    public bool TryToOpenLockedDoor(int mapId) {
+    public bool TryToOpenLockedDoor(int mapId)
+    {
         LockedDoorKey foundKey = pickedUpKeys.FirstOrDefault(pKey => pKey.MapId == mapId);
-        foreach(LockedDoorKey key2 in pickedUpKeys) {
+        foreach (LockedDoorKey key2 in pickedUpKeys)
+        {
         }
-        if (foundKey != null) {
+        if (foundKey != null)
+        {
             pickedUpKeys.Remove(foundKey);
             Destroy(foundKey.gameObject);
             return true;
@@ -28,13 +36,16 @@ public class MapManager : MonoBehaviour
         return false;
     }
 
-    public void PickupKey(LockedDoorKey pickupKey) {
+    public void PickupKey(LockedDoorKey pickupKey)
+    {
         pickedUpKeys.Add(pickupKey);
         mapObjects.Remove(pickupKey.GetComponent<MapPrefab>());
     }
 
-    public void AddObject(MapPrefab mapPrefab) {
-        if (mapPrefab.Type == MapPrefabType.Spawn) {
+    public void AddObject(MapPrefab mapPrefab)
+    {
+        if (mapPrefab.Type == MapPrefabType.Spawn)
+        {
             spawn = mapPrefab;
         }
         mapObjects.Add(mapPrefab);
@@ -45,27 +56,80 @@ public class MapManager : MonoBehaviour
         mapWalls.Add(mapPrefab);
     }
 
-    public MapPrefab GetSpawnPoint() {
+    public void AddCeiling(MapPrefab mapPrefab)
+    {
+        mapCeilings.Add(mapPrefab);
+    }
+
+    public void AddFloor(MapPrefab mapPrefab)
+    {
+        mapFloors.Add(mapPrefab);
+    }
+
+    public void SetupElevator(MapPrefab elevator)
+    {
+        elevatorParent = new GameObject("elevatorParent");
+        int elevatorX = elevator.TileMapTileData.Position.x;
+        int elevatorY = elevator.TileMapTileData.Position.y;
+
+        foreach (MapPrefab ceiling in mapCeilings)
+        {
+            MoveToElevatorParentIfNeeded(elevatorX, elevatorY, ceiling);
+        }
+
+        foreach (MapPrefab floor in mapFloors)
+        {
+            MoveToElevatorParentIfNeeded(elevatorX, elevatorY, floor);
+        }
+
+        foreach (MapPrefab wall in mapWalls)
+        {
+            MoveToElevatorParentIfNeeded(elevatorX, elevatorY, wall);
+        }
+
+        elevator.transform.parent = elevatorParent.transform;
+    }
+
+    private void MoveToElevatorParentIfNeeded(int elevatorX, int elevatorY, MapPrefab ceiling)
+    {
+        int objX = ceiling.TileMapTileData.Position.x;
+        int objY = ceiling.TileMapTileData.Position.y;
+
+        if (objX > (elevatorX - 2) && objX < (elevatorX + 2) && objY > (elevatorY - 3) && objY < (elevatorY + 1))
+        {
+            ceiling.transform.parent = elevatorParent.transform;
+        }
+    }
+
+    public MapPrefab GetSpawnPoint()
+    {
         return spawn;
     }
 
-    public void TriggerSecret(int secretId) {
-        foreach (var mapObject in mapObjects.FindAll(obj => obj.MapId == secretId)) {
+    public void TriggerSecret(int secretId)
+    {
+        foreach (var mapObject in mapObjects.FindAll(obj => obj.MapId == secretId))
+        {
             SecretTarget target = mapObject.GetComponent<SecretTarget>();
-            if (target != null) {
+            if (target != null)
+            {
                 target.Trigger();
             }
         }
     }
 
-    public Quaternion SpawnRotation() {
+    public Quaternion SpawnRotation()
+    {
         Vector2Int pos = spawn.Position;
         Vector2Int emptyPos = Vector2Int.up;
-        for(int xPos = -1; xPos <= 1; xPos += 1) {
-            for (int yPos = -1; yPos <= 1; yPos += 1) {
+        for (int xPos = -1; xPos <= 1; xPos += 1)
+        {
+            for (int yPos = -1; yPos <= 1; yPos += 1)
+            {
                 Vector2Int neighborPos = new Vector2Int(xPos + pos.x, yPos + pos.y);
                 MapPrefab wall = mapWalls.Find(mapWall => mapWall.Position == neighborPos);
-                if (wall == null) {
+                if (wall == null)
+                {
                     emptyPos = neighborPos;
                     break;
                 }
@@ -91,9 +155,11 @@ public class MapManager : MonoBehaviour
         return rotation;
     }
 
-    public void ClearWall(Vector2Int position) {
+    public void ClearWall(Vector2Int position)
+    {
         MapPrefab wallPrefab = mapWalls.FirstOrDefault(wall => wall.Position == position);
-        if (wallPrefab != null) {
+        if (wallPrefab != null)
+        {
             mapWalls.Remove(wallPrefab);
             Destroy(wallPrefab.gameObject);
         }
