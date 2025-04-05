@@ -34,6 +34,8 @@ public class MapGenerator : MonoBehaviour
     private PlayerTest playerCharacterPrefab;
     private PlayerTest player;
 
+    public PlayerTest Player {get {return player;}}
+
     Transform floorContainer;
     Transform ceilingContainer;
     Transform wallContainer;
