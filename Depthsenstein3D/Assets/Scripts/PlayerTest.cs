@@ -4,11 +4,13 @@ public class PlayerTest : MonoBehaviour
 {
     float rotateSpeed = 120f;
     float moveSpeed = 3f;
+    private Rigidbody rb;
+    private Vector2 moveInput;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -16,11 +18,9 @@ public class PlayerTest : MonoBehaviour
     {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
+        moveInput = new Vector2(0.0f, v);
 
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + h * rotateSpeed * Time.deltaTime, 0);
-        transform.position = transform.position + transform.forward * v * moveSpeed * Time.deltaTime;
-
-
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -52,5 +52,10 @@ public class PlayerTest : MonoBehaviour
                 }
             }
         }
+    }
+
+    void FixedUpdate()
+    {
+        rb.linearVelocity = (transform.forward * moveInput.y + transform.right * moveInput.x).normalized * moveSpeed;
     }
 }
