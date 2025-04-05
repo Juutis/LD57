@@ -58,6 +58,7 @@ MonoBehaviour:
   mapContainer: {fileID: 2961365884459171057}
   containerPrefab: {fileID: 2089887056372204930, guid: bdb54cd3cf3f6254cb6da9aa313f633e, type: 3}
   playerCharacterPrefab: {fileID: 7469551634694812745, guid: 515f75e04f20df644a3eca8f147bc81d, type: 3}
+  loreMessageConfig: {fileID: 11400000, guid: 7352d57bdc408b446b24e45124578a45, type: 2}
   mapManager: {fileID: 7572952487975494686}
 --- !u!114 &7572952487975494686
 MonoBehaviour:

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour
@@ -37,6 +38,16 @@ public class Pickup : MonoBehaviour
         LockedDoorKey key = GetComponent<LockedDoorKey>();
         if (key != null) {
             MapGenerator.main.PickupKey(key);
+        }
+        LoreMessage loreMessage = GetComponent<LoreMessage>();
+        Debug.Log("Showing lore..");
+        if (loreMessage != null)
+        {
+            Debug.Log("Showing lore..");
+            string msg = MapGenerator.main.GetLoreMessage();
+            if (msg != "") {
+                UIManager.main.ShowMessage(msg);
+            }
         }
     }
 }

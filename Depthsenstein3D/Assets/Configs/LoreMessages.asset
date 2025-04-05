@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a698bb9d818e5eb46b964f00c0a9be53, type: 3}
+  m_Name: LoreMessages
+  m_EditorClassIdentifier: 
+  loreMessages:
+  - Level: 0
+    Message: 'Re: Re: Costs memo
+
+
+      CFO wants to know about the procurement
+      costs of material Z. Could you send the relevant sheets to statistics? Also,
+      let''s have legal prepped and ready for any unfortunate leaks.
+
+
+      -Paterson'
