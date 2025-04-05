@@ -1,7 +1,9 @@
+using Mono.Cecil.Cil;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class MapGenerator : MonoBehaviour
@@ -35,7 +37,7 @@ public class MapGenerator : MonoBehaviour
     private PlayerTest playerCharacterPrefab;
     private PlayerTest player;
 
-    public PlayerTest Player {get {return player;}}
+    public PlayerTest Player { get { return player; } }
 
     Transform floorContainer;
     Transform ceilingContainer;
@@ -56,7 +58,8 @@ public class MapGenerator : MonoBehaviour
         Generate();
     }
 
-    private void SetupContainers() {
+    private void SetupContainers()
+    {
         floorContainer = Instantiate(containerPrefab, mapContainer);
         floorContainer.transform.localPosition = new Vector3(0, -1, 0f);
         floorContainer.name = "FLOOR";
@@ -78,44 +81,59 @@ public class MapGenerator : MonoBehaviour
         LoopTiles(floorMap, mapId++, SpawnFloorTile);
         LoopTiles(ceilingMap, mapId++, SpawnCeilingTile);
         LoopTiles(wallMap, mapId++, SpawnWallTile);
-        foreach(var objectMap in objectMaps) {
+
+        foreach (var objectMap in objectMaps)
+        {
             LoopTiles(objectMap, mapId++, SpawnObject);
         }
+
         SpawnPlayer();
     }
 
-    public void SpawnPlayer() {
-        if (player == null) {
+    public void SpawnPlayer()
+    {
+        if (player == null)
+        {
             MapPrefab spawn = mapManager.GetSpawnPoint();
-            /*if (spawn == null) {
-                Debug.LogError("SPAWN POINT NOT SET!");
-            }*/
+
+            if (spawn == null) {
+                //Debug.LogError("SPAWN POINT NOT SET!");
+                return;
+            }
+
             player = Instantiate(playerCharacterPrefab, null);
-            if (spawn != null) {
+
+            if (spawn != null)
+            {
                 player.transform.localPosition = new Vector3(spawn.Position.x, 0, spawn.Position.y);
                 player.transform.rotation = mapManager.SpawnRotation();
             }
         }
     }
 
-    public void ClearWall(Vector2Int position) {
+    public void ClearWall(Vector2Int position)
+    {
         mapManager.ClearWall(position);
     }
 
-    public bool TryToOpenLockedDoor(int mapId) {
+    public bool TryToOpenLockedDoor(int mapId)
+    {
         return mapManager.TryToOpenLockedDoor(mapId);
     }
 
-    public string GetLoreMessage() {
+    public string GetLoreMessage()
+    {
 
         int level = 0;
-        if (LevelManager.main != null) {
+        if (LevelManager.main != null)
+        {
             level = LevelManager.main.CurrentLevelNum;
         }
         LevelLoreMessage message = loreMessages.FirstOrDefault(
             msg => msg.Level == level
         );
-        if (message == null) {
+        if (message == null)
+        {
             return "";
         }
         loreMessages.Remove(message);
@@ -127,7 +145,8 @@ public class MapGenerator : MonoBehaviour
         mapManager.PickupKey(pickupKey);
     }
 
-    public void TriggerSecret(int secretId) {
+    public void TriggerSecret(int secretId)
+    {
         mapManager.TriggerSecret(secretId);
     }
 
@@ -202,12 +221,12 @@ public class MapGenerator : MonoBehaviour
                 CustomTile customTile = tileConfig.GetTile(tile.sprite);
 
                 processTileCallback(new TileMapTileData
-                    {
-                        Tile = customTile,
-                        Sprite = tile.sprite,
-                        Position = (Vector2Int)cellPosition,
-                        MapId = mapId
-                    }
+                {
+                    Tile = customTile,
+                    Sprite = tile.sprite,
+                    Position = (Vector2Int)cellPosition,
+                    MapId = mapId
+                }
                 );
             }
         }
@@ -215,7 +234,8 @@ public class MapGenerator : MonoBehaviour
 
 }
 
-public struct TileMapTileData {
+public struct TileMapTileData
+{
     public CustomTile Tile;
     public Sprite Sprite;
     public Vector2Int Position;
