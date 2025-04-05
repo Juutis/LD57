@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
@@ -41,6 +42,11 @@ public class MapGenerator : MonoBehaviour
     Transform wallContainer;
     Transform objectContainer;
 
+    private List<LevelLoreMessage> loreMessages;
+
+    [SerializeField]
+    private LoreMessageConfigScriptableObject loreMessageConfig;
+
     [SerializeField]
     private MapManager mapManager;
 
@@ -65,6 +71,7 @@ public class MapGenerator : MonoBehaviour
 
     public void Generate()
     {
+        loreMessages = loreMessageConfig.LoreMessages;
         mapManager.Initialize();
         SetupContainers();
         int mapId = 0;
@@ -80,6 +87,9 @@ public class MapGenerator : MonoBehaviour
     public void SpawnPlayer() {
         if (player == null) {
             MapPrefab spawn = mapManager.GetSpawnPoint();
+            if (spawn == null) {
+                Debug.LogError("SPAWN POINT NOT SET!");
+            }
             player = Instantiate(playerCharacterPrefab, mapContainer);
             player.transform.localPosition = new Vector3(spawn.Position.x, 0, spawn.Position.y);
             player.transform.rotation = mapManager.SpawnRotation();
@@ -94,6 +104,21 @@ public class MapGenerator : MonoBehaviour
         return mapManager.TryToOpenLockedDoor(mapId);
     }
 
+    public string GetLoreMessage() {
+
+        int level = 0;
+        if (LevelManager.main != null) {
+            level = LevelManager.main.CurrentLevelNum;
+        }
+        LevelLoreMessage message = loreMessages.FirstOrDefault(
+            msg => msg.Level == level
+        );
+        if (message == null) {
+            return "";
+        }
+        loreMessages.Remove(message);
+        return message.Message;
+    }
 
     public void PickupKey(LockedDoorKey pickupKey)
     {

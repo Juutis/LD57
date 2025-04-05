@@ -91,6 +91,7 @@ public enum MapPrefabType
     LockedDoor,
     BasicMeleeMob,
     BasicRangedMob,
-    Clutter
+    Clutter,
+    LoreMessage
 
 }

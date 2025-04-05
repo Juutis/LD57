@@ -35,6 +35,7 @@ public class MapManager : MonoBehaviour
 
     public void AddObject(MapPrefab mapPrefab) {
         if (mapPrefab.Type == MapPrefabType.Spawn) {
+            Debug.Log($"Setting spawn point at {mapPrefab.Position}");
             spawn = mapPrefab;
         }
         mapObjects.Add(mapPrefab);

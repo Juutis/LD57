@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
 
     private List<string> levels = new() { "Level1", "Level2", "Level3" };
     private int currentLevelNum = 0;
+    public int CurrentLevelNum {get {return currentLevelNum;}}
 
     [SerializeField]
     private GameObject currentLevel = null;
