@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 7469551634694812745}
   - component: {fileID: 8101858004073920263}
   - component: {fileID: 146801850666791347}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MatiasTestPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6a84191c6b9c24cba8c7ef756c6435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseMouse: 1
 --- !u!54 &8101858004073920263
 Rigidbody:
   m_ObjectHideFlags: 0
