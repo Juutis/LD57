@@ -8,7 +8,8 @@ public class Elevator : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        closedDoor.SetActive(false);
+        Debug.Log("Fix closed door for elevator");
+        closedDoor?.SetActive(false);
     }
 
     // Update is called once per frame
@@ -19,8 +20,9 @@ public class Elevator : MonoBehaviour
 
     public void CloseDoor()
     {
-        closedDoor.SetActive(true);
-        closedDoor.transform.SetParent(LevelManager.main.CurrentLevel.transform);
+        Debug.Log("Fix closed door for elevator");
+        closedDoor?.SetActive(true);
+        closedDoor?.transform.SetParent(LevelManager.main.CurrentLevel.transform);
         transform.SetParent(null);
     }
 }

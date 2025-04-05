@@ -90,7 +90,7 @@ public class MapGenerator : MonoBehaviour
             /*if (spawn == null) {
                 Debug.LogError("SPAWN POINT NOT SET!");
             }*/
-            player = Instantiate(playerCharacterPrefab, mapContainer);
+            player = Instantiate(playerCharacterPrefab, null);
             if (spawn != null) {
                 player.transform.localPosition = new Vector3(spawn.Position.x, 0, spawn.Position.y);
                 player.transform.rotation = mapManager.SpawnRotation();
