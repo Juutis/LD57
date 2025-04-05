@@ -34,6 +34,8 @@ public class MapGenerator : MonoBehaviour
     private PlayerTest playerCharacterPrefab;
     private PlayerTest player;
 
+    public PlayerTest Player {get {return player;}}
+
     Transform floorContainer;
     Transform ceilingContainer;
     Transform wallContainer;
@@ -86,6 +88,16 @@ public class MapGenerator : MonoBehaviour
 
     public void ClearWall(Vector2Int position) {
         mapManager.ClearWall(position);
+    }
+
+    public bool TryToOpenLockedDoor(int mapId) {
+        return mapManager.TryToOpenLockedDoor(mapId);
+    }
+
+
+    public void PickupKey(LockedDoorKey pickupKey)
+    {
+        mapManager.PickupKey(pickupKey);
     }
 
     public void TriggerSecret(int secretId) {

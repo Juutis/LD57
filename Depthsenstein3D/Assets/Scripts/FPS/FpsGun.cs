@@ -9,6 +9,7 @@ public class FpsGun : MonoBehaviour
 
     private FpsManager.Gun gun;
     private Transform bulletOrigin;
+    private int enemyLayer;
 
     public void Init(FpsManager.Gun gun, Transform bulletOrigin) {
         this.gun = gun;
@@ -22,6 +23,7 @@ public class FpsGun : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         //Invoke("DebugShoot", 2.0f);
+        enemyLayer = LayerMask.NameToLayer("Enemy");
     }
 
     // Update is called once per frame
@@ -89,8 +91,17 @@ public class FpsGun : MonoBehaviour
             dir = Quaternion.AngleAxis(inAccuracy, bulletOrigin.up) * dir;
             dir = Quaternion.AngleAxis(randomRoll, bulletOrigin.forward) * dir;
             if (Physics.Raycast(bulletOrigin.position, dir, out RaycastHit hitInfo, 1000f, ~0)) {
-                var effect = Instantiate(FpsManager.Main.HitEffect);
-                effect.transform.position = hitInfo.point;
+                var other = hitInfo.collider;
+                if (other.gameObject.layer == enemyLayer) {
+                    var effect = Instantiate(FpsManager.Main.BloodEffect);
+                    effect.transform.position = hitInfo.point;
+                } else {
+                    var effect = Instantiate(FpsManager.Main.HitEffect);
+                    effect.transform.position = hitInfo.point;
+                }
+                if (other.TryGetComponent(out Damageable damageable)) {
+                    damageable.Hurt(gun.Config.Damage);
+                }
             }
         }
     }
