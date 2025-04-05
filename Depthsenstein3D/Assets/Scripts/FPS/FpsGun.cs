@@ -99,6 +99,9 @@ public class FpsGun : MonoBehaviour
                     var effect = Instantiate(FpsManager.Main.HitEffect);
                     effect.transform.position = hitInfo.point;
                 }
+                if (other.TryGetComponent(out Damageable damageable)) {
+                    damageable.Hurt(gun.Config.Damage);
+                }
             }
         }
     }

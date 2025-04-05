@@ -8,6 +8,8 @@ public class MeleeEnemy : MonoBehaviour
     private float moveSpeed = 1.0f;
     private float attackDistance = 0.5f;
 
+    public GameObject DieEffect;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -47,5 +49,11 @@ public class MeleeEnemy : MonoBehaviour
 
     private void AnimateAttack() {
         anim.Play("Attack");
+    }
+
+    public void Die() {
+        var fx = Instantiate(DieEffect);
+        fx.transform.position = transform.position;
+        Destroy(gameObject);
     }
 }
