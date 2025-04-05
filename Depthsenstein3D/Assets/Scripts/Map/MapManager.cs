@@ -69,7 +69,7 @@ public class MapManager : MonoBehaviour
     public void SetupElevator(MapPrefab elevator)
     {
         elevatorParent = new GameObject("elevatorParent");
-        elevatorParent.transform.AddComponent<Elevator>();
+        elevatorParent.AddComponent<Elevator>();
         elevatorParent.transform.parent = transform;
 
         int elevatorX = elevator.TileMapTileData.Position.x;
