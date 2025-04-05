@@ -9,6 +9,7 @@ public class FpsManager : MonoBehaviour
     public Gun SelectedGun = null;
     public Transform bulletOrigin;
     public GameObject HitEffect;
+    public GameObject BloodEffect;
 
     void Awake()
     {
