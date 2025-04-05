@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2641677937311140399
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3162642363918755700}
-  m_Layer: 6
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3162642363918755700
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2641677937311140399}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.088, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6905906246618600279}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5946802527270840060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42,38 +11,6 @@ PrefabInstance:
     - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
       propertyPath: MaxHealth
       value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
-      propertyPath: CurrentHealth
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
-      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
-      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
-      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 7519508525666953269}
-    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
-      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
-      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Die
-      objectReference: {fileID: 0}
-    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
-      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: RangedEnemy, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 703625126274421578, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
-      propertyPath: DieEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -129,38 +66,6 @@ PrefabInstance:
       objectReference: {fileID: 2136104429, guid: 48992f260c556a8459e57c594de24723, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3162642363918755700}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1893043045533641910, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7519508525666953269}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
---- !u!1 &5242816665788467786 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1893043045533641910, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
-  m_PrefabInstance: {fileID: 5946802527270840060}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7519508525666953269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5242816665788467786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffc50f59099ac594ba39f16e1143835d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DieEffect: {fileID: 2963091402831274226, guid: b038b65d0c5e78f4cb95ff3f4cf8ff86, type: 3}
-  BulletOrigin: {fileID: 3162642363918755700}
-  accuracyDegrees: 20
-  damage: 5
---- !u!4 &6905906246618600279 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 959825549336114603, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
-  m_PrefabInstance: {fileID: 5946802527270840060}
-  m_PrefabAsset: {fileID: 0}
