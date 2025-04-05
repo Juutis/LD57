@@ -40,6 +40,10 @@ public class PlayerTest : MonoBehaviour
                 else if (target.TryGetComponent(out SecretTrigger secretTrigger)) {
                     secretTrigger.Trigger();
                 }
+                else if (target.TryGetComponent(out LockedDoor lockedDoor))
+                {
+                    lockedDoor.TryToOpen();
+                }
                 else if (target.TryGetComponent(out ElevatorSwitch elevatorSwitch))
                 {
                     Debug.Log("Load level");

@@ -7,11 +7,30 @@ public class MapManager : MonoBehaviour
     private List<MapPrefab> mapObjects = new();
     private List<MapPrefab> mapWalls = new();
     private MapPrefab spawn = null;
+    private List<LockedDoorKey> pickedUpKeys = new ();
     public void Initialize()
     {
         mapObjects = new();
         mapWalls = new();
+        pickedUpKeys = new();
         spawn = null;
+    }
+
+    public bool TryToOpenLockedDoor(int mapId) {
+        LockedDoorKey foundKey = pickedUpKeys.FirstOrDefault(pKey => pKey.MapId == mapId);
+        foreach(LockedDoorKey key2 in pickedUpKeys) {
+        }
+        if (foundKey != null) {
+            pickedUpKeys.Remove(foundKey);
+            Destroy(foundKey.gameObject);
+            return true;
+        }
+        return false;
+    }
+
+    public void PickupKey(LockedDoorKey pickupKey) {
+        pickedUpKeys.Add(pickupKey);
+        mapObjects.Remove(pickupKey.GetComponent<MapPrefab>());
     }
 
     public void AddObject(MapPrefab mapPrefab) {
@@ -53,7 +72,6 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        Debug.Log($"Pos: {pos} & emptyPos: {emptyPos}");
         // Convert Vector2Int to Vector3 (assuming Y is 0)
         Vector3 positionA = new Vector3(pos.x, 0, pos.y);
         Vector3 positionB = new Vector3(emptyPos.x, 0, emptyPos.y);

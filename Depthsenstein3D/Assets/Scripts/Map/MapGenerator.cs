@@ -90,6 +90,16 @@ public class MapGenerator : MonoBehaviour
         mapManager.ClearWall(position);
     }
 
+    public bool TryToOpenLockedDoor(int mapId) {
+        return mapManager.TryToOpenLockedDoor(mapId);
+    }
+
+
+    public void PickupKey(LockedDoorKey pickupKey)
+    {
+        mapManager.PickupKey(pickupKey);
+    }
+
     public void TriggerSecret(int secretId) {
         mapManager.TriggerSecret(secretId);
     }

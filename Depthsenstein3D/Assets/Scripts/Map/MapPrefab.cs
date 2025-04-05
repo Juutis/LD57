@@ -41,6 +41,16 @@ public class MapPrefab : MonoBehaviour
             SecretTarget secretTarget = GetComponent<SecretTarget>();
             secretTarget.Initialize(tileMapTileData.MapId, tileMapTileData.Position);
         }
+        if (mapPrefabType == MapPrefabType.LockedDoor)
+        {
+            LockedDoor lockedDoor = GetComponent<LockedDoor>();
+            lockedDoor.Initialize(tileMapTileData.MapId);
+        }
+        if (mapPrefabType == MapPrefabType.Key)
+        {
+            LockedDoorKey key = GetComponent<LockedDoorKey>();
+            key.Initialize(tileMapTileData.MapId);
+        }
 
         // positioning & naming
         SpawnPrefab(new Vector3(tileMapTileData.Position.x, 0, tileMapTileData.Position.y));
