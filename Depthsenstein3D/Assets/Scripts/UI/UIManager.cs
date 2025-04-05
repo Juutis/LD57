@@ -15,6 +15,22 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Transform uiShowDialogContainer;
 
+
+    [SerializeField]
+    private UIHudPart HUDHealth;
+    [SerializeField]
+    private UIHudPart HUDAmmo;
+    [SerializeField]
+    private UIHudPart HUDScore;
+
+    void Start()
+    {
+        SetHealth(100);
+        SetAmmo(0);
+        SetScore(0);
+    }
+
+
     public void ShowMessage(string message, UnityAction showCallback, UnityAction hideCallback) {
         UIShowDialog uiShowDialog = Instantiate(uiShowDialogPrefab, uiShowDialogContainer);
         uiShowDialog.Show(message, showCallback, hideCallback);
@@ -27,5 +43,15 @@ public class UIManager : MonoBehaviour
         uiShowDialog.Show(message, delegate {}, delegate {
             Time.timeScale = 1f;
         });
+    }
+
+    public void SetHealth(int health) {
+        HUDHealth.SetValue($"{health}%");
+    }
+    public void SetAmmo(int ammo) {
+        HUDAmmo.SetValue($"{ammo}");
+    }
+    public void SetScore(int score) {
+        HUDScore.SetValue($"{score}");
     }
 }
