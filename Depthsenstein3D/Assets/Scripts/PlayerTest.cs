@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerTest : MonoBehaviour
 {
-    float rotateSpeed = 60f;
+    float rotateSpeed = 120f;
     float moveSpeed = 3f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,6 +25,9 @@ public class PlayerTest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 1f, ~0);
+            Debug.DrawLine(transform.position, transform.position + transform.forward, Color.red, 5f);
+
+            Debug.Log($"{(hitInfo.collider != null ? "hit" : "nop")} | ${(hitInfo.collider != null ? hitInfo.collider.gameObject.name : "null")}");
 
             if (hitInfo.collider != null)
             {
@@ -37,6 +40,7 @@ public class PlayerTest : MonoBehaviour
                 else if (target.TryGetComponent(out ElevatorSwitch elevatorSwitch))
                 {
                     Debug.Log("Load level");
+                    LevelManager.main.LoadNextLevel();
                 }
             }
         }
