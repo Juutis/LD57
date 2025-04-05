@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 7469551634694812745}
   - component: {fileID: 8101858004073920263}
   - component: {fileID: 146801850666791347}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MatiasTestPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -134,6 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6a84191c6b9c24cba8c7ef756c6435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseMouse: 1
+  Health: 100
+  MaxHealth: 100
+  Dead: 0
 --- !u!54 &8101858004073920263
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -180,7 +184,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.25
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
