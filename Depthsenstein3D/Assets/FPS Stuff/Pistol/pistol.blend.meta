@@ -120,7 +120,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9897611
+      - time: 0.91808873
         functionName: GunReloaded
         data: 
         objectReferenceParameter: {instanceID: 0}

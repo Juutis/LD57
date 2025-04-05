@@ -27,7 +27,9 @@ public class FpsGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (gun.CurrentStatus.AmmoInMagazine == 0 && lastShot < Time.time - 1.0f / gun.Config.FireRate && ReadyToReload() && !reloading) {
+            Reload();
+        }
     }
 
     public void Shoot() {
@@ -44,11 +46,12 @@ public class FpsGun : MonoBehaviour
     public void Reload() {
         if (ReadyToReload()) {
             anim.Play("Reload");
+            reloading = true;
         }
     }
 
     public bool ReadyToFire() {
-        return lastShot < Time.time - 1.0f / gun.Config.FireRate && gun.CurrentStatus.AmmoInMagazine > 0 && gun.CurrentStatus.CurrentAmmo > 0;
+        return lastShot < Time.time - 1.0f / gun.Config.FireRate && gun.CurrentStatus.AmmoInMagazine > 0 && gun.CurrentStatus.CurrentAmmo > 0 && !reloading;
     }
 
     public bool ReadyToReload() {
@@ -56,6 +59,7 @@ public class FpsGun : MonoBehaviour
     }
 
     public void GunReloaded() {
+        Debug.Log("RELOADED");
         reloading = false;
     }
 
@@ -65,10 +69,12 @@ public class FpsGun : MonoBehaviour
 
     public void Stow() {
         anim.Play("Stow");
+        reloading = false;
     }
 
     public void Arm() {
         anim.Play("Arm");
+        reloading = false;
     }
 
     private void fillMagazine() {
