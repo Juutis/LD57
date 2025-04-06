@@ -12,6 +12,8 @@ public class UIHudPart : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI txtGunKeys;
     [SerializeField]
+    private TextMeshProUGUI txtGunKeysRight;
+    [SerializeField]
     private Image imgGun;
     [SerializeField]
     private Transform inventoryContainer;
@@ -50,15 +52,23 @@ public class UIHudPart : MonoBehaviour
 
     public void UpdateGunKeys() {
         txtGunKeys.enabled = true;
-        string gunKeys = "";
+        txtGunKeysRight.enabled = true;
+        string gunKeysLeft = "";
+        string gunKeysRight = "";
         List<FpsManager.Gun> guns = FpsManager.Main.Guns;
         FpsManager.Gun selected = FpsManager.Main.SelectedGun;
         int index = 0;
         foreach(FpsManager.Gun gun in guns) {
-            gunKeys += GetGunKey(index, selected) + "\n";
+            if (index < 3) { 
+                gunKeysLeft += GetGunKey(index, selected) + "\n";
+            } else {
+                gunKeysRight += GetGunKey(index, selected) + "\n";
+            }
+            
             index += 1;
         }
-        txtGunKeys.text = gunKeys;
+        txtGunKeys.text = gunKeysLeft;
+        txtGunKeysRight.text = gunKeysRight;
     }
 
     private string GetGunKey(int index, FpsManager.Gun selected) {
