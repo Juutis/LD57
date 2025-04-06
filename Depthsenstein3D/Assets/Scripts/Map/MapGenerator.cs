@@ -58,8 +58,8 @@ public class MapGenerator : MonoBehaviour
 
     void Start()
     {
-        Generate();
         ceilingLayer = LayerMask.NameToLayer("Ceiling");
+        Generate();
     }
 
     private void SetupContainers()
@@ -199,7 +199,7 @@ public class MapGenerator : MonoBehaviour
         }
         MapPrefab spawnedTile = Instantiate(prefab, ceilingContainer);
         spawnedTile.Spawn(mapTileData);
-        spawnedTile.gameObject.layer = ceilingLayer;
+        setLayers(spawnedTile.gameObject, ceilingLayer);
         mapManager.AddCeiling(spawnedTile);
     }
 
@@ -258,6 +258,14 @@ public class MapGenerator : MonoBehaviour
 
     private void initAINavigation() {
         NavMeshManager.Main.BuildNavMesh();
+    }
+
+    private void setLayers(GameObject gameObject, int layer) {
+        Debug.Log("Setting layer " + layer, gameObject);
+        gameObject.layer = layer;
+        foreach(Transform t in gameObject.transform) {
+            setLayers(t.gameObject, layer);
+        }
     }
 
 }
