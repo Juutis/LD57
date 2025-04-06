@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493189c96597c47479cd2ec34e4aa247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPrefabType: 4
+  mapPrefabType: 14
   visualizationType: 2
 --- !u!1001 &6774062911582717210
 PrefabInstance:

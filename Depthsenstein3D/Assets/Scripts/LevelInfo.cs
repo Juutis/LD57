@@ -10,12 +10,6 @@ public class LevelInfo : MonoBehaviour
     private float levelYRotation;
     [SerializeField]
     private int depth;
-
-    public int Depth { get { return depth; } }
-    public Vector2 SpawnPos { get { return spawnPos; } }
-    public Vector2 ElevatorPos { get { return elevatorPos; } }
-    public float LevelYRotation { get { return levelYRotation; } }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

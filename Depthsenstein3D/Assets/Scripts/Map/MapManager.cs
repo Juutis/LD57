@@ -50,6 +50,7 @@ public class MapManager : MonoBehaviour
     {
         if (mapPrefab.Type == MapPrefabType.Spawn)
         {
+            Debug.Log("We've set up spawn");
             spawn = mapPrefab;
         }
         mapObjects.Add(mapPrefab);

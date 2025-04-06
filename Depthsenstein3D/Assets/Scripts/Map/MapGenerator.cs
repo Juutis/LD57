@@ -1,12 +1,8 @@
-using Mono.Cecil.Cil;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.AI;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -265,7 +261,6 @@ public class MapGenerator : MonoBehaviour
     }
 
     private void setLayers(GameObject gameObject, int layer) {
-        Debug.Log("Setting layer " + layer, gameObject);
         gameObject.layer = layer;
         foreach(Transform t in gameObject.transform) {
             setLayers(t.gameObject, layer);

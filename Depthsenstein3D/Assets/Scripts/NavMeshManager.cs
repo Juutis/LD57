@@ -9,11 +9,7 @@ public class NavMeshManager : MonoBehaviour
 
     void Awake()
     {
-        if (Main != null) {
-            Destroy(gameObject);
-        } else {
-            Main = this;
-        }
+        Main = this;
         surface = GetComponent<NavMeshSurface>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created

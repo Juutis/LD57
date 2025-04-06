@@ -18,9 +18,6 @@ public class LevelManager : MonoBehaviour
 
     private GameObject nextLevel = null;
 
-    private LevelInfo currentLevelInfo;
-    private LevelInfo nextLevelInfo;
-
     public GameObject CurrentLevel { get { return currentLevel; } }
 
     AsyncOperation sceneLoad;
@@ -38,8 +35,14 @@ public class LevelManager : MonoBehaviour
     private Vector3 currentLevelOrigin;
     private bool elevatorIsMoving = false;
 
+
+    
+
     private void Awake()
     {
+        if (main != null) {
+            Destroy(gameObject);
+        }
         main = this;
     }
 
@@ -47,11 +50,6 @@ public class LevelManager : MonoBehaviour
         currentLevelNum = level;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        currentLevelInfo = currentLevel.GetComponent<LevelInfo>();
-    }
 
     // Update is called once per frame
     void Update()
@@ -110,24 +108,26 @@ public class LevelManager : MonoBehaviour
         int levelHeight = 3;
         int elevatorTravelDistance = 3;
 
-        nextLevelInfo = GetLoadedLevel();
+        nextLevel = MapGenerator.main.gameObject;
 
-        MapManager mapManager = nextLevelInfo.GetComponent<MapManager>();
+        MapManager mapManager = nextLevel.GetComponent<MapManager>();
         MapPrefab spawn = mapManager.GetSpawnPoint();
+        if (spawn == null) {
+            Debug.Log("nO SPAWN");
+        }
         Vector2Int diff = spawnPointTarget - spawn.Position;
         currentLevelTransform = currentLevel.transform.GetComponent<MapGenerator>().Container;
-        nextLevelTransform = nextLevelInfo.transform;
+        nextLevelTransform = nextLevel.transform;
 
         nextLevelTransform.position = nextLevelTransform.position + new Vector3(diff.x, levelHeight, diff.y);
 
         MoveElevator(-elevatorTravelDistance, delegate {
-            elevatorContainer.transform.parent = nextLevelInfo.transform;
+            elevatorContainer.transform.parent = nextLevel.transform;
             Destroy(currentLevel.gameObject);
             currentElevator.OpenDoors(delegate
             {
                 Debug.Log("Doors opened");
                 currentLevel = nextLevel;
-                nextLevelInfo = null;
             });
         });
     }
@@ -140,20 +140,6 @@ public class LevelManager : MonoBehaviour
         nextLevelTarget = nextLevelOrigin + new Vector3(0, distance, 0);
         elevatorIsMoving = true;
         elevatorFinishedCallback = finishedCallback;
-    }
-
-    private LevelInfo GetLoadedLevel() {
-        LevelInfo[] infos = FindObjectsByType<LevelInfo>(FindObjectsSortMode.None);
-
-        LevelInfo loadedLevel = null;
-        foreach (LevelInfo info in infos)
-        {
-            if (info != currentLevelInfo)
-            {
-                loadedLevel = info;
-            }
-        }
-        return loadedLevel;
     }
 
 }
