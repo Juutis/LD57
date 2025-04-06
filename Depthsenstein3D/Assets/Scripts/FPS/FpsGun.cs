@@ -39,12 +39,15 @@ public class FpsGun : MonoBehaviour
     public void Shoot() {
         if (ReadyToFire()) {
             anim.Play("Shoot", -1, 0.0f);
-            Invoke("UpdateAmmoHUD", 0.4f);
+            if(gun.Config.UsesAmmo) {
+                Invoke("UpdateAmmoHUD", 0.4f);
+                gun.CurrentStatus.AmmoInMagazine--;
+                gun.CurrentStatus.CurrentAmmo--;
+            }
             lastShot = Time.time;
-            gun.CurrentStatus.AmmoInMagazine--;
-            gun.CurrentStatus.CurrentAmmo--;
-            lastShot = Time.time;
-            fireBullet();
+            if (!gun.Config.IsMelee) {
+                fireBullet();
+            }
         }
     }
 
@@ -60,11 +63,12 @@ public class FpsGun : MonoBehaviour
     }
 
     public bool ReadyToFire() {
-        return lastShot < Time.time - 1.0f / gun.Config.FireRate && gun.CurrentStatus.AmmoInMagazine > 0 && gun.CurrentStatus.CurrentAmmo > 0 && !reloading;
+        var ammoOk = !gun.Config.UsesAmmo || (gun.CurrentStatus.AmmoInMagazine > 0 && gun.CurrentStatus.CurrentAmmo > 0);
+        return lastShot < Time.time - 1.0f / gun.Config.FireRate && ammoOk && !reloading;
     }
 
     public bool ReadyToReload() {
-        return !reloading && gun.CurrentStatus.AmmoInMagazine < gun.Config.MagazineSize && gun.CurrentStatus.CurrentAmmo > gun.CurrentStatus.AmmoInMagazine;
+        return gun.Config.UsesAmmo && !reloading && gun.CurrentStatus.AmmoInMagazine < gun.Config.MagazineSize && gun.CurrentStatus.CurrentAmmo > gun.CurrentStatus.AmmoInMagazine;
     }
 
     public void GunReloaded() {
@@ -86,6 +90,10 @@ public class FpsGun : MonoBehaviour
         reloading = false;
     }
 
+    public void MeleeHit() {
+        fireBullet();
+    }
+
     private void fillMagazine() {
         gun.CurrentStatus.AmmoInMagazine = Mathf.Min(gun.CurrentStatus.CurrentAmmo, gun.Config.MagazineSize);
     }
@@ -97,7 +105,8 @@ public class FpsGun : MonoBehaviour
             var randomRoll = Random.Range(0.0f, 360.0f);
             dir = Quaternion.AngleAxis(inAccuracy, bulletOrigin.up) * dir;
             dir = Quaternion.AngleAxis(randomRoll, bulletOrigin.forward) * dir;
-            if (Physics.Raycast(bulletOrigin.position, dir, out RaycastHit hitInfo, 1000f, rayCastLayers)) {
+            var range = gun.Config.IsMelee ? 1.0f : 1000.0f;
+            if (Physics.Raycast(bulletOrigin.position, dir, out RaycastHit hitInfo, range, rayCastLayers)) {
                 var other = hitInfo.collider;
                 if (other.gameObject.layer == enemyLayer) {
                     var effect = Instantiate(FpsManager.Main.BloodEffect);

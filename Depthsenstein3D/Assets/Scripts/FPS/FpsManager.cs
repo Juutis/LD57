@@ -77,6 +77,8 @@ public class FpsManager : MonoBehaviour
     public class GunConfig {
         public string Name;
         public Sprite Sprite;
+        public bool IsMelee;
+        public bool UsesAmmo;
         public float FireRate;
         public int MagazineSize;
         public int MaxAmmo;
