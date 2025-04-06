@@ -12,11 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/DirectorsOffice.unity
     guid: 2320c72ef145c0e4fa573001f29e3417
   - enabled: 1
-    path: Assets/Scenes/Level2.unity
-    guid: 9a82ec861d106b6458cd0917652f001c
-  - enabled: 1
     path: Assets/Scenes/Level3.unity
     guid: a6e4fd6da7f9b7e418d547e3e0d2231f
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 9a82ec861d106b6458cd0917652f001c
   - enabled: 1
     path: Assets/Scenes/Garage.unity
     guid: b3d3b4e727207c043bd8334644f367c2

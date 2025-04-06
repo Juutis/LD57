@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         HUDHealth.SetValue(100);
-        SetAmmoInstant(0);
+        //SetAmmoInstant(0);
         AddScore(0);
     }
 
@@ -71,7 +71,7 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void SetAmmoInstant(int ammo)
+    /*public void SetAmmoInstant(int ammo)
     {
         if (ammo < 0)
         {
@@ -81,16 +81,27 @@ public class UIManager : MonoBehaviour
         {
             HUDAmmo.SetValue(ammo);
         }
+    }*/
+
+    public void SetAmmo(FpsManager.Gun gun) {
+        if (gun.Config.IsMelee) {
+            HUDAmmo.SetValue("∞");
+        } else {
+            HUDAmmo.SetValue(gun.CurrentStatus.CurrentAmmo - gun.CurrentStatus.AmmoInMagazine, gun.CurrentStatus.AmmoInMagazine);
+        }
     }
 
+    /*public void SetAmmoMagazine(int ammo, int magazine) {
+        HUDAmmo.SetValue(ammo, magazine);
+    }*/
 
-    public void SetAmmoLerped(int ammo)
+    /*public void SetAmmoLerped(int ammo)
     {
         if (ammo < 0) {
             ammo = 0;
         }
         HUDAmmo.SetValueLerped(ammo);
-    }
+    }*/
 
     public void SetGun(FpsManager.Gun gun)
     {

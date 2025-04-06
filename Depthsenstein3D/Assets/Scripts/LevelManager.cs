@@ -84,7 +84,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void LoadNextLevel(Vector2Int elevatorSwitchPosition)
+    public void LoadNextLevel(MapPrefab elevatorSwitch)
     {
         Debug.Log("Loading next level..");
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
@@ -101,13 +101,12 @@ public class LevelManager : MonoBehaviour
 
         GameObject elevatorContainer = GameObject.FindGameObjectWithTag("Finish");
         elevatorContainer.tag = "Elevator";
-        Vector2Int elevatorPoint = elevatorSwitchPosition - currentElevator.GetComponent<MapPrefab>().Position;
 
         sceneLoad = SceneManager.LoadSceneAsync(levels[currentLevelNum + 1], LoadSceneMode.Additive);
         sceneLoadCallback = delegate
         {
             LevelManager.main.SetCurrentLevel(currentLevelNum + 1);
-            ElevatorToLoadedLevel(elevatorContainer, elevatorPoint);
+            ElevatorToLoadedLevel(elevatorContainer, elevatorSwitch);
         };
     }
 
@@ -148,7 +147,7 @@ public class LevelManager : MonoBehaviour
         };
     }
 
-    public void ElevatorToLoadedLevel(GameObject elevatorContainer, Vector2Int spawnPointTarget)
+    public void ElevatorToLoadedLevel(GameObject elevatorContainer, MapPrefab elevatorSwitchPrefab)
     {
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
 
@@ -163,11 +162,12 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("nO SPAWN");
         }
-        Vector2Int diff = spawnPointTarget - spawn.Position;
+        Vector3 diff = elevatorSwitchPrefab.transform.position - spawn.transform.position;
+        Debug.Log($"{elevatorSwitchPrefab.transform.position} - {spawn.transform.position} = {diff}");
         currentLevelTransform = currentLevel.transform.GetComponent<MapGenerator>().Container;
         nextLevelTransform = nextLevel.transform;
 
-        nextLevelTransform.position = nextLevelTransform.position + new Vector3(diff.x, levelHeight, diff.y);
+        nextLevelTransform.position = nextLevelTransform.position + new Vector3(diff.x, levelHeight, diff.z);
 
         MoveElevator(-elevatorTravelDistance, delegate
         {

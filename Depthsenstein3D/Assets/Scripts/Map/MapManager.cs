@@ -110,7 +110,7 @@ public class MapManager : MonoBehaviour
             for (int yPos = -1; yPos <= 1; yPos += 1)
             {
                 var pos = origin + new Vector2Int(xPos, yPos);
-                var tile = tiles.Find(ceiling => ceiling.Position == pos);
+                var tile = tiles.Find(foundTile => foundTile.Position == pos);
                 if (tile != null) {
                     tile.transform.parent = newParent;
                 }
