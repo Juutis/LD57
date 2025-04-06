@@ -6,6 +6,6 @@ public class ElevatorSwitch : MonoBehaviour
     public void Use() {
         if (hasBeenUsed) {return;}
         hasBeenUsed = true;
-        LevelManager.main.LoadNextLevel(transform.parent.GetComponent<MapPrefab>().Position);
+        LevelManager.main.LoadNextLevel(transform.parent.GetComponent<MapPrefab>());
     }
 }

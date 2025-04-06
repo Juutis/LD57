@@ -28,7 +28,7 @@ public class PlayerTest : MonoBehaviour
     void Update()
     {
 
-        Debug.Log($"Player pos {transform.position}");
+//        Debug.Log($"Player pos {transform.position}");
         if (UseMouse)
         {
             float x = Input.GetAxisRaw("Horizontal");
