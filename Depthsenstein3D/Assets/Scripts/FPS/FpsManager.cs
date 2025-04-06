@@ -35,6 +35,32 @@ public class FpsManager : MonoBehaviour
         
     }
 
+    public void AddAmmo(int gunIndex, int ammo)
+    {
+        if (Guns.Count <= gunIndex)
+        {
+            Debug.LogError($"No such gun {gunIndex}! Total count of guns: {Guns.Count}");
+            return;
+        }
+
+        Gun gun = Guns[gunIndex];
+        int currentAmmo = gun.CurrentStatus.CurrentAmmo;
+        int maxAmmo = gun.Config.MaxAmmo;
+
+        Guns[gunIndex].CurrentStatus.CurrentAmmo = Mathf.Min(maxAmmo, currentAmmo + ammo);
+    }
+
+    public void EnableGun(int gunIndex)
+    {
+        if (Guns.Count <= gunIndex)
+        {
+            Debug.LogError($"No such gun {gunIndex}! Total count of guns: {Guns.Count}");
+            return;
+        }
+
+        Guns[gunIndex].Available = true;
+    }
+
     [System.Serializable]
     public class Gun {
         public bool Available;

@@ -254,7 +254,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 10000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -361,8 +361,8 @@ Camera:
   m_GameObject: {fileID: 8835560874838991001}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.30588236, g: 0.45490196, b: 0.6, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -383,8 +383,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.1
+  far clip plane: 10000
   field of view: 60
   orthographic: 0
   orthographic size: 3.75
@@ -468,6 +468,18 @@ PrefabInstance:
       propertyPath: bulletOrigin
       value: 
       objectReference: {fileID: 2807088392342499054}
+    - target: {fileID: 4276758363007067111, guid: 9f18d2797e3827d4aab019d94f22421b, type: 3}
+      propertyPath: Guns.Array.data[0].Available
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4276758363007067111, guid: 9f18d2797e3827d4aab019d94f22421b, type: 3}
+      propertyPath: Guns.Array.data[1].Available
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4276758363007067111, guid: 9f18d2797e3827d4aab019d94f22421b, type: 3}
+      propertyPath: Guns.Array.data[2].Available
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6247536108319817566, guid: 9f18d2797e3827d4aab019d94f22421b, type: 3}
       propertyPath: m_Name
       value: FPS Shooter

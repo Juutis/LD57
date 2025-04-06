@@ -1,6 +1,11 @@
+using Mono.Cecil.Cil;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class MapGenerator : MonoBehaviour
@@ -51,9 +56,11 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     private MapManager mapManager;
 
+    private int ceilingLayer;
 
     void Start()
     {
+        ceilingLayer = LayerMask.NameToLayer("Ceiling");
         Generate();
     }
 
@@ -87,6 +94,7 @@ public class MapGenerator : MonoBehaviour
         }
 
         SpawnPlayer();
+        initAINavigation();
     }
 
     public void SpawnPlayer()
@@ -185,6 +193,7 @@ public class MapGenerator : MonoBehaviour
         mapManager.AddFloor(spawnedTile);
     }
 
+
     private void SpawnCeilingTile(TileMapTileData mapTileData)
     {
         var prefab = tileConfig.DefaultTexturedCube;
@@ -194,6 +203,7 @@ public class MapGenerator : MonoBehaviour
         }
         MapPrefab spawnedTile = Instantiate(prefab, ceilingContainer);
         spawnedTile.Spawn(mapTileData);
+        setLayers(spawnedTile.gameObject, ceilingLayer);
         mapManager.AddCeiling(spawnedTile);
     }
 
@@ -247,6 +257,18 @@ public class MapGenerator : MonoBehaviour
                 }
                 );
             }
+        }
+    }
+
+    private void initAINavigation() {
+        NavMeshManager.Main.BuildNavMesh();
+    }
+
+    private void setLayers(GameObject gameObject, int layer) {
+        Debug.Log("Setting layer " + layer, gameObject);
+        gameObject.layer = layer;
+        foreach(Transform t in gameObject.transform) {
+            setLayers(t.gameObject, layer);
         }
     }
 
