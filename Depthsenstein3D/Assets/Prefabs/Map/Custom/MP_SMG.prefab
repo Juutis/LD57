@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1698918815911979869}
   - component: {fileID: -8294596259962283781}
   - component: {fileID: 253496331161021190}
+  - component: {fileID: 5448312944515227302}
   m_Layer: 0
   m_Name: MP_SMG
   m_TagString: Untagged
@@ -72,4 +73,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0fa977de69f7974693b9b9c806c969d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunIndex: 2
+  gunIndex: 3
+--- !u!114 &5448312944515227302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7924412456123295035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 919d1ce8394f09c4ca9353028c40a848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunIndex: 3
+  ammoAmount: 30

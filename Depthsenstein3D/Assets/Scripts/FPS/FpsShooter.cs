@@ -33,6 +33,9 @@ public class FpsShooter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3) && state == State.READY) {
             selectGun(FpsManager.Main.Guns[2]);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha4) && state == State.READY) {
+            selectGun(FpsManager.Main.Guns[3]);
+        }
     }
 
     private void selectGun(FpsManager.Gun gun) {

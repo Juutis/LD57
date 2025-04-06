@@ -72,5 +72,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919d1ce8394f09c4ca9353028c40a848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunIndex: 1
+  gunIndex: 2
   ammoAmount: 6

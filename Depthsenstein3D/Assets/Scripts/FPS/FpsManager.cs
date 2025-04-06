@@ -61,7 +61,9 @@ public class FpsManager : MonoBehaviour
             return;
         }
 
-        Guns[gunIndex].Available = true;
+        var gun = Guns[gunIndex];
+        gun.Available = true;
+        gun.CurrentStatus.AmmoInMagazine = Mathf.Min(gun.CurrentStatus.CurrentAmmo, gun.Config.MagazineSize);
         UIManager.main.UpdateGunKeys();
     }
 

@@ -195,7 +195,7 @@ MonoBehaviour:
   - Available: 1
     Config:
       Name: Wrench
-      Sprite: {fileID: 1440978866, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
+      Sprite: {fileID: -78974050, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
       IsMelee: 1
       UsesAmmo: 0
       FireRate: 1
@@ -217,8 +217,8 @@ MonoBehaviour:
       UsesAmmo: 1
       FireRate: 3
       MagazineSize: 10
-      MaxAmmo: 100
-      InitialAmmo: 50
+      MaxAmmo: 150
+      InitialAmmo: 0
       AccuracyDegrees: 3
       ProjectileCount: 1
       Damage: 5
@@ -234,8 +234,8 @@ MonoBehaviour:
       UsesAmmo: 1
       FireRate: 1.5
       MagazineSize: 2
-      MaxAmmo: 30
-      InitialAmmo: 20
+      MaxAmmo: 50
+      InitialAmmo: 0
       AccuracyDegrees: 10
       ProjectileCount: 12
       Damage: 2
@@ -251,8 +251,8 @@ MonoBehaviour:
       UsesAmmo: 1
       FireRate: 8
       MagazineSize: 30
-      MaxAmmo: 150
-      InitialAmmo: 90
+      MaxAmmo: 300
+      InitialAmmo: 0
       AccuracyDegrees: 5
       ProjectileCount: 1
       Damage: 3
