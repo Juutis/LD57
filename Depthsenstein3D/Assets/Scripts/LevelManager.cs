@@ -75,6 +75,7 @@ public class LevelManager : MonoBehaviour
             nextLevelTransform.position = Vector3.Lerp(nextLevelOrigin, nextLevelTarget, elevatorTimer / elevatorDuration);
             if (elevatorTimer >= elevatorDuration)
             {
+                elevatorTimer = 0f;
                 currentLevelTransform.position = currentLevelTarget;
                 nextLevelTransform.position = nextLevelTarget;
                 elevatorIsMoving = false;
