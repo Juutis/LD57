@@ -11,13 +11,18 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        main = this;
+        else
+        {
+            main = this;
+        }
     }
 
     [SerializeField]
     private UIShowDialog uiShowDialogPrefab;
     [SerializeField]
     private Transform uiShowDialogContainer;
+
+    [SerializeField] private FadeInOut fader;
 
 
     [SerializeField]
@@ -107,5 +112,15 @@ public class UIManager : MonoBehaviour
     public void RemoveKeyFromInventory(LockedDoorKey key)
     {
         HUDInventory.RemoveKey(key);
+    }
+
+    public void FadeOut()
+    {
+        fader.FadeOut();
+    }
+
+    public void FadeIn()
+    {
+        fader.FadeIn();
     }
 }
