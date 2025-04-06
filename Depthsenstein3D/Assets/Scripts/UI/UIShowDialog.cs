@@ -11,21 +11,24 @@ public class UIShowDialog : MonoBehaviour
     private TextMeshProUGUI txtMessage;
 
     private bool isShown = false;
+    private bool isHiding = false;
 
     private UnityAction showCallback;
     private UnityAction hideCallback;
 
     public void Hide()
     {
-        if (!isShown) {
+        if (!isShown || isHiding) {
             return;
         }
+        isHiding = true;
         animator.Play("uiShowDialogHide");
     }
 
     public void HideFinished()
     {
         isShown = false;
+        isHiding = false;
         hideCallback();
         Destroy(gameObject);
     }
@@ -44,5 +47,11 @@ public class UIShowDialog : MonoBehaviour
     public void ShowFinished() {
         isShown = true;
         showCallback();
+    }
+
+    void Update() {
+        if (!isHiding && isShown && Input.GetKeyDown(KeyCode.Space)) {
+            Hide();
+        }
     }
 }

@@ -54,8 +54,8 @@ public class FpsShooter : MonoBehaviour
 
     void GunStowed() {
         FpsManager.Main.SelectedGun = desiredGun;
-        UIManager.main.SetAmmoInstant(desiredGun.CurrentStatus.CurrentAmmo);
         UIManager.main.SetGun(desiredGun);
+        UIManager.main.SetAmmo(desiredGun);
         foreach (var g in FpsManager.Main.Guns) {
             g.GunModel.gameObject.SetActive(false);
         }
