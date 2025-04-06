@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
 
     private List<string> levels = new() { "Level1", "DirectorsOffice", "Level2", "Level3" };
     private int currentLevelNum = 0;
-    public int CurrentLevelNum {get {return currentLevelNum;}}
+    public int CurrentLevelNum { get { return currentLevelNum; } }
 
     [SerializeField]
     private GameObject currentLevel = null;
@@ -35,18 +35,20 @@ public class LevelManager : MonoBehaviour
     private Vector3 currentLevelOrigin;
     private bool elevatorIsMoving = false;
 
-
-    
-
     private void Awake()
     {
-        if (main != null) {
+        if (main != null)
+        {
             Destroy(gameObject);
         }
-        main = this;
+        else
+        {
+            main = this;
+        }
     }
 
-    public void SetCurrentLevel(int level) {
+    public void SetCurrentLevel(int level)
+    {
         currentLevelNum = level;
     }
 
@@ -54,19 +56,22 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (sceneLoad != null) {
-            if (sceneLoad.isDone && sceneLoadCallback != null) {
+        if (sceneLoad != null)
+        {
+            if (sceneLoad.isDone && sceneLoadCallback != null)
+            {
                 sceneLoadCallback.Invoke();
                 sceneLoadCallback = null;
                 sceneLoad = null;
             }
         }
-        if (elevatorIsMoving) {
+        if (elevatorIsMoving)
+        {
             elevatorTimer += Time.deltaTime;
             currentLevelTransform.position = Vector3.Lerp(currentLevelOrigin, currentLevelTarget, elevatorTimer / elevatorDuration);
             nextLevelTransform.position = Vector3.Lerp(nextLevelOrigin, nextLevelTarget, elevatorTimer / elevatorDuration);
-            if (elevatorTimer >= elevatorDuration) {
+            if (elevatorTimer >= elevatorDuration)
+            {
                 currentLevelTransform.position = currentLevelTarget;
                 nextLevelTransform.position = nextLevelTarget;
                 elevatorIsMoving = false;
@@ -86,7 +91,8 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        currentElevator.CloseDoors(delegate {
+        currentElevator.CloseDoors(delegate
+        {
             Debug.Log("DoorsClosed");
         });
 
@@ -95,14 +101,38 @@ public class LevelManager : MonoBehaviour
         Vector2Int elevatorPoint = elevatorSwitchPosition - currentElevator.GetComponent<MapPrefab>().Position;
 
         sceneLoad = SceneManager.LoadSceneAsync(levels[currentLevelNum + 1], LoadSceneMode.Additive);
-        sceneLoadCallback = delegate {
+        sceneLoadCallback = delegate
+        {
             LevelManager.main.SetCurrentLevel(currentLevelNum + 1);
             ElevatorToLoadedLevel(elevatorContainer, elevatorPoint);
         };
-        //StartCoroutine(LerpLevels());
     }
 
-    public void ElevatorToLoadedLevel(GameObject elevatorContainer, Vector2Int spawnPointTarget) {
+    public void RestartLevel()
+    {
+        ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
+        currentElevator.CloseDoors(delegate { });
+        MapGenerator.main.Player.ResetPlayer(MapGenerator.main.GetSpawnPos());
+        Destroy(currentLevel.gameObject);
+        sceneLoad = SceneManager.LoadSceneAsync(levels[currentLevelNum], LoadSceneMode.Additive);
+
+        sceneLoadCallback = delegate
+        {
+            nextLevel = MapGenerator.main.gameObject;
+            MapGenerator.main.InitAINavigation();
+
+            ElevatorDoors currentElevator = nextLevel.GetComponentInChildren<ElevatorDoors>();
+            UIManager.main.FadeIn();
+            currentElevator.OpenDoors(delegate
+            {
+                currentLevel = nextLevel;
+                MapGenerator.main.StartEnemies();
+            });
+        };
+    }
+
+    public void ElevatorToLoadedLevel(GameObject elevatorContainer, Vector2Int spawnPointTarget)
+    {
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
 
         int levelHeight = 3;
@@ -112,7 +142,8 @@ public class LevelManager : MonoBehaviour
 
         MapManager mapManager = nextLevel.GetComponent<MapManager>();
         MapPrefab spawn = mapManager.GetSpawnPoint();
-        if (spawn == null) {
+        if (spawn == null)
+        {
             Debug.Log("nO SPAWN");
         }
         Vector2Int diff = spawnPointTarget - spawn.Position;
@@ -121,21 +152,23 @@ public class LevelManager : MonoBehaviour
 
         nextLevelTransform.position = nextLevelTransform.position + new Vector3(diff.x, levelHeight, diff.y);
 
-        MoveElevator(-elevatorTravelDistance, delegate {
+        MoveElevator(-elevatorTravelDistance, delegate
+        {
             elevatorContainer.transform.parent = nextLevel.transform;
             Destroy(currentLevel.gameObject);
+            MapGenerator.main.InitAINavigation();
             currentElevator.OpenDoors(delegate
             {
                 Debug.Log("Doors opened");
                 currentLevel = nextLevel;
-                MapGenerator.main.InitAINavigation();
                 MapGenerator.main.StartEnemies();
             });
         });
     }
 
-    private void MoveElevator(float distance, UnityAction finishedCallback) {
-        if (elevatorIsMoving) {return;}
+    private void MoveElevator(float distance, UnityAction finishedCallback)
+    {
+        if (elevatorIsMoving) { return; }
         nextLevelOrigin = nextLevelTransform.position;
         currentLevelOrigin = currentLevelTransform.position;
         currentLevelTarget = currentLevelOrigin + new Vector3(0, distance, 0);

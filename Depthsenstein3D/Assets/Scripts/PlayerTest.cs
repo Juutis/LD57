@@ -79,6 +79,16 @@ public class PlayerTest : MonoBehaviour
                 }
             }
         }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            UIManager.main.FadeOut();
+            Invoke("Restart", 0.5f);
+        }
+    }
+
+    private void Restart()
+    {
+        LevelManager.main.RestartLevel();
     }
 
     void FixedUpdate()
@@ -111,5 +121,14 @@ public class PlayerTest : MonoBehaviour
         if (Dead) return;
         Dead = true;
         Debug.Log("YOU DIED");
+    }
+
+    public void ResetPlayer(Vector3 spawnPos)
+    {
+        Health = MaxHealth;
+        Dead = false;
+        rb.linearVelocity = Vector3.zero;
+        rb.position = spawnPos;
+        transform.position = spawnPos;
     }
 }
