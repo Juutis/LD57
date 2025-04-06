@@ -71,7 +71,6 @@ public class MapPrefab : MonoBehaviour
         }
         else if (mapPrefabType == MapPrefabType.BasicRangedMob || mapPrefabType == MapPrefabType.BasicMeleeMob)
         {
-            Debug.Break();
         }
 
         // positioning & naming
