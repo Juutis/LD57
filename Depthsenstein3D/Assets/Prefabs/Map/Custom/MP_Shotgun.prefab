@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6258826717706021108}
   - component: {fileID: 1698918815911979869}
   - component: {fileID: -8294596259962283781}
-  - component: {fileID: 7894503188426338181}
   - component: {fileID: 253496331161021190}
   m_Layer: 0
   m_Name: MP_Shotgun
@@ -61,27 +60,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef1e379c413e5d4b946911c60cbe5d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &7894503188426338181
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7924412456123295035}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &253496331161021190
 MonoBehaviour:
   m_ObjectHideFlags: 0
