@@ -93,12 +93,6 @@ public class MapGenerator : MonoBehaviour
         SpawnPlayer();
     }
 
-    public Vector3 GetSpawnPos()
-    {
-        MapPrefab spawn = mapManager.GetSpawnPoint();
-        return new Vector3(spawn.Position.x, 0, spawn.Position.y);
-    }
-
     public void SpawnPlayer()
     {
         if (player == null)
