@@ -6,6 +6,7 @@ public class SecretTrigger : MonoBehaviour
     private int secretId;
 
     private bool hasTriggered = false;
+    private bool hasTriggeredSelf = false;
 
     private Vector2Int tilePosition;
     public int SecretId {get {return secretId;}}
@@ -26,7 +27,13 @@ public class SecretTrigger : MonoBehaviour
     }
 
     public void TriggerSelf() {
+        if (hasTriggeredSelf)
+        {
+            return;
+        }
+        hasTriggeredSelf = true;
         MapGenerator.main.ClearWall(tilePosition);
+        //Destroy(gameObject);
     }
     
 

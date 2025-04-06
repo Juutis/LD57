@@ -136,7 +136,14 @@ public class MapManager : MonoBehaviour
             }
         }
         if (!targetsWereFound) {
-            secretTrigger.TriggerSelf();
+            foreach (var mapObject in mapObjects.FindAll(obj => obj.MapId == secretTrigger.SecretId))
+            {
+                SecretTrigger trigger = mapObject.GetComponent<SecretTrigger>();
+                if (trigger != null)
+                {
+                    trigger.TriggerSelf();
+                }
+            }
         }
     }
 
