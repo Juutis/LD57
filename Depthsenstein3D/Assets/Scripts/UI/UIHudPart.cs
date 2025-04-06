@@ -10,6 +10,8 @@ public class UIHudPart : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI txtValue;
     [SerializeField]
+    private TextMeshProUGUI txtGunKeys;
+    [SerializeField]
     private Image imgGun;
     [SerializeField]
     private Transform inventoryContainer;
@@ -42,6 +44,30 @@ public class UIHudPart : MonoBehaviour
         txtValue.text = $"{prefix}{value}{postfix}";
     }
 
+    public void UpdateGunKeys() {
+        txtGunKeys.enabled = true;
+        string gunKeys = "";
+        List<FpsManager.Gun> guns = FpsManager.Main.Guns;
+        FpsManager.Gun selected = FpsManager.Main.SelectedGun;
+        int index = 0;
+        foreach(FpsManager.Gun gun in guns) {
+            gunKeys += GetGunKey(index, selected) + "\n";
+            index += 1;
+        }
+        txtGunKeys.text = gunKeys;
+    }
+
+    private string GetGunKey(int index, FpsManager.Gun selected) {
+        FpsManager.Gun gun = FpsManager.Main.Guns[index];
+        if (gun != null && gun.Available) {
+            if (selected == gun) {
+                return $"<color=white>{index + 1}</color>";
+            }
+            return $"{index+1}";
+        }
+        return "";
+    }
+
     public void SetValueLerped(int newValue)
     {
         originalScale = backTargetScale;
@@ -55,6 +81,7 @@ public class UIHudPart : MonoBehaviour
         imgGun.enabled = true;
         imgGun.sprite = gun.Config.Sprite;
         txtTitle.text = gun.Config.Name.ToUpper();
+        UpdateGunKeys();
     }
 
     public void RemoveKey(LockedDoorKey key)

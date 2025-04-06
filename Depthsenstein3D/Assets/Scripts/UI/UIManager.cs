@@ -89,6 +89,10 @@ public class UIManager : MonoBehaviour
         HUDGun.SetGun(gun);
     }
 
+    public void UpdateGunKeys() {
+        HUDGun.UpdateGunKeys();
+    }
+
     public void AddScore(int delta)
     {
         score += delta;

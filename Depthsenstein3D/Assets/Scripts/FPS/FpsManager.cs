@@ -62,6 +62,7 @@ public class FpsManager : MonoBehaviour
         }
 
         Guns[gunIndex].Available = true;
+        UIManager.main.UpdateGunKeys();
     }
 
     [System.Serializable]
