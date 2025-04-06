@@ -49,7 +49,7 @@ public class FpsManager : MonoBehaviour
 
         Guns[gunIndex].CurrentStatus.CurrentAmmo = Mathf.Min(maxAmmo, currentAmmo + ammo);
         if (Main.SelectedGun == Guns[gunIndex]) {
-            UIManager.main.SetAmmoLerped(Main.SelectedGun.CurrentStatus.CurrentAmmo);
+            UIManager.main.SetAmmo(Main.SelectedGun);
         }
     }
 

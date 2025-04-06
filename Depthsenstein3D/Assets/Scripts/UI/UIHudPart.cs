@@ -46,6 +46,11 @@ public class UIHudPart : MonoBehaviour
         txtValue.text = $"{prefix}{value}{postfix}";
     }
 
+    public void SetValue(int value, int magazine) {
+        currentValue = value;
+        txtValue.text = $"{prefix}{magazine}/{value}{postfix}";
+    }
+
     public void SetValue(string value) {
         txtValue.text = $"{prefix}{value}{postfix}";
     }

@@ -52,7 +52,9 @@ public class FpsGun : MonoBehaviour
     }
 
     public void UpdateAmmoHUD() {
-        UIManager.main.SetAmmoInstant(FpsManager.Main.SelectedGun.CurrentStatus.CurrentAmmo);
+        UIManager.main.SetAmmo(
+            FpsManager.Main.SelectedGun
+        );
     }
 
     public void Reload() {
@@ -96,6 +98,7 @@ public class FpsGun : MonoBehaviour
 
     private void fillMagazine() {
         gun.CurrentStatus.AmmoInMagazine = Mathf.Min(gun.CurrentStatus.CurrentAmmo, gun.Config.MagazineSize);
+        UIManager.main.SetAmmo(gun);
     }
 
     private void fireBullet() {
