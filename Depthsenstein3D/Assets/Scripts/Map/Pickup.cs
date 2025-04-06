@@ -16,12 +16,17 @@ public class Pickup : MonoBehaviour
         if (!isActive) {
             return;
         }
+
         distanceCheckTimer += Time.deltaTime;
-        if (distanceCheckTimer > distanceCheckInterval) {
+
+        if (distanceCheckTimer > distanceCheckInterval)
+        {
             distanceCheckTimer = 0f;
+            
             if (MapGenerator.main.Player == null) {
                 return;
             }
+
             if (Vector3.Distance(MapGenerator.main.Player.transform.position, transform.position) <= minDistance) {
                 HandlePickup();
                 Kill();

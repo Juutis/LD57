@@ -96,8 +96,15 @@ public class MapGenerator : MonoBehaviour
         {
             MapPrefab spawn = mapManager.GetSpawnPoint();
 
-            if (spawn == null) {
-                //Debug.LogError("SPAWN POINT NOT SET!");
+            if (spawn == null)
+            {
+                player = FindFirstObjectByType<PlayerTest>();
+
+                if (player == null)
+                {
+                    Debug.LogError("No spawn and player was not found!");
+                }
+
                 return;
             }
 
