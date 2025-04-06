@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager main;
 
-    private List<string> levels = new() { "Level1", "Level2", "Level3" };
+    private List<string> levels = new() { "Level1", "DirectorsOffice", "Level2", "Level3" };
     private int currentLevelNum = 0;
     public int CurrentLevelNum { get { return currentLevelNum; } }
 
