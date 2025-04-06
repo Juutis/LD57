@@ -65,8 +65,9 @@ public class MapPrefab : MonoBehaviour
         }
         else if (mapPrefabType == MapPrefabType.SpecialWall)
         {
-            TextureSwapper swapper = GetComponent<TextureSwapper>();
-            swapper.Init(tileMapTileData.Sprite);
+            if (TryGetComponent(out TextureSwapper textureSwapper)) {
+                textureSwapper.Init(tileMapTileData.Sprite);
+            }
         }
 
         // positioning & naming
