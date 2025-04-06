@@ -26,14 +26,17 @@ public class PlayerTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (UseMouse) {
+        if (UseMouse)
+        {
             float x = Input.GetAxisRaw("Horizontal");
             float y = Input.GetAxisRaw("Vertical");
             moveInput = new Vector2(x, y);
 
             float rot = Input.GetAxisRaw("Mouse X");
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + rot * mouseSensitivity, 0);
-        } else {
+        }
+        else
+        {
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");
             moveInput = new Vector2(0.0f, v);
@@ -77,14 +80,17 @@ public class PlayerTest : MonoBehaviour
         rb.linearVelocity = (transform.forward * moveInput.y + transform.right * moveInput.x).normalized * moveSpeed;
     }
 
-    public void Hurt(float damage) {
+    public void Hurt(float damage)
+    {
         Health -= damage;
-        if (Health <= 0) {
+        if (Health <= 0)
+        {
             Die();
         }
     }
 
-    public void Die() {
+    public void Die()
+    {
         if (Dead) return;
         Dead = true;
         Debug.Log("YOU DIED");

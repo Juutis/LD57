@@ -16,12 +16,17 @@ public class Pickup : MonoBehaviour
         if (!isActive) {
             return;
         }
+
         distanceCheckTimer += Time.deltaTime;
-        if (distanceCheckTimer > distanceCheckInterval) {
+
+        if (distanceCheckTimer > distanceCheckInterval)
+        {
             distanceCheckTimer = 0f;
+            
             if (MapGenerator.main.Player == null) {
                 return;
             }
+
             if (Vector3.Distance(MapGenerator.main.Player.transform.position, transform.position) <= minDistance) {
                 HandlePickup();
                 Kill();
@@ -40,7 +45,6 @@ public class Pickup : MonoBehaviour
             MapGenerator.main.PickupKey(key);
         }
         LoreMessage loreMessage = GetComponent<LoreMessage>();
-        Debug.Log("Showing lore..");
         if (loreMessage != null)
         {
             Debug.Log("Showing lore..");

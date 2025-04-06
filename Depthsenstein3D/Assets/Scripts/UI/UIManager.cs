@@ -7,6 +7,9 @@ public class UIManager : MonoBehaviour
     public static UIManager main;
     void Awake()
     {
+        if (main != null && main != this) {
+            Destroy(gameObject);
+        }
         main = this;
     }
 
@@ -22,6 +25,8 @@ public class UIManager : MonoBehaviour
     private UIHudPart HUDAmmo;
     [SerializeField]
     private UIHudPart HUDScore;
+    [SerializeField]
+    private UIHudPart HUDInventory;
 
     void Start()
     {
@@ -53,5 +58,8 @@ public class UIManager : MonoBehaviour
     }
     public void SetScore(int score) {
         HUDScore.SetValue($"{score}");
+    }
+    public void AddKeyToInventory(LockedDoorKey key) {
+        HUDInventory.AddKey(key);
     }
 }
