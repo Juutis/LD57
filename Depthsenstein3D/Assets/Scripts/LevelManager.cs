@@ -128,6 +128,8 @@ public class LevelManager : MonoBehaviour
             {
                 Debug.Log("Doors opened");
                 currentLevel = nextLevel;
+                MapGenerator.main.InitAINavigation();
+                MapGenerator.main.StartEnemies();
             });
         });
     }

@@ -68,6 +68,10 @@ public class MapPrefab : MonoBehaviour
             TextureSwapper swapper = GetComponent<TextureSwapper>();
             swapper.Init(tileMapTileData.Sprite);
         }
+        else if (mapPrefabType == MapPrefabType.BasicRangedMob || mapPrefabType == MapPrefabType.BasicMeleeMob)
+        {
+            Debug.Break();
+        }
 
         // positioning & naming
         SpawnPrefab(new Vector3(tileMapTileData.Position.x, 0, tileMapTileData.Position.y));

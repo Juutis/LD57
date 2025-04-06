@@ -31,21 +31,40 @@ public class RangedEnemy : MonoBehaviour
     private State state = State.PATROL;
     private float navMeshY = -0.5f;
 
+    private bool isActive = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerTest>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
+        rb.detectCollisions = false;
+    }
+
+    public void Initialize()
+    {
+        Debug.Log("Initializing enemy");
         rayCastLayers = LayerMask.GetMask("Default", "Player");
         playerLosLayers = LayerMask.GetMask("Default", "Player");
         RandomizeNavigationTarget();
         EnableNavigation();
+        isActive = true;
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        rb.position = new Vector3(transform.position.x, 0, transform.position.z);
+        rb.isKinematic = false;
+        rb.detectCollisions = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isActive)
+        {
+            return;
+        }
+
         switch (state)
         {
             case State.PATROL:
@@ -110,6 +129,11 @@ public class RangedEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!isActive)
+        {
+            return;
+        }
+
         runTowardsWaypoint();
 
         if (isFinalWaypoint() && GetDistanceToTarget() < targetRange)
