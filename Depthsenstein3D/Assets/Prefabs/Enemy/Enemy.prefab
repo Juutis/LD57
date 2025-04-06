@@ -107,9 +107,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.25
-  m_Height: 1
+  m_Height: 0.64612687
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.17693657, z: 0}
 --- !u!114 &703625126274421578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc50f59099ac594ba39f16e1143835d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 1
+  attackDistance: 2
   DieEffect: {fileID: 2963091402831274226, guid: b038b65d0c5e78f4cb95ff3f4cf8ff86, type: 3}
   BulletOrigin: {fileID: 8747326508200427912}
   accuracyDegrees: 20
@@ -180,7 +182,7 @@ Transform:
   m_GameObject: {fileID: 8515859885415820499}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.088, z: 0}
+  m_LocalPosition: {x: 0, y: -0.158, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

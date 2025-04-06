@@ -13,6 +13,9 @@ public class RangedEnemy : MonoBehaviour
     public float accuracyDegrees = 20.0f;
     public float damage = 5.0f;
     private int rayCastLayers;
+    private Vector3 lastDir;
+
+    public Projectile projectile;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +33,7 @@ public class RangedEnemy : MonoBehaviour
             AnimateAttack();
         } else if (rb.linearVelocity.magnitude > 0.01f) {
             AnimateRun();
+            lastDir = rb.linearVelocity;
         } else {
             AnimateIdle();
         }
@@ -47,15 +51,52 @@ public class RangedEnemy : MonoBehaviour
     }
 
     private void AnimateRun() {
-        anim.Play("Run");
+        var dirToPlayer = player.transform.position - transform.position;
+        var angle = Vector3.SignedAngle(dirToPlayer, lastDir, Vector3.up);
+        if (angle > 45 && angle < 135) {
+            if (hasAnimState("Run_right")) {
+                anim.Play("Run_right");
+            } else {
+                anim.Play("Run");
+            }
+        } else if (angle > -135 && angle < -45) {
+            if (hasAnimState("Run_left")) {
+                anim.Play("Run_left");
+            } else {
+                anim.Play("Run");
+            }
+        } else {
+            anim.Play("Run");
+        }
     }
 
     private void AnimateIdle() {
-        anim.Play("Idle");
+        var dirToPlayer = player.transform.position - transform.position;
+        var angle = Vector3.SignedAngle(dirToPlayer, lastDir, Vector3.up);
+        if (angle > 45 && angle < 135) {
+            if (hasAnimState("Idle_right")) {
+                anim.Play("Idle_right");
+            } else {
+                anim.Play("Idle");
+            }
+        } else if (angle > -135 && angle < -45) {
+            if (hasAnimState("Idle_left")) {
+                anim.Play("Idle_left");
+            } else {
+                anim.Play("Idle");
+            }
+        } else {
+            anim.Play("Idle");
+        }
     }
 
     private void AnimateAttack() {
         anim.Play("Attack");
+    }
+
+    private bool hasAnimState(string state) {
+        var stateId = Animator.StringToHash(state);
+        return anim.HasState(0, stateId);
     }
 
     public void Die() {
@@ -65,21 +106,27 @@ public class RangedEnemy : MonoBehaviour
     }
 
     public void Shoot() {
-        var dir = player.transform.position - BulletOrigin.position;
-        var inAccuracy = Random.Range(0.0f, 1.0f) * accuracyDegrees;
-        var randomRoll = Random.Range(0.0f, 360.0f);
-        dir = Quaternion.AngleAxis(inAccuracy, BulletOrigin.up) * dir;
-        dir = Quaternion.AngleAxis(randomRoll, BulletOrigin.forward) * dir;
-        if (Physics.Raycast(BulletOrigin.position, dir, out RaycastHit hitInfo, 1000f, rayCastLayers)) {
-            var other = hitInfo.collider;
-            if (other.gameObject == player.gameObject) {
-                var effect = Instantiate(FpsManager.Main.BloodEffect);
-                effect.transform.position = hitInfo.point;
-                player.Hurt(damage);
-            } else {
-                var effect = Instantiate(FpsManager.Main.HitEffect);
-                effect.transform.position = hitInfo.point;
+        if (projectile == null) {
+            var dir = player.transform.position - BulletOrigin.position;
+            var inAccuracy = Random.Range(0.0f, 1.0f) * accuracyDegrees;
+            var randomRoll = Random.Range(0.0f, 360.0f);
+            dir = Quaternion.AngleAxis(inAccuracy, BulletOrigin.up) * dir;
+            dir = Quaternion.AngleAxis(randomRoll, BulletOrigin.forward) * dir;
+            if (Physics.Raycast(BulletOrigin.position, dir, out RaycastHit hitInfo, 1000f, rayCastLayers)) {
+                var other = hitInfo.collider;
+                if (other.gameObject == player.gameObject) {
+                    var effect = Instantiate(FpsManager.Main.BloodEffect);
+                    effect.transform.position = hitInfo.point;
+                    player.Hurt(damage);
+                } else {
+                    var effect = Instantiate(FpsManager.Main.HitEffect);
+                    effect.transform.position = hitInfo.point;
+                }
             }
+        } else {
+            var proj = Instantiate(projectile);
+            proj.transform.position = BulletOrigin.position;
+            proj.Target = player.transform;
         }
     }
 

@@ -109,15 +109,20 @@ public class MapManager : MonoBehaviour
         return spawn;
     }
 
-    public void TriggerSecret(int secretId)
+    public void TriggerSecret(SecretTrigger secretTrigger)
     {
-        foreach (var mapObject in mapObjects.FindAll(obj => obj.MapId == secretId))
+        bool targetsWereFound = false;
+        foreach (var mapObject in mapObjects.FindAll(obj => obj.MapId == secretTrigger.SecretId))
         {
             SecretTarget target = mapObject.GetComponent<SecretTarget>();
             if (target != null)
             {
+                targetsWereFound = true;
                 target.Trigger();
             }
+        }
+        if (!targetsWereFound) {
+            secretTrigger.TriggerSelf();
         }
     }
 

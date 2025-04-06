@@ -38,11 +38,11 @@ public class MapPrefab : MonoBehaviour
         // custom
         if (mapPrefabType == MapPrefabType.SecretTrigger) {
             SecretTrigger secretTrigger = GetComponent<SecretTrigger>();
-            secretTrigger.Initialize(tileMapTileData.MapId);
+            secretTrigger.Initialize(tileMapTileData);
         }
         else if (mapPrefabType == MapPrefabType.SecretTarget) {
             SecretTarget secretTarget = GetComponent<SecretTarget>();
-            secretTarget.Initialize(tileMapTileData.MapId, tileMapTileData.Position);
+            secretTarget.Initialize(tileMapTileData);
         }
         else if (mapPrefabType == MapPrefabType.Door)
         {
