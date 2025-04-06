@@ -59,9 +59,19 @@ public class Pickup : MonoBehaviour
             FpsManager.Main.AddAmmo(gunAmmo.GunIndex, gunAmmo.AmmoAmount);
         }
 
+        if (TryGetComponent(out MoneyPickup moneyPickup))
+        {
+            UIManager.main.AddScore(moneyPickup.Value);
+        }
+
+        if (TryGetComponent(out HPPickup hpPickup))
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerTest>().Heal(hpPickup.Value);
+        }
+
         if (TryGetComponent(out Gun gun))
         {
-            FpsManager.Main.EnableGun(gun.GunIndex);
+            FpsManager.Main.EnableGun(gun.GunIndex, gun.Sprite);
         }
     }
 }

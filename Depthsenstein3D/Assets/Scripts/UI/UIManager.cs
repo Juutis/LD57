@@ -7,7 +7,8 @@ public class UIManager : MonoBehaviour
     public static UIManager main;
     void Awake()
     {
-        if (main != null && main != this) {
+        if (main != null && main != this)
+        {
             Destroy(gameObject);
         }
         main = this;
@@ -24,19 +25,24 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private UIHudPart HUDAmmo;
     [SerializeField]
+    private UIHudPart HUDGun;
+    [SerializeField]
     private UIHudPart HUDScore;
     [SerializeField]
     private UIHudPart HUDInventory;
 
+    private int score = 0;
+
     void Start()
     {
-        SetHealth(100);
-        SetAmmo(0);
-        SetScore(0);
+        HUDHealth.SetValue(100);
+        SetAmmoInstant(0);
+        AddScore(0);
     }
 
 
-    public void ShowMessage(string message, UnityAction showCallback, UnityAction hideCallback) {
+    public void ShowMessage(string message, UnityAction showCallback, UnityAction hideCallback)
+    {
         UIShowDialog uiShowDialog = Instantiate(uiShowDialogPrefab, uiShowDialogContainer);
         uiShowDialog.Show(message, showCallback, hideCallback);
     }
@@ -45,24 +51,57 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         UIShowDialog uiShowDialog = Instantiate(uiShowDialogPrefab, uiShowDialogContainer);
-        uiShowDialog.Show(message, delegate {}, delegate {
+        uiShowDialog.Show(message, delegate { }, delegate
+        {
             Time.timeScale = 1f;
         });
     }
 
-    public void SetHealth(int health) {
-        HUDHealth.SetValue($"{health}%");
+    public void SetHealth(int health)
+    {
+        if (health < 0) {
+            health = 0;
+        }
+        HUDHealth.SetValueLerped(health);
     }
-    public void SetAmmo(int ammo) {
-        HUDAmmo.SetValue($"{ammo}");
+
+
+    public void SetAmmoInstant(int ammo)
+    {
+        if (ammo < 0)
+        {
+            ammo = 0;
+        }
+        HUDAmmo.SetValue(ammo);
     }
-    public void SetScore(int score) {
-        HUDScore.SetValue($"{score}");
+
+
+    public void SetAmmoLerped(int ammo)
+    {
+        if (ammo < 0) {
+            ammo = 0;
+        }
+        HUDAmmo.SetValueLerped(ammo);
     }
-    public void AddKeyToInventory(LockedDoorKey key) {
+
+    public void SetGun(FpsManager.Gun gun)
+    {
+        HUDGun.SetGun(gun);
+    }
+
+    public void AddScore(int delta)
+    {
+        score += delta;
+        HUDScore.SetValueLerped(score);
+    }
+
+    public void AddKeyToInventory(LockedDoorKey key)
+    {
         HUDInventory.AddKey(key);
     }
-    public void RemoveKeyFromInventory(LockedDoorKey key) {
+
+    public void RemoveKeyFromInventory(LockedDoorKey key)
+    {
         HUDInventory.RemoveKey(key);
     }
 }

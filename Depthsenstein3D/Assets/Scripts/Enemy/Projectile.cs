@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour
             if (other.gameObject == player.gameObject) {
                 var effect = Instantiate(FpsManager.Main.BloodEffect);
                 effect.transform.position = hitInfo.point;
-                player.Hurt(Damage);
+                player.Hurt((int)Damage);
             } else {
                 var effect = Instantiate(FpsManager.Main.HitEffect);
                 effect.transform.position = hitInfo.point;

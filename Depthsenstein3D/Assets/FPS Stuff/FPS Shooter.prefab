@@ -193,6 +193,8 @@ MonoBehaviour:
   Guns:
   - Available: 1
     Config:
+      Name: Pistol
+      Sprite: {fileID: -1967167844, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
       FireRate: 3
       MagazineSize: 10
       MaxAmmo: 100
@@ -206,6 +208,8 @@ MonoBehaviour:
     GunModel: {fileID: 6835545210745277851}
   - Available: 1
     Config:
+      Name: Shotgun
+      Sprite: {fileID: -1692856028, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
       FireRate: 1.5
       MagazineSize: 2
       MaxAmmo: 30
@@ -219,6 +223,8 @@ MonoBehaviour:
     GunModel: {fileID: 6414543950968299899}
   - Available: 1
     Config:
+      Name: SMG
+      Sprite: {fileID: 1440978866, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
       FireRate: 8
       MagazineSize: 30
       MaxAmmo: 150
@@ -233,6 +239,8 @@ MonoBehaviour:
   SelectedGun:
     Available: 0
     Config:
+      Name: 
+      Sprite: {fileID: 0}
       FireRate: 0
       MagazineSize: 0
       MaxAmmo: 0

@@ -39,12 +39,17 @@ public class FpsGun : MonoBehaviour
     public void Shoot() {
         if (ReadyToFire()) {
             anim.Play("Shoot", -1, 0.0f);
+            Invoke("UpdateAmmoHUD", 0.4f);
             lastShot = Time.time;
             gun.CurrentStatus.AmmoInMagazine--;
             gun.CurrentStatus.CurrentAmmo--;
             lastShot = Time.time;
             fireBullet();
         }
+    }
+
+    public void UpdateAmmoHUD() {
+        UIManager.main.SetAmmoInstant(FpsManager.Main.SelectedGun.CurrentStatus.CurrentAmmo);
     }
 
     public void Reload() {

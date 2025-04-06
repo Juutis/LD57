@@ -222,7 +222,7 @@ public class RangedEnemy : MonoBehaviour
                 {
                     var effect = Instantiate(FpsManager.Main.BloodEffect);
                     effect.transform.position = hitInfo.point;
-                    player.Hurt(damage);
+                    player.Hurt((int)damage);
                 }
                 else
                 {
@@ -249,7 +249,7 @@ public class RangedEnemy : MonoBehaviour
             {
                 var effect = Instantiate(FpsManager.Main.BloodEffect);
                 effect.transform.position = hitInfo.point;
-                player.Hurt(damage);
+                player.Hurt((int)damage);
             }
         }
     }

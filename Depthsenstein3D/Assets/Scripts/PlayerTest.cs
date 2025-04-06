@@ -10,8 +10,8 @@ public class PlayerTest : MonoBehaviour
     private Vector2 moveInput;
     public bool UseMouse = true;
 
-    public float Health = 100;
-    public float MaxHealth = 100;
+    public int Health = 100;
+    public int MaxHealth = 100;
     public bool Dead = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,6 +21,7 @@ public class PlayerTest : MonoBehaviour
         Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
         Health = MaxHealth;
+        UIManager.main.SetHealth(Health);
     }
 
     // Update is called once per frame
@@ -85,9 +86,20 @@ public class PlayerTest : MonoBehaviour
         rb.linearVelocity = (transform.forward * moveInput.y + transform.right * moveInput.x).normalized * moveSpeed;
     }
 
-    public void Hurt(float damage)
+    public void Heal(int points)
+    {
+        Health += points;
+        if (Health > 100)
+        {
+            Health = 100;
+        }
+        UIManager.main.SetHealth(Health);
+    }
+
+    public void Hurt(int damage)
     {
         Health -= damage;
+        UIManager.main.SetHealth(Health);
         if (Health <= 0)
         {
             Die();

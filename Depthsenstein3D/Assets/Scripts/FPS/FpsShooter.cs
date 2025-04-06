@@ -39,6 +39,8 @@ public class FpsShooter : MonoBehaviour
         if (!gun.Available) return;
         if (gun == selectedGun()) return;
         desiredGun = gun;
+        UIManager.main.SetAmmoInstant(desiredGun.CurrentStatus.CurrentAmmo);
+        UIManager.main.SetGun(desiredGun);
         state = State.STOWING;
         if (selectedGun() == null) {
             Invoke("GunStowed", 0.0f);

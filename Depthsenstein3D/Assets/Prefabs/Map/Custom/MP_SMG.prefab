@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493189c96597c47479cd2ec34e4aa247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPrefabType: 8
+  mapPrefabType: 9
   visualizationType: 1
 --- !u!114 &-8294596259962283781
 MonoBehaviour:

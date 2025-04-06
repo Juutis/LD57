@@ -7,15 +7,12 @@ public class Gun : MonoBehaviour
 
     public int GunIndex { get { return gunIndex; } }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private Sprite sprite;
 
-    // Update is called once per frame
-    void Update()
+    public Sprite Sprite { get { return sprite; } }
+
+    public void Initialize(Sprite sprite)
     {
-        
+        this.sprite = sprite;
     }
 }

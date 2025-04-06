@@ -48,9 +48,12 @@ public class FpsManager : MonoBehaviour
         int maxAmmo = gun.Config.MaxAmmo;
 
         Guns[gunIndex].CurrentStatus.CurrentAmmo = Mathf.Min(maxAmmo, currentAmmo + ammo);
+        if (Main.SelectedGun == Guns[gunIndex]) {
+            UIManager.main.SetAmmoLerped(Main.SelectedGun.CurrentStatus.CurrentAmmo);
+        }
     }
 
-    public void EnableGun(int gunIndex)
+    public void EnableGun(int gunIndex, Sprite sprite)
     {
         if (Guns.Count <= gunIndex)
         {
@@ -71,6 +74,8 @@ public class FpsManager : MonoBehaviour
 
     [System.Serializable]
     public class GunConfig {
+        public string Name;
+        public Sprite Sprite;
         public float FireRate;
         public int MagazineSize;
         public int MaxAmmo;

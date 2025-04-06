@@ -67,6 +67,8 @@ public class MapPrefab : MonoBehaviour
         {
             TextureSwapper swapper = GetComponent<TextureSwapper>();
             swapper.Init(tileMapTileData.Sprite);
+        } else if (mapPrefabType == MapPrefabType.Gun) {
+            GetComponent<Gun>().Initialize(sprite);
         }
 
         // positioning & naming
