@@ -45,7 +45,6 @@ public class Pickup : MonoBehaviour
             MapGenerator.main.PickupKey(key);
         }
         LoreMessage loreMessage = GetComponent<LoreMessage>();
-        Debug.Log("Showing lore..");
         if (loreMessage != null)
         {
             Debug.Log("Showing lore..");

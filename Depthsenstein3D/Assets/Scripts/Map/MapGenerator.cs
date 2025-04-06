@@ -103,6 +103,15 @@ public class MapGenerator : MonoBehaviour
                 if (player == null)
                 {
                     Debug.LogError("No spawn and player was not found!");
+#if UNITY_EDITOR
+                    player = Instantiate(playerCharacterPrefab, null);
+
+                    if (spawn != null)
+                    {
+                        player.transform.localPosition = new Vector3(spawn.Position.x, 0, spawn.Position.y);
+                        player.transform.rotation = mapManager.SpawnRotation();
+                    }
+#endif
                 }
 
                 return;
@@ -150,6 +159,7 @@ public class MapGenerator : MonoBehaviour
     public void PickupKey(LockedDoorKey pickupKey)
     {
         mapManager.PickupKey(pickupKey);
+        UIManager.main.AddKeyToInventory(pickupKey);
     }
 
     public void TriggerSecret(int secretId)

@@ -56,7 +56,7 @@ public class MapPrefab : MonoBehaviour
         else if (mapPrefabType == MapPrefabType.Key)
         {
             LockedDoorKey key = GetComponent<LockedDoorKey>();
-            key.Initialize(tileMapTileData.MapId);
+            key.Initialize(tileMapTileData.MapId, sprite);
         }
         else if (mapPrefabType == MapPrefabType.Elevator)
         {

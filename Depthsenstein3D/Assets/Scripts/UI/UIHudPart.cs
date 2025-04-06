@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,6 +8,12 @@ public class UIHudPart : MonoBehaviour
     private TextMeshProUGUI txtTitle;
     [SerializeField]
     private TextMeshProUGUI txtValue;
+    [SerializeField]
+    private Transform inventoryContainer;
+    [SerializeField]
+    private UIHudPartItem uiHudPartItemPrefab;
+
+    private List<UIHudPartItem> inventory = new();
 
     public void Initialize(string title, string value)
     {
@@ -16,5 +23,11 @@ public class UIHudPart : MonoBehaviour
 
     public void SetValue(string value) {
         txtValue.text = value;
+    }
+
+    public void AddKey(LockedDoorKey key) {
+        UIHudPartItem uiHudPartItem = Instantiate(uiHudPartItemPrefab, inventoryContainer);
+        uiHudPartItem.Initialize(key);
+        inventory.Add(uiHudPartItem);
     }
 }
