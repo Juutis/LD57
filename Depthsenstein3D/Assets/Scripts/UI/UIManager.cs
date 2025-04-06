@@ -75,9 +75,12 @@ public class UIManager : MonoBehaviour
     {
         if (ammo < 0)
         {
-            ammo = 0;
+            HUDAmmo.SetValue("∞");
         }
-        HUDAmmo.SetValue(ammo);
+        else 
+        {
+            HUDAmmo.SetValue(ammo);
+        }
     }
 
 

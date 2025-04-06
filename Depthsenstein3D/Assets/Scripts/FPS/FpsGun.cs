@@ -40,9 +40,9 @@ public class FpsGun : MonoBehaviour
         if (ReadyToFire()) {
             anim.Play("Shoot", -1, 0.0f);
             if(gun.Config.UsesAmmo) {
-                Invoke("UpdateAmmoHUD", 0.4f);
                 gun.CurrentStatus.AmmoInMagazine--;
                 gun.CurrentStatus.CurrentAmmo--;
+                UpdateAmmoHUD();
             }
             lastShot = Time.time;
             if (!gun.Config.IsMelee) {

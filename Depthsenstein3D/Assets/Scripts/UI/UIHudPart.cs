@@ -44,6 +44,10 @@ public class UIHudPart : MonoBehaviour
         txtValue.text = $"{prefix}{value}{postfix}";
     }
 
+    public void SetValue(string value) {
+        txtValue.text = $"{prefix}{value}{postfix}";
+    }
+
     public void UpdateGunKeys() {
         txtGunKeys.enabled = true;
         string gunKeys = "";
