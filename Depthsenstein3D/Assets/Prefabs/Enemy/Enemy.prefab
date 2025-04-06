@@ -36,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 5725473735054880837}
   - {fileID: 8747326508200427912}
+  - {fileID: 2594418190225108531}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1581036201790347782
@@ -153,10 +154,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   attackDistance: 2
+  aggroDistance: 5
   DieEffect: {fileID: 2963091402831274226, guid: b038b65d0c5e78f4cb95ff3f4cf8ff86, type: 3}
   BulletOrigin: {fileID: 8747326508200427912}
   accuracyDegrees: 20
   damage: 5
+  projectile: {fileID: 0}
+  navigationTarget: {fileID: 2594418190225108531}
+--- !u!1 &2082736919525994225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2594418190225108531}
+  m_Layer: 6
+  m_Name: NavTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2594418190225108531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082736919525994225}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 959825549336114603}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8515859885415820499
 GameObject:
   m_ObjectHideFlags: 0
