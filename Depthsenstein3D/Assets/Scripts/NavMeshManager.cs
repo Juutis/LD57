@@ -24,6 +24,7 @@ public class NavMeshManager : MonoBehaviour
     }
 
     public void BuildNavMesh() {
+        surface.RemoveData();
         surface.BuildNavMesh();
     }
 }
