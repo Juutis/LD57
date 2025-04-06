@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6258826717706021108}
   - component: {fileID: 1698918815911979869}
-  - component: {fileID: -3372827845798492150}
-  - component: {fileID: -2017619248251506530}
+  - component: {fileID: -8294596259962283781}
+  - component: {fileID: 7894503188426338181}
+  - component: {fileID: 253496331161021190}
   m_Layer: 0
-  m_Name: MP_Gun
+  m_Name: MP_Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,9 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493189c96597c47479cd2ec34e4aa247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPrefabType: 9
+  mapPrefabType: 8
   visualizationType: 1
---- !u!114 &-3372827845798492150
+--- !u!114 &-8294596259962283781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef1e379c413e5d4b946911c60cbe5d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &-2017619248251506530
+--- !u!135 &7894503188426338181
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,3 +82,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &253496331161021190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7924412456123295035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0fa977de69f7974693b9b9c806c969d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunIndex: 1

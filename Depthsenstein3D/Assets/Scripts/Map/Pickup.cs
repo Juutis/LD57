@@ -53,5 +53,15 @@ public class Pickup : MonoBehaviour
                 UIManager.main.ShowMessage(msg);
             }
         }
+
+        if (TryGetComponent(out Ammo gunAmmo))
+        {
+            FpsManager.Main.AddAmmo(gunAmmo.GunIndex, gunAmmo.AmmoAmount);
+        }
+
+        if (TryGetComponent(out Gun gun))
+        {
+            FpsManager.Main.EnableGun(gun.GunIndex);
+        }
     }
 }

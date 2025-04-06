@@ -468,6 +468,18 @@ PrefabInstance:
       propertyPath: bulletOrigin
       value: 
       objectReference: {fileID: 2807088392342499054}
+    - target: {fileID: 4276758363007067111, guid: 9f18d2797e3827d4aab019d94f22421b, type: 3}
+      propertyPath: Guns.Array.data[0].Available
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4276758363007067111, guid: 9f18d2797e3827d4aab019d94f22421b, type: 3}
+      propertyPath: Guns.Array.data[1].Available
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4276758363007067111, guid: 9f18d2797e3827d4aab019d94f22421b, type: 3}
+      propertyPath: Guns.Array.data[2].Available
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6247536108319817566, guid: 9f18d2797e3827d4aab019d94f22421b, type: 3}
       propertyPath: m_Name
       value: FPS Shooter
