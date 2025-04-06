@@ -68,6 +68,14 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: -0.05592209
       objectReference: {fileID: 0}
+    - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 3218966361157423755, guid: f6c3149e8132d3a48a82486ebed9568d, type: 3}
+    - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: attackDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5725473735054880837, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -88,6 +96,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -432985680, guid: 331d06b4577538a4fb4fb848d4c25a1b, type: 3}
+    - target: {fileID: 8747326508200427912, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.034
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
