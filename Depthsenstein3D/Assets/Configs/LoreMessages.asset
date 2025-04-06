@@ -14,12 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loreMessages:
   - Level: 0
-    Message: 'Re: Re: Costs memo
+    Message: 'Maintenance report #52
 
 
-      CFO wants to know about the procurement
-      costs of material Z. Could you send the relevant sheets to statistics? Also,
-      let''s have legal prepped and ready for any unfortunate leaks.
+      This AC unit should be replaced. It''s
+      been fixed too many times and keeps going out of order. If I get called here
+      one more time management can suffocate for all I care.
 
 
-      -Paterson'
+      - J.G.
+
+'
+  - Level: 1
+    Message: "Fwd: Project funds\n\LThe boys at purchasing are wondering if we\u2019re
+      cleared for that additional funding for Project Molar? They want to get the
+      orders sorted by Friday, so please confirm the status of allocated funds with
+      Richardson at your earliest convenience.\n\L- Lester"
+  - Level: 1
+    Message: "Re: Re: Costs\_\n\LCFO wants to know about the procurement costs of
+      the Material.\nCould you send the relevant sheets to statistics? Also, let\u2019s
+      have\nlegal prepped and ready for any potential leaks.\n\L- Paterson"
+  - Level: 1
+    Message: "Re: Leads on Buyers\n\LWe\u2019ve got a tip from John in Accounting
+      that the folks at EngiCo had heard some good stuff about the new product. Might
+      be worth setting up a meeting. Check in with Hobb on how you\u2019d like to
+      proceed.\n\L- Colt"
