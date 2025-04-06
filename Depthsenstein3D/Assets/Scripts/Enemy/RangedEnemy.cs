@@ -5,8 +5,8 @@ public class RangedEnemy : MonoBehaviour
     private PlayerTest player;
     private Animator anim;
     private Rigidbody rb;
-    private float moveSpeed = 1.0f;
-    private float attackDistance = 2.0f;
+    public float moveSpeed = 1.0f;
+    public float attackDistance = 2.0f;
 
     public GameObject DieEffect;
     public Transform BulletOrigin;
@@ -79,6 +79,18 @@ public class RangedEnemy : MonoBehaviour
             } else {
                 var effect = Instantiate(FpsManager.Main.HitEffect);
                 effect.transform.position = hitInfo.point;
+            }
+        }
+    }
+
+    public void Melee() {
+        var dir = player.transform.position - BulletOrigin.position;
+        if (Physics.Raycast(BulletOrigin.position, dir, out RaycastHit hitInfo, attackDistance, rayCastLayers)) {
+            var other = hitInfo.collider;
+            if (other.gameObject == player.gameObject) {
+                var effect = Instantiate(FpsManager.Main.BloodEffect);
+                effect.transform.position = hitInfo.point;
+                player.Hurt(damage);
             }
         }
     }
