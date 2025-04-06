@@ -53,3 +53,5 @@ MonoBehaviour:
     prefab: {fileID: 1698918815911979869, guid: b97368f7fb6fda54fba0b316a1b07764, type: 3}
   - sprite: {fileID: 1440978866, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
     prefab: {fileID: 1698918815911979869, guid: 7abeb5cbe35c21c4a812e7bfe1cd87e3, type: 3}
+  - sprite: {fileID: 516001219, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
+    prefab: {fileID: 1698918815911979869, guid: dd6f81258251b434980eb7a3b93993cd, type: 3}
