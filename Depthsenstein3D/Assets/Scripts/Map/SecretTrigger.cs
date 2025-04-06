@@ -6,9 +6,13 @@ public class SecretTrigger : MonoBehaviour
     private int secretId;
 
     private bool hasTriggered = false;
-    public void Initialize(int secretId)
+
+    private Vector2Int tilePosition;
+    public int SecretId {get {return secretId;}}
+    public void Initialize(TileMapTileData mapTileData)
     {
-        this.secretId = secretId;
+        tilePosition = mapTileData.Position;
+        secretId = mapTileData.MapId;
     }
 
     public void Trigger() {
@@ -16,10 +20,15 @@ public class SecretTrigger : MonoBehaviour
             return;
         }
 
-        MapGenerator.main.TriggerSecret(secretId);
+        MapGenerator.main.TriggerSecret(this);
 
         hasTriggered = true;
     }
+
+    public void TriggerSelf() {
+        MapGenerator.main.ClearWall(tilePosition);
+    }
+    
 
     void Update()
     {

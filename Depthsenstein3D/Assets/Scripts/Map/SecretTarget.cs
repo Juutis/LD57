@@ -8,10 +8,10 @@ public class SecretTarget : MonoBehaviour
     private bool hasTriggered = false;
 
     private Vector2Int tilePosition;
-    public void Initialize(int secretId, Vector2Int tilePosition)
+    public void Initialize(TileMapTileData mapTileData)
     {
-        this.tilePosition = tilePosition;
-        this.secretId = secretId;
+        tilePosition = mapTileData.Position;
+        secretId = mapTileData.MapId;
     }
 
     public void Trigger()
