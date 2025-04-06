@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 5673596902759372260}
-  sprite: {fileID: -1569638573, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
+  sprite: {fileID: 1141193855, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
 --- !u!1001 &3644304383769473967
 PrefabInstance:
   m_ObjectHideFlags: 0
