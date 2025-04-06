@@ -2,14 +2,10 @@ using UnityEngine;
 
 public class ElevatorSwitch : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+    private bool hasBeenUsed = false;
+    public void Use() {
+        if (hasBeenUsed) {return;}
+        hasBeenUsed = true;
+        LevelManager.main.LoadNextLevel(transform.parent.GetComponent<MapPrefab>().Position);
     }
 }

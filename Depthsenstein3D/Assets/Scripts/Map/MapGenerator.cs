@@ -1,9 +1,6 @@
-using Mono.Cecil.Cil;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class MapGenerator : MonoBehaviour
@@ -28,6 +25,8 @@ public class MapGenerator : MonoBehaviour
     private TileConfigScriptableObject tileConfig;
     [SerializeField]
     private Transform mapContainer;
+
+    public Transform Container { get { return mapContainer; } }
 
     [SerializeField]
 
@@ -96,10 +95,12 @@ public class MapGenerator : MonoBehaviour
         {
             MapPrefab spawn = mapManager.GetSpawnPoint();
 
+            player = FindFirstObjectByType<PlayerTest>();
+            if (player != null) {
+                return;
+            }
             if (spawn == null)
             {
-                player = FindFirstObjectByType<PlayerTest>();
-
                 if (player == null)
                 {
                     Debug.LogError("No spawn and player was not found!");
@@ -169,7 +170,7 @@ public class MapGenerator : MonoBehaviour
 
     public void SetupElevator(MapPrefab elevator)
     {
-        mapManager.SetupElevator(elevator);
+        mapManager.SetupElevator(elevator, objectContainer);
     }
 
     private void SpawnFloorTile(TileMapTileData mapTileData)

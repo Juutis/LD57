@@ -62,4 +62,7 @@ public class UIManager : MonoBehaviour
     public void AddKeyToInventory(LockedDoorKey key) {
         HUDInventory.AddKey(key);
     }
+    public void RemoveKeyFromInventory(LockedDoorKey key) {
+        HUDInventory.RemoveKey(key);
+    }
 }

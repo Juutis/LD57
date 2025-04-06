@@ -66,10 +66,15 @@ public class PlayerTest : MonoBehaviour
                 {
                     lockedDoor.TryToOpen();
                 }
+                else if (target.TryGetComponent(out ElevatorDoors elevatorDoors)) {
+                    Debug.Log("Elevator");
+                    elevatorDoors.OpenDoorsFromPlayerAction(delegate {
+                        Debug.Log("Doors opened");
+                    });
+                }
                 else if (target.TryGetComponent(out ElevatorSwitch elevatorSwitch))
                 {
-                    Debug.Log("Load level");
-                    LevelManager.main.LoadNextLevel();
+                    elevatorSwitch.Use();
                 }
             }
         }

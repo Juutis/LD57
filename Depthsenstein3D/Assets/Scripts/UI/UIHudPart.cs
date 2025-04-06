@@ -25,6 +25,12 @@ public class UIHudPart : MonoBehaviour
         txtValue.text = value;
     }
 
+    public void RemoveKey(LockedDoorKey key)
+    {
+        UIHudPartItem partItem = inventory.Find(item => item.Key == key);
+        inventory.Remove(partItem);
+        partItem.Kill();
+    }
     public void AddKey(LockedDoorKey key) {
         UIHudPartItem uiHudPartItem = Instantiate(uiHudPartItemPrefab, inventoryContainer);
         uiHudPartItem.Initialize(key);

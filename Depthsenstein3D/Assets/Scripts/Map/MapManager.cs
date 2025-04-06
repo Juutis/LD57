@@ -13,6 +13,9 @@ public class MapManager : MonoBehaviour
     private MapPrefab spawn = null;
     private List<LockedDoorKey> pickedUpKeys = new();
 
+    [SerializeField]
+    private MapPrefab elevatorDoorsPrefab;
+
     public void Initialize()
     {
         mapObjects = new();
@@ -30,6 +33,7 @@ public class MapManager : MonoBehaviour
         if (foundKey != null)
         {
             pickedUpKeys.Remove(foundKey);
+            UIManager.main.RemoveKeyFromInventory(foundKey);
             Destroy(foundKey.gameObject);
             return true;
         }
@@ -66,41 +70,38 @@ public class MapManager : MonoBehaviour
         mapFloors.Add(mapPrefab);
     }
 
-    public void SetupElevator(MapPrefab elevator)
+    public void SetupElevator(MapPrefab elevator, Transform parent)
     {
+        Debug.Log("Setting up elevator");
         elevatorParent = new GameObject("elevatorParent");
-        elevatorParent.AddComponent<Elevator>();
         elevatorParent.transform.parent = transform;
+        elevatorParent.tag = "Finish";
 
-        int elevatorX = elevator.TileMapTileData.Position.x;
-        int elevatorY = elevator.TileMapTileData.Position.y;
+        Vector2Int emptyNeighbor = FirstEmptyNeighbor(elevator);
+        Vector2Int direction = elevator.Position - emptyNeighbor;
+        Vector2Int doorPosition = emptyNeighbor - direction;
+        MapPrefab elevatorDoors = Instantiate(elevatorDoorsPrefab, parent);
+        elevatorDoors.transform.localPosition = new Vector3(doorPosition.x, 0, doorPosition.y);
+        elevatorDoors.transform.parent = elevatorParent.transform;
 
-        foreach (MapPrefab ceiling in mapCeilings)
-        {
-            MoveToElevatorParentIfNeeded(elevatorX, elevatorY, ceiling);
-        }
-
-        foreach (MapPrefab floor in mapFloors)
-        {
-            MoveToElevatorParentIfNeeded(elevatorX, elevatorY, floor);
-        }
-
-        foreach (MapPrefab wall in mapWalls)
-        {
-            MoveToElevatorParentIfNeeded(elevatorX, elevatorY, wall);
-        }
+        ChangeNeighborParents(emptyNeighbor, mapCeilings, elevatorParent.transform);
+        ChangeNeighborParents(emptyNeighbor, mapWalls, elevatorParent.transform);
+        ChangeNeighborParents(emptyNeighbor, mapFloors, elevatorParent.transform);
 
         elevator.transform.parent = elevatorParent.transform;
     }
 
-    private void MoveToElevatorParentIfNeeded(int elevatorX, int elevatorY, MapPrefab ceiling)
-    {
-        int objX = ceiling.TileMapTileData.Position.x;
-        int objY = ceiling.TileMapTileData.Position.y;
-
-        if (objX > (elevatorX - 2) && objX < (elevatorX + 2) && objY > (elevatorY - 3) && objY < (elevatorY + 1))
+    private void ChangeNeighborParents(Vector2Int origin, List<MapPrefab> tiles, Transform newParent) {
+        for (int xPos = -1; xPos <= 1; xPos += 1)
         {
-            ceiling.transform.parent = elevatorParent.transform;
+            for (int yPos = -1; yPos <= 1; yPos += 1)
+            {
+                var pos = origin + new Vector2Int(xPos, yPos);
+                var tile = tiles.Find(ceiling => ceiling.Position == pos);
+                if (tile != null) {
+                    tile.transform.parent = newParent;
+                }
+            }
         }
     }
 
@@ -124,6 +125,28 @@ public class MapManager : MonoBehaviour
         if (!targetsWereFound) {
             secretTrigger.TriggerSelf();
         }
+    }
+
+    private Vector2Int FirstEmptyNeighbor(MapPrefab origin, int distance = 1) {
+        Vector2Int emptyPos = Vector2Int.up;
+        Vector2Int pos = origin.Position;
+        for (int xPos = -distance; xPos <= distance; xPos += 1)
+        {
+            for (int yPos = -distance; yPos <= distance; yPos += 1)
+            {
+                if (xPos == 0 && yPos == 0) {
+                    continue;
+                }
+                Vector2Int neighborPos = new Vector2Int(xPos + pos.x, yPos + pos.y);
+                MapPrefab wall = mapWalls.Find(mapWall => mapWall.Position == neighborPos);
+                if (wall == null)
+                {
+                    emptyPos = neighborPos;
+                    break;
+                }
+            }
+        }
+        return emptyPos;
     }
 
     public Quaternion SpawnRotation()

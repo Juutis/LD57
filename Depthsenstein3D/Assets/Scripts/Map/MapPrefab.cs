@@ -104,6 +104,7 @@ public enum MapPrefabType
     BasicMeleeMob,
     BasicRangedMob,
     Clutter,
-    LoreMessage
+    LoreMessage,
+    ElevatorDoors
 
 }

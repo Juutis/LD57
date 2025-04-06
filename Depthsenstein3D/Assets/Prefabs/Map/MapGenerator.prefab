@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a129715dc4f19404d8ee27e08bc213fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elevatorDoorsPrefab: {fileID: 7686811409860206386, guid: a46be21b29b49f14a8e2f7d62cb42b9b, type: 3}
 --- !u!114 &1013439692327581298
 MonoBehaviour:
   m_ObjectHideFlags: 0
