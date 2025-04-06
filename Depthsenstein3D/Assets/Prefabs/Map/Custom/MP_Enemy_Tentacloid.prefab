@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6258826717706021108}
   - component: {fileID: 1698918815911979869}
+  - component: {fileID: 566153068487834486}
   m_Layer: 0
   m_Name: MP_Enemy_Tentacloid
   m_TagString: Untagged
@@ -47,6 +48,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapPrefabType: 14
   visualizationType: 2
+--- !u!114 &566153068487834486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7924412456123295035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ad16a823d423bb4d9dde5e695a6eae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 6179145425446849193}
 --- !u!1001 &3724854344869340595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,6 +118,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdbbd98308de9504e944bd94392670d5, type: 3}
+--- !u!114 &6179145425446849193 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7381939975907749658, guid: fdbbd98308de9504e944bd94392670d5, type: 3}
+  m_PrefabInstance: {fileID: 3724854344869340595}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc50f59099ac594ba39f16e1143835d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7083212283974873547 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5908150147224736888, guid: fdbbd98308de9504e944bd94392670d5, type: 3}

@@ -65,10 +65,13 @@ public class MapPrefab : MonoBehaviour
         }
         else if (mapPrefabType == MapPrefabType.SpecialWall)
         {
-            TextureSwapper swapper = GetComponent<TextureSwapper>();
-            swapper.Init(tileMapTileData.Sprite);
-        } else if (mapPrefabType == MapPrefabType.Gun) {
-            GetComponent<Gun>().Initialize(sprite);
+            if (TryGetComponent(out TextureSwapper textureSwapper)) {
+                textureSwapper.Init(tileMapTileData.Sprite);
+            }
+        }
+        else if (mapPrefabType == MapPrefabType.BasicRangedMob || mapPrefabType == MapPrefabType.BasicMeleeMob)
+        {
+            Debug.Break();
         }
 
         // positioning & naming

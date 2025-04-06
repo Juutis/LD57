@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6258826717706021108}
   - component: {fileID: 1698918815911979869}
+  - component: {fileID: 3259419422239907250}
   m_Layer: 0
   m_Name: MP_Enemy_Melee
   m_TagString: Untagged
@@ -47,6 +48,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapPrefabType: 14
   visualizationType: 2
+--- !u!114 &3259419422239907250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7924412456123295035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ad16a823d423bb4d9dde5e695a6eae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 8759331700150352874}
 --- !u!1001 &6774062911582717210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109,3 +123,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1153264122577733010, guid: 9c189ead0e3217549b561851ee5fc405, type: 3}
   m_PrefabInstance: {fileID: 6774062911582717210}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8759331700150352874 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2849982064089825008, guid: 9c189ead0e3217549b561851ee5fc405, type: 3}
+  m_PrefabInstance: {fileID: 6774062911582717210}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc50f59099ac594ba39f16e1143835d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

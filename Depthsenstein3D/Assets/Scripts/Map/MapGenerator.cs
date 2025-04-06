@@ -90,7 +90,6 @@ public class MapGenerator : MonoBehaviour
         }
 
         SpawnPlayer();
-        initAINavigation();
     }
 
     public void SpawnPlayer()
@@ -130,6 +129,11 @@ public class MapGenerator : MonoBehaviour
                 player.transform.rotation = mapManager.SpawnRotation();
             }
         }
+    }
+
+    public void StartEnemies()
+    {
+        mapManager.StartEnemies();
     }
 
     public void ClearWall(Vector2Int position)
@@ -256,7 +260,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    private void initAINavigation() {
+    public void InitAINavigation() {
         NavMeshManager.Main.BuildNavMesh();
     }
 

@@ -8,6 +8,7 @@ public class MapManager : MonoBehaviour
     private List<MapPrefab> mapWalls = new();
     private List<MapPrefab> mapCeilings = new();
     private List<MapPrefab> mapFloors = new();
+    private List<MapPrefab> mapEnemies = new();
     private GameObject elevatorParent;
 
     private MapPrefab spawn = null;
@@ -53,6 +54,12 @@ public class MapManager : MonoBehaviour
             Debug.Log("We've set up spawn");
             spawn = mapPrefab;
         }
+        else if (mapPrefab.Type == MapPrefabType.BasicMeleeMob || mapPrefab.Type == MapPrefabType.BasicRangedMob)
+        {
+            Debug.Log("Add enemy");
+            mapEnemies.Add(mapPrefab);
+        }
+
         mapObjects.Add(mapPrefab);
     }
 
@@ -69,6 +76,11 @@ public class MapManager : MonoBehaviour
     public void AddFloor(MapPrefab mapPrefab)
     {
         mapFloors.Add(mapPrefab);
+    }
+
+    public void StartEnemies()
+    {
+        mapEnemies.ForEach(x => x.GetComponent<MapEnemy>()?.Initialize());
     }
 
     public void SetupElevator(MapPrefab elevator, Transform parent)
