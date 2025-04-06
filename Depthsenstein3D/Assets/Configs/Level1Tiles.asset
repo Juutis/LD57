@@ -26,13 +26,13 @@ MonoBehaviour:
   - sprite: {fileID: 537806223, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
     prefab: {fileID: 1698918815911979869, guid: 19a028e52447b054f97377771a6b98fd, type: 3}
   - sprite: {fileID: 977994762, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
-    prefab: {fileID: 1698918815911979869, guid: 8b5672a622c854f4eac9b61eb797e7eb, type: 3}
+    prefab: {fileID: 1698918815911979869, guid: a2f5b47fcf9acb148a057c818437cd32, type: 3}
   - sprite: {fileID: 814437190, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
     prefab: {fileID: 1698918815911979869, guid: 3ceadf21667c93347a8819c7dea562c5, type: 3}
   - sprite: {fileID: -1302391114, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
     prefab: {fileID: 1698918815911979869, guid: bd31fc5ae205d4a4da9ea60eafa8f98d, type: 3}
   - sprite: {fileID: -1640490067, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
-    prefab: {fileID: 1698918815911979869, guid: cb90bf6d1ff304d4984616ff64cb129a, type: 3}
+    prefab: {fileID: 1698918815911979869, guid: 5d8fd9863c3605845ae6ff84189a5778, type: 3}
   - sprite: {fileID: -384658153, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
     prefab: {fileID: 1698918815911979869, guid: 2b75127aa0c0282488336c7d4d51c72d, type: 3}
   - sprite: {fileID: -1967167844, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
@@ -63,9 +63,5 @@ MonoBehaviour:
     prefab: {fileID: 1698918815911979869, guid: 026bec4a61c6dd647b806c130319add7, type: 3}
   - sprite: {fileID: -1429563245, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
     prefab: {fileID: 1698918815911979869, guid: 3bfcb6f54a6348f4bba4d0f05f279417, type: 3}
-  - sprite: {fileID: 977994762, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
-    prefab: {fileID: 1698918815911979869, guid: a2f5b47fcf9acb148a057c818437cd32, type: 3}
-  - sprite: {fileID: -1640490067, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
-    prefab: {fileID: 1698918815911979869, guid: 5d8fd9863c3605845ae6ff84189a5778, type: 3}
   - sprite: {fileID: 161363215, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
     prefab: {fileID: 1698918815911979869, guid: 20f812e46db9fd341bb868f4b029af73, type: 3}
