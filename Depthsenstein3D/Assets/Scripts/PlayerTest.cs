@@ -27,8 +27,6 @@ public class PlayerTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Debug.Log($"Player pos {transform.position}");
         if (UseMouse)
         {
             float x = Input.GetAxisRaw("Horizontal");
@@ -134,6 +132,5 @@ public class PlayerTest : MonoBehaviour
         transform.position = spawnPos;
         transform.rotation = spawnRot;
         rb.position = spawnPos;
-        Debug.Log($"Reset to pos {transform.position}");
     }
 }
