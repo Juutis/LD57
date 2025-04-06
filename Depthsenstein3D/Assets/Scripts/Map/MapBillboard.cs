@@ -7,7 +7,7 @@ public class MapBillboard : MonoBehaviour
 
     private void GetCamera() {
         if (mainCameraTransform == null) {
-            mainCameraTransform = Camera.main?.transform;
+            mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera")?.transform;
         }
     }
 
