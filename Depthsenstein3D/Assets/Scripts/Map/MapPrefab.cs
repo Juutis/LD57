@@ -63,6 +63,11 @@ public class MapPrefab : MonoBehaviour
             MapGenerator.main.SetupElevator(this);
             transform.GetChild(0).AddComponent<ElevatorSwitch>();
         }
+        else if (mapPrefabType == MapPrefabType.SpecialWall)
+        {
+            TextureSwapper swapper = GetComponent<TextureSwapper>();
+            swapper.Init(tileMapTileData.Sprite);
+        }
 
         // positioning & naming
         SpawnPrefab(new Vector3(tileMapTileData.Position.x, 0, tileMapTileData.Position.y));
@@ -104,6 +109,7 @@ public enum MapPrefabType
     BasicMeleeMob,
     BasicRangedMob,
     Clutter,
-    LoreMessage
+    LoreMessage,
+    SpecialWall
 
 }

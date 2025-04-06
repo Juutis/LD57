@@ -31,7 +31,7 @@ public class MapPrefabHelper : MonoBehaviour
         return cube;
     }
 
-    private Texture2D ExtractTexture(Sprite sprite)
+    public Texture2D ExtractTexture(Sprite sprite)
     {
         if (textureCache.ContainsKey(sprite))
         {

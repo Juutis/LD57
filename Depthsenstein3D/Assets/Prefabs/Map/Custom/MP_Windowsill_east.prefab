@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1698918815911979869}
   - component: {fileID: 1759857869147530815}
   m_Layer: 0
-  m_Name: MP_HalfWall
+  m_Name: MP_Windowsill_east
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 5673596902759372260}
-  sprite: {fileID: 0}
+  sprite: {fileID: -1569638573, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
 --- !u!1001 &3644304383769473967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71,7 +71,15 @@ PrefabInstance:
     m_TransformParent: {fileID: 6258826717706021108}
     m_Modifications:
     - target: {fileID: 261010873895337860, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 261010873895337860, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
       propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 261010873895337860, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
+      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 261010873895337860, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
@@ -80,19 +88,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 261010873895337860, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 261010873895337860, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.375
       objectReference: {fileID: 0}
     - target: {fileID: 261010873895337860, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 261010873895337860, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 261010873895337860, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
       propertyPath: m_LocalRotation.y
@@ -104,7 +112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 261010873895337860, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 261010873895337860, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -114,9 +122,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 783760583050213925, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5495902117074765545, guid: e5d7b078baa82fd49ab5ce4c8a0f3ba2, type: 3}
     - target: {fileID: 4408550443223429111, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
       propertyPath: m_Name
       value: texturedCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924497407974121440, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924497407974121440, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924497407974121440, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924497407974121440, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
+      propertyPath: m_Center.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8948513740265940555, guid: 8ad1b20306a8d114bb79b3bff9d8c388, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
