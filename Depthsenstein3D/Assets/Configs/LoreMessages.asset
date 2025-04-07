@@ -35,6 +35,12 @@ MonoBehaviour:
     Message: "Re: Re: Costs\_\n\LCFO wants to know about the procurement costs of
       the Material.\nCould you send the relevant sheets to statistics? Also, let\u2019s
       have\nlegal prepped and ready for any potential leaks.\n\L- Paterson"
+  - Level: 1
+    Message: "Strategy pivot\n\LIt\u2019s official, the board has officially greenlit
+      the proposal. It\u2019s enough to keep our heads above water, but let\u2019s
+      make sure the team is on the same page so that we focus on mission-critical
+      stuff only. Keep the red tape to a minimum, but make sure they continue to
+      understand how far up the good old NDA boot is in their ass, got it?\n\L- Voss"
   - Level: 2
     Message: "Maintenance report #46\L\LWhen prospecting for reno, there was evidence
       of some parts of the wall being hollow on each floor. No sign of this in the
