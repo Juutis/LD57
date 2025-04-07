@@ -46,7 +46,10 @@ public class FpsGun : MonoBehaviour
             }
             lastShot = Time.time;
             if (!gun.Config.IsMelee) {
+                SoundManager.main.PlaySound(GameSoundType.PistolShoot);
                 fireBullet();
+            } else {
+                SoundManager.main.PlaySound(GameSoundType.SwingMelee);
             }
         }
     }
@@ -60,6 +63,7 @@ public class FpsGun : MonoBehaviour
     public void Reload() {
         if (ReadyToReload()) {
             anim.Play("Reload");
+            SoundManager.main.PlaySound(GameSoundType.PistolReload);
             reloading = true;
         }
     }
@@ -111,17 +115,31 @@ public class FpsGun : MonoBehaviour
             var range = gun.Config.IsMelee ? 1.0f : 1000.0f;
             if (Physics.Raycast(bulletOrigin.position, dir, out RaycastHit hitInfo, range, rayCastLayers)) {
                 var other = hitInfo.collider;
+                bool justWallWasHit = true;
                 if (other.gameObject.layer == enemyLayer) {
                     var effect = Instantiate(FpsManager.Main.BloodEffect);
                     effect.transform.position = hitInfo.point;
+                    // invoke to separate gunshot & hit
+                    Invoke("PlayHitSound", 0.1f);
+                    justWallWasHit = false;
                 } else {
                     var effect = Instantiate(FpsManager.Main.HitEffect);
                     effect.transform.position = hitInfo.point;
                 }
                 if (other.TryGetComponent(out Damageable damageable)) {
                     damageable.Hurt(gun.Config.Damage);
+                    justWallWasHit = false;
+                }
+                if (justWallWasHit) {
+                    if (gun.Config.IsMelee) {
+                        SoundManager.main.PlaySound(GameSoundType.HitWall);
+                    }
                 }
             }
         }
+    }
+
+    public void PlayHitSound() {
+        SoundManager.main.PlaySound(GameSoundType.EnemyIsHitMelee);
     }
 }

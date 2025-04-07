@@ -89,6 +89,7 @@ public class RangedEnemy : MonoBehaviour
         {
             if (canSeePlayer())
             {
+                SoundManager.main.PlaySound(GameSoundType.EnemySeesPlayer);
                 state = State.ATTACK;
                 AttackModeNavigation();
             }
@@ -288,6 +289,7 @@ public class RangedEnemy : MonoBehaviour
         dead = true;
         DisableNavigation();
         GetComponent<Collider>().enabled = false;
+        SoundManager.main.PlaySound(GameSoundType.EnemyDie);
         rb.linearVelocity = Vector3.zero;
         rb.isKinematic = true;
     }
@@ -352,6 +354,7 @@ public class RangedEnemy : MonoBehaviour
     }
 
     public void WasHurt() {
+        Debug.Log("hurt!");
         if (state == State.PATROL) {
             state = State.ATTACK;
             AttackModeNavigation();

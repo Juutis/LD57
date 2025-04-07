@@ -43,12 +43,14 @@ public class Pickup : MonoBehaviour
         LockedDoorKey key = GetComponent<LockedDoorKey>();
         if (key != null) {
             MapGenerator.main.PickupKey(key);
+            SoundManager.main.PlaySound(GameSoundType.KeyPickup);
         }
         LoreMessage loreMessage = GetComponent<LoreMessage>();
         if (loreMessage != null)
         {
             Debug.Log("Showing lore..");
             string msg = MapGenerator.main.GetLoreMessage();
+            SoundManager.main.PlaySound(GameSoundType.LorePickup);
             MapGenerator.main.Player.Stats.LoreFound += 1;
             if (msg != "") {
                 UIManager.main.ShowMessage(msg);
@@ -58,12 +60,14 @@ public class Pickup : MonoBehaviour
         if (TryGetComponent(out Ammo gunAmmo))
         {
             FpsManager.Main.AddAmmo(gunAmmo.GunIndex, gunAmmo.AmmoAmount);
+            SoundManager.main.PlaySound(GameSoundType.AmmoPickup);
         }
 
         if (TryGetComponent(out MoneyPickup moneyPickup))
         {
             UIManager.main.AddScore(moneyPickup.Value);
             MapGenerator.main.Player.Stats.ScoreGained += moneyPickup.Value;
+            SoundManager.main.PlaySound(GameSoundType.MoneyPickup);
         }
 
         if (TryGetComponent(out HPPickup hpPickup))
@@ -74,6 +78,7 @@ public class Pickup : MonoBehaviour
         if (TryGetComponent(out Gun gun))
         {
             FpsManager.Main.EnableGun(gun.GunIndex, gun.Sprite);
+            SoundManager.main.PlaySound(GameSoundType.GunPickup);
         }
     }
 }

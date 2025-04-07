@@ -102,6 +102,7 @@ public class PlayerTest : MonoBehaviour
                 if (target.TryGetComponent(out NormalDoor door))
                 {
                     Destroy(door.gameObject);
+                    SoundManager.main.PlaySound(GameSoundType.OpenDoor);
                 }
                 else if (target.TryGetComponent(out SecretTrigger secretTrigger))
                 {
@@ -109,17 +110,26 @@ public class PlayerTest : MonoBehaviour
                 }
                 else if (target.TryGetComponent(out LockedDoor lockedDoor))
                 {
-                    lockedDoor.TryToOpen();
+                    if (lockedDoor.TryToOpen()) {
+                        SoundManager.main.PlaySound(GameSoundType.OpenDoor);
+                    } else {
+                        SoundManager.main.PlaySound(GameSoundType.Prod);
+                    }
                 }
                 else if (target.TryGetComponent(out ElevatorDoors elevatorDoors)) {
                     Debug.Log("Elevator");
+                    SoundManager.main.PlaySound(GameSoundType.ElevatorOpen);
                     elevatorDoors.OpenDoorsFromPlayerAction(delegate {
+                        SoundManager.main.PlaySound(GameSoundType.ElevatorDing);
                         Debug.Log("Doors opened");
                     });
                 }
                 else if (target.TryGetComponent(out ElevatorSwitch elevatorSwitch))
                 {
                     elevatorSwitch.Use();
+                }
+                else {
+                    SoundManager.main.PlaySound(GameSoundType.Prod);
                 }
             }
         }
@@ -158,6 +168,7 @@ public class PlayerTest : MonoBehaviour
     {
         Health -= damage;
         UIManager.main.SetHealth(Health);
+        SoundManager.main.PlaySound(GameSoundType.PlayerIsHitMelee);
         if (Health <= 0)
         {
             Die();
