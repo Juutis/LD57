@@ -6,6 +6,8 @@ public class UIShowDialog : MonoBehaviour
 {
     [SerializeField]
     private Animator animator;
+    [SerializeField]
+    private Animator winscreenAnimator;
 
     [SerializeField]
     private TextMeshProUGUI txtMessage;
@@ -14,12 +16,19 @@ public class UIShowDialog : MonoBehaviour
 
     private bool isShown = false;
     private bool isHiding = false;
+    private bool isWin = false;
 
     private UnityAction showCallback;
     private UnityAction hideCallback;
 
     [SerializeField]
     private GameObject deathScreen;
+    [SerializeField]
+    private GameObject paper;
+    [SerializeField]
+    private GameObject winScreen;
+    [SerializeField]
+    private GameObject containerContent;
 
     public void Hide()
     {
@@ -38,6 +47,16 @@ public class UIShowDialog : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void ShowWin() {
+        isWin = true;
+        animator.enabled = false;
+        deathScreen.SetActive(false);
+        winScreen.SetActive(true);
+        containerContent.SetActive(true);
+        paper.SetActive(false);
+        winscreenAnimator.Play("winScreenShow");
+    }
+
     public void ShowDeath(UnityAction hideCallback) {
         if (isShown)
         {
@@ -47,7 +66,7 @@ public class UIShowDialog : MonoBehaviour
         txtMessage.text = "You took too many hits and died.";
         txtButton.text = "RESTART LEVEL (SPACE)";
         this.showCallback = delegate {
-            
+
         };
         this.hideCallback = hideCallback;
         animator.Play("uiShowDialogShow");
@@ -72,6 +91,9 @@ public class UIShowDialog : MonoBehaviour
     }
 
     void Update() {
+        if (isWin) {
+            return;
+        }
         if (!isHiding && isShown && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))) {
             Hide();
         }

@@ -78,6 +78,7 @@ public class Boss : MonoBehaviour
     public void HeartKilled() {
         Die();
         Debug.Log("YOU WIN");
+        UIManager.main.ShowWin();
     }
 
     public void Initialize()

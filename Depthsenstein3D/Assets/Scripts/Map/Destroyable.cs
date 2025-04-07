@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Destroyable : MonoBehaviour
 {
+    [SerializeField]
+    private bool isEnabled;
+
     private string spriteName;
     private int HP = 3;
 
@@ -24,6 +27,12 @@ public class Destroyable : MonoBehaviour
 
     public void Hit()
     {
+        if (!isEnabled)
+        {
+            return;
+        }
+
+
         HP--;
 
         if (HP <= 0 )
