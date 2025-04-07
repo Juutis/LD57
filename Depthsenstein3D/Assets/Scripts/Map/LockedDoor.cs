@@ -15,9 +15,11 @@ public class LockedDoor : MonoBehaviour
         }
     }
 
-    public void TryToOpen() {
+    public bool TryToOpen() {
         if (MapGenerator.main.TryToOpenLockedDoor(mapId)) {
             Destroy(gameObject);
+            return true;
         }
+        return false;
     }
 }

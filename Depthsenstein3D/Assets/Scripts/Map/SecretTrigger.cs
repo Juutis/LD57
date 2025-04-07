@@ -26,6 +26,7 @@ public class SecretTrigger : MonoBehaviour
         if (!secrets.Contains(secretId)) {
             secrets.Add(secretId);;
         }
+        SoundManager.main.PlaySound(GameSoundType.ActivateTrigger);
         MapGenerator.main.TriggerSecret(this);
 
         hasTriggered = true;

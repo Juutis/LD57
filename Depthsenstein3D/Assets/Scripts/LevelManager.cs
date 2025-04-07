@@ -90,6 +90,7 @@ public class LevelManager : MonoBehaviour
         //Debug.Log("Loading next level..");
         MapGenerator.main.Player.FreezeControls();
         FpsManager.Main.FreezeControls();
+        MusicManager.main.SwitchMusic(MusicType.Elevator);
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
         MapGenerator.main.Player.ElevatorRotate(currentElevator.transform.position, delegate {
             //Debug.Log("rotation completed");
@@ -112,6 +113,10 @@ public class LevelManager : MonoBehaviour
             elevatorContainer.tag = "Elevator";
 
             sceneLoad = SceneManager.LoadSceneAsync(levels[currentLevelNum + 1], LoadSceneMode.Additive);
+            // check level num here if you want ambience
+            if (currentLevelNum == 0) {
+                MusicManager.main.FadeOutAmbience();
+            }
             sceneLoadCallback = delegate
             {
                 LevelManager.main.SetCurrentLevel(currentLevelNum + 1);
@@ -197,6 +202,9 @@ public class LevelManager : MonoBehaviour
 
                     MapGenerator.main.Player.RestoreControls();
                     FpsManager.Main.RestoreControls();
+                    MusicManager.main.SwitchMusic(MusicType.Game);
+                    SoundManager.main.PlaySound(GameSoundType.ElevatorDing);
+
                     //Debug.Log("Doors opened");
                     currentLevel = nextLevel;
                     MapGenerator.main.StartEnemies();
