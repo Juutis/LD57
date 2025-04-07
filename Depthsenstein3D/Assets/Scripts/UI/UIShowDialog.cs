@@ -12,6 +12,12 @@ public class UIShowDialog : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI txtMessage;
     [SerializeField]
+    private GameObject winScoreContainer;
+
+    [SerializeField]
+    private UILevelSingleStat singleLevelStatPrefab;
+
+    [SerializeField]
     private TextMeshProUGUI txtButton;
 
     private bool isShown = false;
@@ -55,6 +61,17 @@ public class UIShowDialog : MonoBehaviour
         containerContent.SetActive(true);
         paper.SetActive(false);
         winscreenAnimator.Play("winScreenShow");
+
+
+    }
+
+    public void ShowWinFinished() {
+        var stats = MapGenerator.main.Player.Stats.EndStats();
+        foreach (var stat in stats)
+        {
+            UILevelSingleStat singleStat = Instantiate(singleLevelStatPrefab, winScoreContainer.transform);
+            singleStat.Initialize(stat, stat.Name == "Total time");
+        }
     }
 
     public void ShowDeath(UnityAction hideCallback) {
