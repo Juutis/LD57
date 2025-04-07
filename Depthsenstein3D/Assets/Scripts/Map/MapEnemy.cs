@@ -17,6 +17,11 @@ public class MapEnemy : MonoBehaviour
         
     }
 
+    public void ResetPos()
+    {
+        enemy.ResetPos();
+    }
+
     public void Initialize()
     {
         enemy.Initialize();

@@ -89,7 +89,7 @@ public class PlayerTest : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + h * rotateSpeed * Time.deltaTime, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.E))
         {
             Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 1f, ~0);
 

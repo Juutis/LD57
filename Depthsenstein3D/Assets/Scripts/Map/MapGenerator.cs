@@ -105,6 +105,8 @@ public class MapGenerator : MonoBehaviour
         SpawnPlayer();
         mapManager.CalculateSecrets();
         player.Stats.ResetCurrentStats();
+
+        mapManager.ResetEnemies();
     }
 
     public void SpawnPlayer()

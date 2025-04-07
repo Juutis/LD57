@@ -49,16 +49,26 @@ public class RangedEnemy : MonoBehaviour
         rb.detectCollisions = false;
     }
 
+    public void ResetPos()
+    {
+        transform.localPosition = Vector3.zero;
+
+        if (rb != null && transform != null)
+        {
+            rb.position = transform.position;
+        }
+    }
+
     public void Initialize()
     {
-        Debug.Log("Initializing enemy");
         rayCastLayers = LayerMask.GetMask("Default", "Player", "Ceiling");
         playerLosLayers = LayerMask.GetMask("Default", "Player");
         isActive = true;
         RandomizeNavigationTarget();
         EnableNavigation();
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-        rb.position = new Vector3(transform.position.x, 0, transform.position.z);
+
+        transform.localPosition = Vector3.zero;
+        rb.position = transform.position;
         rb.isKinematic = false;
         rb.detectCollisions = true;
     }
@@ -105,11 +115,13 @@ public class RangedEnemy : MonoBehaviour
         }
     }
 
-    private bool playerInAttackRange() {
+    private bool playerInAttackRange()
+    {
         return Vector3.Distance(transform.position, player.transform.position) < attackDistance;
     }
 
-    private bool canSeePlayer() {
+    private bool canSeePlayer()
+    {
         var dir = player.transform.position - transform.position;
         if (Physics.Raycast(BulletOrigin.position, dir, out RaycastHit hitInfo, 1000f, playerLosLayers))
         {
@@ -121,7 +133,8 @@ public class RangedEnemy : MonoBehaviour
     public void RandomizeNavigationTarget()
     {
         if (dead) return;
-        if (!isActive) {
+        if (!isActive)
+        {
             Invoke("RandomizeNavigationTarget", Random.Range(2.0f, 5.0f));
         }
         if (state != State.PATROL) return;
@@ -141,19 +154,22 @@ public class RangedEnemy : MonoBehaviour
         Invoke("AttackModeNavigation", Random.Range(1.0f, 2.0f));
     }
 
-    private void recalculateAttackNavigation() {
+    private void recalculateAttackNavigation()
+    {
         if (dead) return;
         if (!isActive) return;
         if (state != State.ATTACK) return;
-        if (!playerInAttackRange() || !canSeePlayer()) {
+        if (!playerInAttackRange() || !canSeePlayer())
+        {
             navigationTarget = player.transform.position;
-        } else {
+        }
+        else
+        {
             var maxDist = 1.0f;
             var targetPos = transform.position + new Vector3(Random.Range(-maxDist, maxDist), 0, Random.Range(-maxDist, maxDist));
             targetPos.y = navMeshY;
             navigationTarget = targetPos;
         }
-        //Debug.DrawLine(transform.position, navigationTarget, Color.red, 3.0f);
     }
 
     private void handleAttack()
@@ -166,7 +182,8 @@ public class RangedEnemy : MonoBehaviour
             nextAttack = Time.time + Random.Range(minDelayBetweenAttacks, maxDelayBetweenAttacks);
             attacking = true;
         }
-        if (!attacking) {
+        if (!attacking)
+        {
             if (rb.linearVelocity.magnitude > 0.01f)
             {
                 AnimateRun();
@@ -186,7 +203,8 @@ public class RangedEnemy : MonoBehaviour
             return;
         }
 
-        if (attacking) {
+        if (attacking)
+        {
             rb.linearVelocity = Vector3.zero;
             return;
         }
@@ -332,7 +350,8 @@ public class RangedEnemy : MonoBehaviour
         }
     }
 
-    public void AttackDone() {
+    public void AttackDone()
+    {
         attacking = false;
         recalculateAttackNavigation();
     }
@@ -353,9 +372,11 @@ public class RangedEnemy : MonoBehaviour
         }
     }
 
-    public void WasHurt() {
+    public void WasHurt()
+    {
         Debug.Log("hurt!");
-        if (state == State.PATROL) {
+        if (state == State.PATROL)
+        {
             state = State.ATTACK;
             AttackModeNavigation();
         }
