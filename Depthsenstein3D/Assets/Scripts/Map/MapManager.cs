@@ -47,7 +47,8 @@ public class MapManager : MonoBehaviour
     {
         return scoreAvailable;
     }
-    public int GetMaxLore() {
+    public int GetMaxLore()
+    {
         return loreCreated;
     }
 
@@ -75,14 +76,18 @@ public class MapManager : MonoBehaviour
 
     public void ResetKeys()
     {
+        pickedUpKeys.ForEach(x => Destroy(x.gameObject));
+
         pickedUpKeys.Clear();
     }
 
-    public void CalculateSecrets() {
+    public void CalculateSecrets()
+    {
         int secrets = 0;
         foreach (var layer in mapObjects.GroupBy(m => m.MapId))
         {
-            foreach(var mapObject in layer) {
+            foreach (var mapObject in layer)
+            {
                 SecretTrigger trigger = mapObject.GetComponent<SecretTrigger>();
                 if (trigger != null)
                 {
@@ -161,14 +166,27 @@ public class MapManager : MonoBehaviour
         elevator.transform.parent = elevatorParent.transform;
     }
 
-    private void ChangeNeighborParents(Vector2Int origin, List<MapPrefab> tiles, Transform newParent) {
+    public void ResetEnemies()
+    {
+        foreach (var enemy in mapEnemies)
+        {
+            if (enemy.TryGetComponent(out MapEnemy mapEnemy))
+            {
+                mapEnemy.ResetPos();
+            }
+        }
+    }
+
+    private void ChangeNeighborParents(Vector2Int origin, List<MapPrefab> tiles, Transform newParent)
+    {
         for (int xPos = -1; xPos <= 1; xPos += 1)
         {
             for (int yPos = -1; yPos <= 1; yPos += 1)
             {
                 var pos = origin + new Vector2Int(xPos, yPos);
                 var tile = tiles.Find(foundTile => foundTile.Position == pos);
-                if (tile != null) {
+                if (tile != null)
+                {
                     tile.transform.parent = newParent;
                 }
             }
@@ -192,7 +210,8 @@ public class MapManager : MonoBehaviour
                 target.Trigger();
             }
         }
-        if (!targetsWereFound) {
+        if (!targetsWereFound)
+        {
             foreach (var mapObject in mapObjects.FindAll(obj => obj.MapId == secretTrigger.SecretId))
             {
                 SecretTrigger trigger = mapObject.GetComponent<SecretTrigger>();
@@ -204,14 +223,16 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    private Vector2Int FirstEmptyNeighbor(MapPrefab origin, int distance = 1) {
+    private Vector2Int FirstEmptyNeighbor(MapPrefab origin, int distance = 1)
+    {
         Vector2Int emptyPos = Vector2Int.up;
         Vector2Int pos = origin.Position;
         for (int xPos = -distance; xPos <= distance; xPos += 1)
         {
             for (int yPos = -distance; yPos <= distance; yPos += 1)
             {
-                if (xPos == 0 && yPos == 0) {
+                if (xPos == 0 && yPos == 0)
+                {
                     continue;
                 }
                 Vector2Int neighborPos = new Vector2Int(xPos + pos.x, yPos + pos.y);

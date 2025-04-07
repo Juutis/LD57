@@ -67,7 +67,7 @@ public class UILevelStats : MonoBehaviour
 
     void Update()
     {
-        if (!isHiding && isShown && Input.GetKeyDown(KeyCode.E))
+        if (!isHiding && isShown && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)))
         {
             Hide();
         }
