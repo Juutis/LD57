@@ -17,12 +17,13 @@ MonoBehaviour:
     Message: 'Maintenance report #52
 
 
-      This AC unit should be replaced. It''s
-      been fixed too many times and keeps going out of order. If I get called here
-      one more time management can suffocate for all I care.
+      The AC unit on the roof should be replaced.
+      I managed to patch it up for now, but it won''t hold up for long. If I get
+      called here one more time management can suffocate for all I care.
 
 
-      - J.G.
+      -
+      J.G.
 
 '
   - Level: 1
@@ -34,8 +35,11 @@ MonoBehaviour:
     Message: "Re: Re: Costs\_\n\LCFO wants to know about the procurement costs of
       the Material.\nCould you send the relevant sheets to statistics? Also, let\u2019s
       have\nlegal prepped and ready for any potential leaks.\n\L- Paterson"
-  - Level: 1
-    Message: "Re: Leads on Buyers\n\LWe\u2019ve got a tip from John in Accounting
-      that the folks at EngiCo had heard some good stuff about the new product. Might
-      be worth setting up a meeting. Check in with Hobb on how you\u2019d like to
-      proceed.\n\L- Colt"
+  - Level: 2
+    Message: "Maintenance report #46\L\LWhen prospecting for reno, there was evidence
+      of some parts of the wall being hollow on each floor. No sign of this in the
+      blueprints, but should be confirmed before the construction starts.\n\L- J.G."
+  - Level: 2
+    Message: "Your cut\n\LI stashed your cut in the toilet. I admit it's hella nasty
+      but at least we can be sure nobody's gonna be snooping around in there.\n\L-
+      J"
