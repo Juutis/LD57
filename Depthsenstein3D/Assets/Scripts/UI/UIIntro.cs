@@ -135,7 +135,7 @@ public class UIIntro : MonoBehaviour
     }
 
     public void IntroFinished() {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
 
