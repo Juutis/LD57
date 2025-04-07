@@ -92,6 +92,7 @@ public class LevelManager : MonoBehaviour
         FpsManager.Main.FreezeControls();
         MusicManager.main.SwitchMusic(MusicType.Elevator);
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
+        MapGenerator.main.ResetKeys();
         MapGenerator.main.Player.ElevatorRotate(currentElevator.transform.position, delegate
         {
             LevelStats stats = MapGenerator.main.Player.Stats.CalculateCurrentLevelStats();
