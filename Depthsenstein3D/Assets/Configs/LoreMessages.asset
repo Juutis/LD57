@@ -46,11 +46,44 @@ MonoBehaviour:
       of some parts of the wall being hollow on each floor. No sign of this in the
       blueprints, but should be confirmed before the construction starts.\n\L- J.G."
   - Level: 2
-    Message: "Your cut\n\LI stashed your cut in the toilet. I admit it's hella nasty
-      but at least we can be sure nobody's gonna be snooping around in there.\n\L-
-      J"
-  - Level: 2
     Message: "Re: Leads on Buyers\n\LWe\u2019ve got a tip from John in Accounting
       that the folks at EngiCo had heard some good stuff about the new product. Might
       be worth setting up a meeting. Check in with Hobb on how you\u2019d like to
       proceed.\n\L- Colt"
+  - Level: 2
+    Message: "Auditory Concerns\n\LI have recent feedback from our receptionists.
+      The disruptions have, unfortunately, become increasingly frequent. HQ visitors
+      are taking notice, which should cause concern. Can you make sure your guys
+      are on this so that we get the structural concerns taken care of? It\u2019s
+      not great for optics and frankly, beyond urgent. Make sure to give me an ETA
+      when you have one.\n\L- B.L."
+  - Level: 2
+    Message: "Your cut\n\LI stashed your cut in the toilet. I admit it's hella nasty
+      but at least we can be sure nobody's gonna be snooping around in there.\n\L-
+      J"
+  - Level: 3
+    Message: "Comms on M\n\LWe got word that the press has got hold of some documents
+      about the specs of Project Molar. Let\u2019s get the Comms on this and workshop
+      on our angle in sufficiently tackling this. We don\u2019t want any more bloodhounds
+      in the HQ trying to sniff things out. Set up a meeting ASAP and make sure the
+      C-level is clued in. It\u2019s clear some housekeeping is due.\n\L- Voss"
+  - Level: 3
+    Message: "Maintenance report #25\L\LWe need to get see if something can be done
+      to the garage. There are three massive halls and only a handful of parking
+      spaces. And half the time they are blocking air vents!\n\L- J.G."
+  - Level: 3
+    Message: "Maintenance report #37\n\LSome suits reported that their vehicles had
+      been damaged on the north-east side of the garage. We need someone to review
+      the footage from the security camera. Let me know if you find anything. \L-
+      J.G."
+  - Level: 3
+    Message: "Re: Q4 Financials\n\LThanks Rob. I glanced at the numbers and wanted
+      to confirm if the security spending is accurately reported. Have we double-checked
+      this with the department head? It also seems the security personnel are constantly
+      changing on a drop of a hat. Is the churn truly that bad? We should properly
+      drill down on this to plug this drain on our HQ ops.\n\n- J.P."
+  - Level: 3
+    Message: "Hot Goss\n\LYoo I just saw a guy armed to the teeth enter the classified
+      area. I mean.. what the hell is even going on there? Also, not seen the OG
+      security guys around for a while now. Missing my eye candy, Derek! I wonder
+      what happened to him, huh?\n\L- Leah"
