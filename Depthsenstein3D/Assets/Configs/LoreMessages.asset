@@ -49,3 +49,8 @@ MonoBehaviour:
     Message: "Your cut\n\LI stashed your cut in the toilet. I admit it's hella nasty
       but at least we can be sure nobody's gonna be snooping around in there.\n\L-
       J"
+  - Level: 2
+    Message: "Re: Leads on Buyers\n\LWe\u2019ve got a tip from John in Accounting
+      that the folks at EngiCo had heard some good stuff about the new product. Might
+      be worth setting up a meeting. Check in with Hobb on how you\u2019d like to
+      proceed.\n\L- Colt"
