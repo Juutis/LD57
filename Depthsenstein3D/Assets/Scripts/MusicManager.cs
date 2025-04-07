@@ -39,8 +39,11 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField]
     private AudioSource outsideAmbience;
+    [SerializeField]
+    private AudioSource officeAmbience;
 
     private AudioFade ambienceFade;
+    private AudioFade officeAmbienceFade;
 
     private void Awake()
     {
@@ -53,14 +56,26 @@ public class MusicManager : MonoBehaviour
 
     }
 
-    public void FadeOutAmbience() {
+    public void FadeOutOutsideAmbience() {
         ambienceFade = new AudioFade(0.5f, 0f, outsideAmbience, 1f);
     }
 
-    public void FadeInAmbience()
+    public void FadeInOutsideAmbience()
     {
         ambienceFade = new AudioFade(0.5f, 0.4f, outsideAmbience, 1f);
     }
+
+
+    public void FadeOutOfficeAmbience()
+    {
+        officeAmbienceFade = new AudioFade(0.5f, 0f, officeAmbience, 1f);
+    }
+
+    public void FadeInOfficeAmbience()
+    {
+        officeAmbienceFade = new AudioFade(0.5f, 0.4f, officeAmbience, 1f);
+    }
+
 
     public void StartMusic(MusicType musicType)
     {
@@ -168,6 +183,9 @@ public class MusicManager : MonoBehaviour
         }
         if (ambienceFade != null && ambienceFade.IsFading) {
             ambienceFade.Update();
+        }
+        if (officeAmbienceFade != null && officeAmbienceFade.IsFading) {
+            officeAmbienceFade.Update();
         }
     }
 

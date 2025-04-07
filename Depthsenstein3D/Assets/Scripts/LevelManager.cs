@@ -122,7 +122,7 @@ public class LevelManager : MonoBehaviour
             sceneLoad = SceneManager.LoadSceneAsync(levels[currentLevelNum + 1], LoadSceneMode.Additive);
             // check level num here if you want ambience
             if (currentLevelNum == 0) {
-                MusicManager.main.FadeOutAmbience();
+                MusicManager.main.FadeOutOutsideAmbience();
             }
             sceneLoadCallback = delegate
             {
@@ -228,6 +228,7 @@ public class LevelManager : MonoBehaviour
                 else
                 {
                     MusicManager.main.FadeOutMusic();
+                    MusicManager.main.FadeInOfficeAmbience();
                 }
                 SoundManager.main.PlaySound(GameSoundType.ElevatorDing);
 
