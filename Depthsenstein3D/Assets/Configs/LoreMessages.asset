@@ -117,10 +117,10 @@ MonoBehaviour:
       about. I can\u2019t believe every opportunity in this company just flies straight
       over my head. Maybe we should ask one of them to join us for lunch to get some
       hints on what they\u2019ve been up to, what do you think?\n\n- Rey"
-  - Level: 5
+  - Level: 3
     Message: "Huge potential!!\n\LI just got the lab report back on the Material,
       and there are some major gains to be had with this stuff. Can you get the guys
-      on a CBA ASAP so that we can capitalize on this?\n\L- Grant"
+      on a CBA for the dig ASAP so that we can capitalize on this?\n\L- Grant"
   - Level: 5
     Message: "Interrogation of subject 1: [redacted]\n\LThe subject seems visibly
       anxious. Proceeds to consistently inquire where [redacted] have originated.
