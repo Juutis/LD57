@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -37,6 +38,9 @@ public class UIManager : MonoBehaviour
     private UIHudPart HUDInventory;
     [SerializeField]
     private UILevelStats UILevelStats;
+
+    [SerializeField]
+    private TextMeshProUGUI txtControlsToggle;
 
     private int score = 0;
 
@@ -160,8 +164,19 @@ public class UIManager : MonoBehaviour
         fader.FadeIn();
     }
 
+
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.P)) {
+            if (MapGenerator.main.Player == null) {
+                return;
+            }
+            MapGenerator.main.Player.UseMouse = !MapGenerator.main.Player.UseMouse;
+            if (MapGenerator.main.Player.UseMouse) {
+                txtControlsToggle.text = "<b>Controls:</b> mouse (press p to toggle)";
+            } else {
+                txtControlsToggle.text = "<b>Controls:</b> keyboard (press p to toggle)";
+            }
+        }
     }
 }
