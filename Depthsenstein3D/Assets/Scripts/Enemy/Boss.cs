@@ -327,6 +327,7 @@ public class Boss : MonoBehaviour
 
     public void Die()
     {
+        if (dead) return;
         //var fx = Instantiate(DieEffect);
         //fx.transform.position = transform.position;
         MapGenerator.main.Player.Stats.EnemiesKilled += 1;
@@ -334,6 +335,9 @@ public class Boss : MonoBehaviour
         dead = true;
         DisableNavigation();
         SoundManager.main.PlaySound(GameSoundType.EnemyDie);
+        foreach(var coll in GetComponentsInChildren<Collider>()) {
+            coll.enabled = false;
+        }
         rb.linearVelocity = Vector3.zero;
         rb.isKinematic = true;
     }

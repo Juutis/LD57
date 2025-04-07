@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private List<Sprite> altSprites = new();
 
-    private List<string> levels = new() { "Level1", "DirectorsOffice", "Level2", "Garage", "RoadToUnderground", "Underworld" };
+    private List<string> levels = new() { "Level1", "DirectorsOffice", "Level2", "Garage", "RoadToUnderground", "Underworld", "Boss" };
     private int currentLevelNum = 0;
     public int CurrentLevelNum { get { return currentLevelNum; } }
 
