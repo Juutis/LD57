@@ -238,9 +238,6 @@ public class AudioFade
             audioSource.volume = targetVolume;
             audioSource.pitch = targetPitch;
             IsFading = false;
-            if (targetVolume < 0.1f) {
-                audioSource.Stop();
-            }
         }
     }
 }

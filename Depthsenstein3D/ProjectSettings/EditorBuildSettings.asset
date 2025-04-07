@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: 7ec175130b1d28145a9233a45b1edf11
+  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 7a332555d6611084e89e6fd46102fb57
   - enabled: 1
@@ -23,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RoadToUnderground.unity
     guid: aea82137cb494fe4687f5f34c04eed3f
+  - enabled: 1
+    path: Assets/Scenes/Underworld.unity
+    guid: f90c3491bbe65fc449f20327dd54ecc2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
