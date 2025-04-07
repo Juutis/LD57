@@ -17,12 +17,38 @@ public class MapManager : MonoBehaviour
     [SerializeField]
     private MapPrefab elevatorDoorsPrefab;
 
+    private int secretsCreated = 0;
+    private int enemiesCreated = 0;
+    private int scoreAvailable = 0;
+    private int loreCreated = 0;
+
     public void Initialize()
     {
         mapObjects = new();
         mapWalls = new();
         pickedUpKeys = new();
         spawn = null;
+        secretsCreated = 0;
+        enemiesCreated = 0;
+        scoreAvailable = 0;
+        loreCreated = 0;
+    }
+
+
+    public int GetMaxSecrets()
+    {
+        return secretsCreated;
+    }
+    public int GetMaxEnemies()
+    {
+        return enemiesCreated;
+    }
+    public int GetMaxScore()
+    {
+        return scoreAvailable;
+    }
+    public int GetMaxLore() {
+        return loreCreated;
     }
 
     public bool TryToOpenLockedDoor(int mapId)
@@ -47,6 +73,22 @@ public class MapManager : MonoBehaviour
         mapObjects.Remove(pickupKey.GetComponent<MapPrefab>());
     }
 
+    public void CalculateSecrets() {
+        int secrets = 0;
+        foreach (var layer in mapObjects.GroupBy(m => m.MapId))
+        {
+            foreach(var mapObject in layer) {
+                SecretTrigger trigger = mapObject.GetComponent<SecretTrigger>();
+                if (trigger != null)
+                {
+                    secrets += 1;
+                    break;
+                }
+            }
+        }
+        secretsCreated = secrets;
+    }
+
     public void AddObject(MapPrefab mapPrefab)
     {
         if (mapPrefab.Type == MapPrefabType.Spawn)
@@ -58,6 +100,16 @@ public class MapManager : MonoBehaviour
         {
             Debug.Log("Add enemy");
             mapEnemies.Add(mapPrefab);
+            enemiesCreated++;
+        }
+        else if (mapPrefab.Type == MapPrefabType.Money)
+        {
+            Debug.Log("Add money");
+            scoreAvailable += mapPrefab.GetComponent<MoneyPickup>().Value;
+        }
+        else if (mapPrefab.Type == MapPrefabType.LoreMessage)
+        {
+            loreCreated += 1;
         }
 
         mapObjects.Add(mapPrefab);

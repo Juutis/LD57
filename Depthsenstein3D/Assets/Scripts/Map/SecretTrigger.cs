@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SecretTrigger : MonoBehaviour
@@ -21,6 +22,10 @@ public class SecretTrigger : MonoBehaviour
             return;
         }
 
+        List<int> secrets = MapGenerator.main.Player.Stats.SecretsFound;
+        if (!secrets.Contains(secretId)) {
+            secrets.Add(secretId);;
+        }
         MapGenerator.main.TriggerSecret(this);
 
         hasTriggered = true;

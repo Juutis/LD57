@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
     private UnityAction sceneLoadCallback;
     private UnityAction elevatorFinishedCallback;
 
-    private float elevatorDuration = 5f;
+    private float elevatorDuration = 1f;
     private float elevatorTimer = 0;
     private Transform currentLevelTransform;
     private Transform nextLevelTransform;
@@ -87,13 +87,16 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextLevel(MapPrefab elevatorSwitch)
     {
-        Debug.Log("Loading next level..");
+        //Debug.Log("Loading next level..");
         MapGenerator.main.Player.FreezeControls();
         FpsManager.Main.FreezeControls();
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
         MapGenerator.main.Player.ElevatorRotate(currentElevator.transform.position, delegate {
-            Debug.Log("rotation completed");
-        
+            //Debug.Log("rotation completed");
+
+            LevelStats stats = MapGenerator.main.Player.Stats.CalculateCurrentLevelStats();
+            
+
             if (currentElevator == null)
             {
                 Debug.LogError("ElevatorDoors not found!");
@@ -102,7 +105,7 @@ public class LevelManager : MonoBehaviour
 
             currentElevator.CloseDoors(delegate
             {
-                Debug.Log("DoorsClosed");
+                //Debug.Log("DoorsClosed");
             });
 
             GameObject elevatorContainer = GameObject.FindGameObjectWithTag("Finish");
@@ -112,7 +115,7 @@ public class LevelManager : MonoBehaviour
             sceneLoadCallback = delegate
             {
                 LevelManager.main.SetCurrentLevel(currentLevelNum + 1);
-                ElevatorToLoadedLevel(elevatorContainer, elevatorSwitch);
+                ElevatorToLoadedLevel(elevatorContainer, elevatorSwitch, stats);
             };
         });
     }
@@ -154,7 +157,7 @@ public class LevelManager : MonoBehaviour
         };
     }
 
-    public void ElevatorToLoadedLevel(GameObject elevatorContainer, MapPrefab elevatorSwitchPrefab)
+    public void ElevatorToLoadedLevel(GameObject elevatorContainer, MapPrefab elevatorSwitchPrefab, LevelStats stats)
     {
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
 
@@ -167,10 +170,10 @@ public class LevelManager : MonoBehaviour
         MapPrefab spawn = mapManager.GetSpawnPoint();
         if (spawn == null)
         {
-            Debug.Log("nO SPAWN");
+            //Debug.Log("nO SPAWN");
         }
         Vector3 diff = elevatorSwitchPrefab.transform.position - spawn.transform.position;
-        Debug.Log($"{elevatorSwitchPrefab.transform.position} - {spawn.transform.position} = {diff}");
+        //Debug.Log($"{elevatorSwitchPrefab.transform.position} - {spawn.transform.position} = {diff}");
         currentLevelTransform = currentLevel.transform.GetComponent<MapGenerator>().Container;
         nextLevelTransform = nextLevel.transform;
 
@@ -181,17 +184,21 @@ public class LevelManager : MonoBehaviour
             elevatorContainer.transform.parent = nextLevel.transform;
             Destroy(currentLevel.gameObject);
             MapGenerator.main.InitAINavigation();
-            currentElevator.OpenDoors(delegate
+            UIManager.main.ShowLevelStats(stats, delegate
             {
-                playerSpawnPos = MapGenerator.main.Player.transform.position;
-                playerSpawnRot = MapGenerator.main.Player.transform.rotation;
-                MapGenerator.main.Player.RestoreControls();
-                FpsManager.Main.RestoreControls();
-                Debug.Log("Doors opened");
-                currentLevel = nextLevel;
-                MapGenerator.main.StartEnemies();
+                currentElevator.OpenDoors(delegate
+                {
+                    playerSpawnPos = MapGenerator.main.Player.transform.position;
+                    playerSpawnRot = MapGenerator.main.Player.transform.rotation;
+                    MapGenerator.main.Player.RestoreControls();
+                    FpsManager.Main.RestoreControls();
+                    //Debug.Log("Doors opened");
+                    currentLevel = nextLevel;
+                    MapGenerator.main.StartEnemies();
+                });
             });
         });
+
     }
 
     private void MoveElevator(float distance, UnityAction finishedCallback)

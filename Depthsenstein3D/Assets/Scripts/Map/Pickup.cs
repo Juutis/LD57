@@ -49,6 +49,7 @@ public class Pickup : MonoBehaviour
         {
             Debug.Log("Showing lore..");
             string msg = MapGenerator.main.GetLoreMessage();
+            MapGenerator.main.Player.Stats.LoreFound += 1;
             if (msg != "") {
                 UIManager.main.ShowMessage(msg);
             }
@@ -62,6 +63,7 @@ public class Pickup : MonoBehaviour
         if (TryGetComponent(out MoneyPickup moneyPickup))
         {
             UIManager.main.AddScore(moneyPickup.Value);
+            MapGenerator.main.Player.Stats.ScoreGained += moneyPickup.Value;
         }
 
         if (TryGetComponent(out HPPickup hpPickup))

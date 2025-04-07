@@ -35,6 +35,8 @@ public class UIManager : MonoBehaviour
     private UIHudPart HUDScore;
     [SerializeField]
     private UIHudPart HUDInventory;
+    [SerializeField]
+    private UILevelStats UILevelStats;
 
     private int score = 0;
 
@@ -60,6 +62,10 @@ public class UIManager : MonoBehaviour
         {
             Time.timeScale = 1f;
         });
+    }
+
+    public void ShowLevelStats(LevelStats stats, UnityAction hideCallback) {
+        UILevelStats.Initialize(stats, hideCallback);
     }
 
     public void SetHealth(int health)

@@ -61,6 +61,18 @@ public class MapGenerator : MonoBehaviour
         Generate();
     }
 
+    public int GetMaxSecrets() {
+        return mapManager.GetMaxSecrets();
+    }
+    public int GetMaxEnemies() {
+        return mapManager.GetMaxEnemies();
+    }
+    public int GetMaxScore() {
+        return mapManager.GetMaxScore();
+    }
+    public int GetMaxLore() {
+        return mapManager.GetMaxLore();
+    }
     private void SetupContainers()
     {
         floorContainer = Instantiate(containerPrefab, mapContainer);
@@ -91,6 +103,8 @@ public class MapGenerator : MonoBehaviour
         }
 
         SpawnPlayer();
+        mapManager.CalculateSecrets();
+        player.Stats.ResetCurrentStats();
     }
 
     public void SpawnPlayer()

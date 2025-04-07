@@ -227,6 +227,7 @@ public class RangedEnemy : MonoBehaviour
     {
         var fx = Instantiate(DieEffect);
         fx.transform.position = transform.position;
+        MapGenerator.main.Player.Stats.EnemiesKilled += 1;
         Destroy(gameObject);
     }
 
