@@ -20,36 +20,46 @@ public class UILevelStats : MonoBehaviour
     private bool isShown = false;
     private bool isHiding = false;
 
-    public void Initialize(LevelStats levelStats, UnityAction hideCallback) 
+    public void Initialize(LevelStats levelStats, UnityAction hideCallback)
     {
-        foreach(var stat in singleLevelStats) {
-            Destroy(stat.gameObject);
+        foreach (var stat in singleLevelStats)
+        {
+            if (stat != null)
+            {
+                Destroy(stat.gameObject);
+            }
         }
+
+        singleLevelStats.Clear();
         this.hideCallback = hideCallback;
         animator.Play("levelStatsShow");
-        Debug.Log("levelStats");
+
         foreach (var stat in levelStats.Stats)
         {
-//            Debug.Log($"{stat.Name} {stat.Value} / {stat.Max}");
+            //            Debug.Log($"{stat.Name} {stat.Value} / {stat.Max}");
             UILevelSingleStat singleStat = Instantiate(uiLevelSingleStatPrefab, statContainer);
             singleStat.Initialize(stat);
             singleLevelStats.Add(singleStat);
         }
     }
 
-    public void ShowFinished() {
+    public void ShowFinished()
+    {
         isShown = true;
     }
 
-    public void Hide() {
-        if (!isShown) {
+    public void Hide()
+    {
+        if (!isShown)
+        {
             return;
         }
         isHiding = true;
         animator.Play("levelStatsHide");
     }
 
-    public void HideFinished() {
+    public void HideFinished()
+    {
         isHiding = false;
         isShown = false;
         hideCallback();
@@ -57,9 +67,10 @@ public class UILevelStats : MonoBehaviour
 
     void Update()
     {
-       if (!isHiding && isShown && Input.GetKeyDown(KeyCode.E)) {
-           Hide();
-       }
+        if (!isHiding && isShown && Input.GetKeyDown(KeyCode.E))
+        {
+            Hide();
+        }
     }
 
 
