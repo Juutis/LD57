@@ -69,6 +69,7 @@ public class PlayerTest : MonoBehaviour
             }
         }
         if (!canAct) {
+            rb.linearVelocity = Vector3.zero;
             return;
         }
         if (UseMouse)
@@ -136,6 +137,10 @@ public class PlayerTest : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!canAct) {
+            rb.linearVelocity = Vector3.zero;
+            return;
+        }
         rb.linearVelocity = (transform.forward * moveInput.y + transform.right * moveInput.x).normalized * moveSpeed;
     }
 
