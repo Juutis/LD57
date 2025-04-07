@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 7469551634694812745}
   - component: {fileID: 8101858004073920263}
   - component: {fileID: 146801850666791347}
+  - component: {fileID: 8271713412132927844}
   m_Layer: 7
   m_Name: MatiasTestPlayer
   m_TagString: Player
@@ -139,6 +140,7 @@ MonoBehaviour:
   Health: 100
   MaxHealth: 100
   Dead: 0
+  Stats: {fileID: 8271713412132927844}
 --- !u!54 &8101858004073920263
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -189,6 +191,18 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8271713412132927844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5763013120657808960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29efdfb141ad3247add962293392c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6168891897607711304
 GameObject:
   m_ObjectHideFlags: 0
