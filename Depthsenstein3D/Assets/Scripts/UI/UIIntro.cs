@@ -109,6 +109,9 @@ public class UIIntro : MonoBehaviour
             messageTimer = messageFadeDuration;
         }
         if (fadeState == UIIntroFadeState.Stalled) {
+            if (Input.anyKeyDown) {
+                intervalTimer += 0.5f;
+            }
             intervalTimer += Time.unscaledDeltaTime;
             if (intervalTimer >= messageInterval) {
                 fadeState = UIIntroFadeState.WaitingForInput;

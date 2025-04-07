@@ -53,6 +53,12 @@ public class UIManager : MonoBehaviour
         uiShowDialog.ShowDeath(hideCallback);
     }
 
+    public void ShowWin() {
+        Time.timeScale = 0;
+        UIShowDialog uiShowDialog = Instantiate(uiShowDialogPrefab, uiShowDialogContainer);
+        uiShowDialog.ShowWin();
+    }
+
     public void ShowMessage(string message, UnityAction showCallback, UnityAction hideCallback)
     {
         UIShowDialog uiShowDialog = Instantiate(uiShowDialogPrefab, uiShowDialogContainer);
@@ -152,5 +158,10 @@ public class UIManager : MonoBehaviour
     public void FadeIn()
     {
         fader.FadeIn();
+    }
+
+    void Update()
+    {
+
     }
 }
