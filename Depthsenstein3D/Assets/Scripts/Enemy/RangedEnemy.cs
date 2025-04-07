@@ -324,6 +324,7 @@ public class RangedEnemy : MonoBehaviour
             var roll = Quaternion.AngleAxis(randomRoll, dir);
             dir = yaw * dir;
             dir = roll * dir;
+            SoundManager.main.PlaySound(GameSoundType.PistolShoot);
             if (Physics.Raycast(BulletOrigin.position, dir, out RaycastHit hitInfo, 1000f, rayCastLayers))
             {
                 var other = hitInfo.collider;
