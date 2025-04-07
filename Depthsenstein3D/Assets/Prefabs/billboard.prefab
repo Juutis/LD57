@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5273246301615873103}
   - component: {fileID: 457373753078234924}
   - component: {fileID: 4795048575260937842}
-  m_Layer: 0
+  - component: {fileID: -2894566645246539304}
+  m_Layer: 11
   m_Name: billboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,3 +114,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 065ee42530f25144ebed281abe8c5d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &-2894566645246539304
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7269304519444062353}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.02}
+  m_Center: {x: 0, y: 0, z: 0}

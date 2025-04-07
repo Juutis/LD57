@@ -135,6 +135,20 @@ public class FpsGun : MonoBehaviour
             dir = Quaternion.AngleAxis(inAccuracy, bulletOrigin.up) * dir;
             dir = Quaternion.AngleAxis(randomRoll, bulletOrigin.forward) * dir;
             var range = gun.Config.IsMelee ? 1.0f : 1000.0f;
+            if (Physics.Raycast(bulletOrigin.position, dir, out RaycastHit destroyHit, range, LayerMask.GetMask("DestroyEffect")))
+            {
+                var other = destroyHit.collider;
+
+                if (other.TryGetComponent(out Destroyable destroyable))
+                {
+                    destroyable.Hit();
+                }
+                else if (other.transform.childCount > 0 && other.transform.GetChild(0).TryGetComponent(out Destroyable destroyableChild))
+                {
+                    destroyableChild.Hit();
+                }
+            }
+
             if (Physics.Raycast(bulletOrigin.position, dir, out RaycastHit hitInfo, range, rayCastLayers))
             {
                 var other = hitInfo.collider;
