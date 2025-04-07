@@ -116,6 +116,12 @@ public class UIHudPart : MonoBehaviour
         inventory.Add(uiHudPartItem);
     }
 
+    public void ClearInventory()
+    {
+        inventory.ForEach(x => Destroy(x.gameObject));
+        inventory.Clear();
+    }
+
     void Update()
     {
         if (isLerping) {

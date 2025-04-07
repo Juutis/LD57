@@ -134,6 +134,11 @@ public class UIManager : MonoBehaviour
         HUDInventory.RemoveKey(key);
     }
 
+    public void ClearInventory()
+    {
+        HUDInventory.ClearInventory();
+    }
+
     public void FadeOut()
     {
         fader.FadeOut();

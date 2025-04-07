@@ -180,5 +180,6 @@ public class PlayerTest : MonoBehaviour
         transform.position = spawnPos;
         transform.rotation = spawnRot;
         rb.position = spawnPos;
+        UIManager.main.SetHealth(Health);
     }
 }

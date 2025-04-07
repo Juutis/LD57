@@ -127,8 +127,11 @@ public class LevelManager : MonoBehaviour
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
         currentElevator.CloseDoors(delegate { });
         MapGenerator.main.Player.ResetPlayer(playerSpawnPos, playerSpawnRot);
+        FpsManager.Main.ResetGuns();
         Destroy(currentLevel.gameObject);
         GameObject elevatorContainer = GameObject.FindGameObjectWithTag("Elevator");
+        MapGenerator.main.ResetKeys();
+        UIManager.main.ClearInventory();
 
         if (elevatorContainer != null)
         {
@@ -190,6 +193,8 @@ public class LevelManager : MonoBehaviour
                 {
                     playerSpawnPos = MapGenerator.main.Player.transform.position;
                     playerSpawnRot = MapGenerator.main.Player.transform.rotation;
+                    FpsManager.Main.SaveSpawnGuns();
+
                     MapGenerator.main.Player.RestoreControls();
                     FpsManager.Main.RestoreControls();
                     //Debug.Log("Doors opened");

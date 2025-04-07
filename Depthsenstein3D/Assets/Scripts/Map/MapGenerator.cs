@@ -161,6 +161,11 @@ public class MapGenerator : MonoBehaviour
         return mapManager.TryToOpenLockedDoor(mapId);
     }
 
+    public void ResetKeys()
+    {
+        mapManager.ResetKeys();
+    }
+
     public string GetLoreMessage()
     {
 
