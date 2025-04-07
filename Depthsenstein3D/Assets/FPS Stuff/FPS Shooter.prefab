@@ -204,7 +204,7 @@ MonoBehaviour:
       InitialAmmo: -1
       AccuracyDegrees: 0
       ProjectileCount: 1
-      Damage: 2
+      Damage: 4
     CurrentStatus:
       CurrentAmmo: -1
       AmmoInMagazine: -1
@@ -260,6 +260,7 @@ MonoBehaviour:
       CurrentAmmo: 0
       AmmoInMagazine: 0
     GunModel: {fileID: 5655523727541525833}
+  GunsAtSpawn: []
   SelectedGun:
     Available: 0
     Config:
@@ -278,6 +279,7 @@ MonoBehaviour:
       CurrentAmmo: 0
       AmmoInMagazine: 0
     GunModel: {fileID: 0}
+  SelectedGunIndexAtSpawn: -1
   bulletOrigin: {fileID: 0}
   HitEffect: {fileID: 5930714590066344127, guid: 1d897d9300c4f3243a4fd109b1c0b752, type: 3}
   BloodEffect: {fileID: 5930714590066344127, guid: c61c5e1121aafef478f2b2a01c6a907b, type: 3}

@@ -117,3 +117,19 @@ MonoBehaviour:
       about. I can\u2019t believe every opportunity in this company just flies straight
       over my head. Maybe we should ask one of them to join us for lunch to get some
       hints on what they\u2019ve been up to, what do you think?\n\n- Rey"
+  - Level: 5
+    Message: "Huge potential!!\n\LI just got the lab report back on the Material,
+      and there are some major gains to be had with this stuff. Can you get the guys
+      on a CBA ASAP so that we can capitalize on this?\n\L- Grant"
+  - Level: 5
+    Message: "Interrogation of subject 1: [redacted]\n\LThe subject seems visibly
+      anxious. Proceeds to consistently inquire where [redacted] have originated.
+      They also claim to have witnessed [redacted]\u2019s face on [redacted]. They
+      show signs of significant mental strain while recalling this detail.\n\LSubject
+      cleared for rehabilitation. Treatment to proceed with the addition of cognitive
+      adjustment therapy.\n\LSenior officer,\nDr. Floren"
+  - Level: 5
+    Message: "The status of subject 2: [redacted]\n\LThe subject is presently unviable
+      for interrogation. Their physical state is observed to bear the markings of
+      [redacted]. They are to be monitored and developments documented.\n\nSubject's
+      case for rehabilitation to be determined.\n\LSenior officer,\nDr. Floren"
