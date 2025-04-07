@@ -46,7 +46,7 @@ public class RangedEnemy : MonoBehaviour
     public void Initialize()
     {
         Debug.Log("Initializing enemy");
-        rayCastLayers = LayerMask.GetMask("Default", "Player");
+        rayCastLayers = LayerMask.GetMask("Default", "Player", "Ceiling");
         playerLosLayers = LayerMask.GetMask("Default", "Player");
         RandomizeNavigationTarget();
         EnableNavigation();
@@ -236,10 +236,15 @@ public class RangedEnemy : MonoBehaviour
         if (projectile == null)
         {
             var dir = player.transform.position - BulletOrigin.position;
+            dir.y = 0;
+            Debug.DrawLine(BulletOrigin.position, BulletOrigin.position + dir * 10.0f, Color.green, 5.0f);
             var inAccuracy = Random.Range(0.0f, 1.0f) * accuracyDegrees;
             var randomRoll = Random.Range(0.0f, 360.0f);
-            dir = Quaternion.AngleAxis(inAccuracy, BulletOrigin.up) * dir;
-            dir = Quaternion.AngleAxis(randomRoll, BulletOrigin.forward) * dir;
+            var yaw = Quaternion.AngleAxis(inAccuracy, Vector3.up);
+            var roll = Quaternion.AngleAxis(randomRoll, dir);
+            dir = yaw * dir;
+            dir = roll * dir;
+            Debug.DrawLine(BulletOrigin.position, BulletOrigin.position + dir * 10.0f, Color.red, 5.0f);
             if (Physics.Raycast(BulletOrigin.position, dir, out RaycastHit hitInfo, 1000f, rayCastLayers))
             {
                 var other = hitInfo.collider;
