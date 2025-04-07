@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -7,6 +8,9 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager main;
+
+    [SerializeField]
+    private List<Sprite> altSprites = new();
 
     private List<string> levels = new() { "Level1", "DirectorsOffice", "Level2", "Garage", "RoadToUnderground", "Underworld" };
     private int currentLevelNum = 0;
@@ -232,6 +236,11 @@ public class LevelManager : MonoBehaviour
                 currentLevel = nextLevel;
                 MapGenerator.main.StartEnemies();
             });
+    }
+
+    public Sprite GetDestroyedSprite(string name)
+    {
+        return altSprites.FirstOrDefault(x =>  x.name == name);
     }
 
     private void MoveElevator(float distance, UnityAction finishedCallback)

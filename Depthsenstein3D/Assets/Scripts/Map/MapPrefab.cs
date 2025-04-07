@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -72,6 +73,15 @@ public class MapPrefab : MonoBehaviour
         }
         else if (mapPrefabType == MapPrefabType.BasicRangedMob || mapPrefabType == MapPrefabType.BasicMeleeMob)
         {
+        }
+
+
+        if (transform.childCount > 0)
+        {
+            if (transform.GetChild(0).gameObject.TryGetComponent(out Destroyable destroyable))
+            {
+                destroyable.Init(mapTileData.Sprite.name);
+            }
         }
 
         // positioning & naming
