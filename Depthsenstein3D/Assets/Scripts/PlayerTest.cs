@@ -149,11 +149,6 @@ public class PlayerTest : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.K))
-        {
-            UIManager.main.FadeOut();
-            Invoke("Restart", 0.5f);
-        }
     }
 
     private void Restart()

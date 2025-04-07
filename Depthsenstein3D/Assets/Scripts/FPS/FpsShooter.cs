@@ -34,7 +34,7 @@ public class FpsShooter : MonoBehaviour
         if (!canAct) {
             return;
         }
-        if (Input.GetKey(KeyCode.Mouse0) && state == State.READY) {
+        if ((Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.X) || Input.GetKey(KeyCode.M)) && state == State.READY) {
             selectedGun().GunModel.Shoot();
         }
         if (Input.GetKeyDown(KeyCode.R) && state == State.READY) {
