@@ -12,7 +12,8 @@ public class FpsGun : MonoBehaviour
     private int enemyLayer;
     private int rayCastLayers;
 
-    public void Init(FpsManager.Gun gun, Transform bulletOrigin) {
+    public void Init(FpsManager.Gun gun, Transform bulletOrigin)
+    {
         this.gun = gun;
         this.bulletOrigin = bulletOrigin;
         gun.CurrentStatus.CurrentAmmo = gun.Config.InitialAmmo;
@@ -31,119 +32,175 @@ public class FpsGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gun.CurrentStatus.AmmoInMagazine == 0 && lastShot < Time.time - 1.0f / gun.Config.FireRate && ReadyToReload() && !reloading) {
+        if (gun.CurrentStatus.AmmoInMagazine == 0 && lastShot < Time.time - 1.0f / gun.Config.FireRate && ReadyToReload() && !reloading)
+        {
             Reload();
         }
     }
 
-    public void Shoot() {
-        if (ReadyToFire()) {
+    public void Shoot()
+    {
+        if (ReadyToFire())
+        {
             anim.Play("Shoot", -1, 0.0f);
-            if(gun.Config.UsesAmmo) {
+            if (gun.Config.UsesAmmo)
+            {
                 gun.CurrentStatus.AmmoInMagazine--;
                 gun.CurrentStatus.CurrentAmmo--;
                 UpdateAmmoHUD();
             }
             lastShot = Time.time;
-            if (!gun.Config.IsMelee) {
+            if (!gun.Config.IsMelee)
+            {
                 SoundManager.main.PlaySound(GameSoundType.PistolShoot);
                 fireBullet();
-            } else {
+            }
+            else
+            {
                 SoundManager.main.PlaySound(GameSoundType.SwingMelee);
             }
         }
     }
 
-    public void UpdateAmmoHUD() {
+    public void UpdateAmmoHUD()
+    {
         UIManager.main.SetAmmo(
             FpsManager.Main.SelectedGun
         );
     }
 
-    public void Reload() {
-        if (ReadyToReload()) {
+    public void Reload()
+    {
+        if (ReadyToReload())
+        {
             anim.Play("Reload");
             SoundManager.main.PlaySound(GameSoundType.PistolReload);
             reloading = true;
         }
     }
 
-    public bool ReadyToFire() {
+    public bool ReadyToFire()
+    {
         var ammoOk = !gun.Config.UsesAmmo || (gun.CurrentStatus.AmmoInMagazine > 0 && gun.CurrentStatus.CurrentAmmo > 0);
         return lastShot < Time.time - 1.0f / gun.Config.FireRate && ammoOk && !reloading;
     }
 
-    public bool ReadyToReload() {
+    public bool ReadyToReload()
+    {
         return gun.Config.UsesAmmo && !reloading && gun.CurrentStatus.AmmoInMagazine < gun.Config.MagazineSize && gun.CurrentStatus.CurrentAmmo > gun.CurrentStatus.AmmoInMagazine;
     }
 
-    public void GunReloaded() {
+    public void GunReloaded()
+    {
         Debug.Log("RELOADED");
         reloading = false;
     }
 
-    public void MagazineFilled() {
+    public void MagazineFilled()
+    {
         fillMagazine();
     }
 
-    public void Stow() {
+    public void Stow()
+    {
         anim.Play("Stow");
         reloading = false;
     }
 
-    public void Arm() {
+    public void Arm()
+    {
         anim.Play("Arm");
         reloading = false;
     }
 
-    public void MeleeHit() {
+    public void MeleeHit()
+    {
         fireBullet();
     }
 
-    private void fillMagazine() {
+    private void fillMagazine()
+    {
         gun.CurrentStatus.AmmoInMagazine = Mathf.Min(gun.CurrentStatus.CurrentAmmo, gun.Config.MagazineSize);
         UIManager.main.SetAmmo(gun);
     }
 
-    private void fireBullet() {
+    private void fireBullet()
+    {
         bool bulletHitEnemy = false;
-        for(var i = 0; i < gun.Config.ProjectileCount; i++) {
+        for (var i = 0; i < gun.Config.ProjectileCount; i++)
+        {
             var dir = bulletOrigin.forward;
             var inAccuracy = Random.Range(0.0f, 1.0f) * gun.Config.AccuracyDegrees;
             var randomRoll = Random.Range(0.0f, 360.0f);
             dir = Quaternion.AngleAxis(inAccuracy, bulletOrigin.up) * dir;
             dir = Quaternion.AngleAxis(randomRoll, bulletOrigin.forward) * dir;
             var range = gun.Config.IsMelee ? 1.0f : 1000.0f;
-            if (Physics.Raycast(bulletOrigin.position, dir, out RaycastHit hitInfo, range, rayCastLayers)) {
+            if (Physics.Raycast(bulletOrigin.position, dir, out RaycastHit destroyHit, range, LayerMask.GetMask("DestroyEffect")))
+            {
+                var other = destroyHit.collider;
+
+                if (other.TryGetComponent(out Destroyable destroyable))
+                {
+                    destroyable.Hit();
+                }
+                else if (other.transform.childCount > 0 && other.transform.GetChild(0).TryGetComponent(out Destroyable destroyableChild))
+                {
+                    destroyableChild.Hit();
+                }
+            }
+
+            if (Physics.Raycast(bulletOrigin.position, dir, out RaycastHit hitInfo, range, rayCastLayers))
+            {
                 var other = hitInfo.collider;
                 bool justWallWasHit = true;
-                if (other.gameObject.layer == enemyLayer) {
+                if (other.gameObject.layer == enemyLayer)
+                {
                     var effect = Instantiate(FpsManager.Main.BloodEffect);
                     effect.transform.position = hitInfo.point;
                     // invoke to separate gunshot & hit
                     bulletHitEnemy = true;
                     justWallWasHit = false;
-                } else {
+                }
+                else
+                {
                     var effect = Instantiate(FpsManager.Main.HitEffect);
                     effect.transform.position = hitInfo.point;
                 }
-                if (other.TryGetComponent(out Damageable damageable)) {
+
+
+                if (other.TryGetComponent(out Damageable damageable))
+                {
                     damageable.Hurt(gun.Config.Damage);
                     justWallWasHit = false;
                 }
-                if (justWallWasHit) {
-                    if (gun.Config.IsMelee) {
+
+                if (other.TryGetComponent(out Destroyable destroyable))
+                {
+                    destroyable.Hit();
+                }
+                else if (other.transform.childCount > 0 && other.transform.GetChild(0).TryGetComponent(out Destroyable destroyableChild))
+                {
+                    destroyableChild.Hit();
+                }
+
+
+                if (justWallWasHit)
+                {
+                    if (gun.Config.IsMelee)
+                    {
                         SoundManager.main.PlaySound(GameSoundType.HitWall);
                     }
                 }
             }
         }
-        if (bulletHitEnemy) {
+        if (bulletHitEnemy)
+        {
             Invoke("PlayHitSound", 0.1f);
         }
     }
 
-    public void PlayHitSound() {
+    public void PlayHitSound()
+    {
         SoundManager.main.PlaySound(GameSoundType.EnemyIsHitMelee);
     }
 }

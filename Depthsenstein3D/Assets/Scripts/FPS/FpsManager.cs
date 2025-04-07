@@ -79,6 +79,10 @@ public class FpsManager : MonoBehaviour
         }
 
         var gun = Guns[gunIndex];
+        if (gunIndex == 1 && !gun.Available) {
+            MusicManager.main.StartMusic(MusicType.Game);
+            MusicManager.main.FadeOutOfficeAmbience();
+        }
         gun.Available = true;
         gun.CurrentStatus.AmmoInMagazine = Mathf.Min(gun.CurrentStatus.CurrentAmmo, gun.Config.MagazineSize);
         UIManager.main.UpdateGunKeys();
