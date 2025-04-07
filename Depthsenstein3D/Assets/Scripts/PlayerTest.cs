@@ -162,6 +162,7 @@ public class PlayerTest : MonoBehaviour
         {
             Die();
         }
+        ScreenShake.Instance.Shake();
     }
 
     public void Die()
