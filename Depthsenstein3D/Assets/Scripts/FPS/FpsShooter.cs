@@ -14,7 +14,7 @@ public class FpsShooter : MonoBehaviour
     void Start()
     {
         var selectedGun = FpsManager.Main.Guns.First(it => it.Available);
-        selectGun(selectedGun);
+        SelectGun(selectedGun);
     }
 
 
@@ -41,20 +41,20 @@ public class FpsShooter : MonoBehaviour
             selectedGun().GunModel.Reload();
         }
         if (Input.GetKeyDown(KeyCode.Alpha1) && state == State.READY) {
-            selectGun(FpsManager.Main.Guns[0]);
+            SelectGun(FpsManager.Main.Guns[0]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && state == State.READY) {
-            selectGun(FpsManager.Main.Guns[1]);
+            SelectGun(FpsManager.Main.Guns[1]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && state == State.READY) {
-            selectGun(FpsManager.Main.Guns[2]);
+            SelectGun(FpsManager.Main.Guns[2]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) && state == State.READY) {
-            selectGun(FpsManager.Main.Guns[3]);
+            SelectGun(FpsManager.Main.Guns[3]);
         }
     }
 
-    private void selectGun(FpsManager.Gun gun) {
+    public void SelectGun(FpsManager.Gun gun) {
         if (!gun.Available) return;
         if (gun == selectedGun()) return;
         desiredGun = gun;

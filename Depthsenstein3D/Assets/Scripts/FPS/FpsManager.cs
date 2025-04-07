@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FpsManager : MonoBehaviour
@@ -6,7 +7,10 @@ public class FpsManager : MonoBehaviour
     public static FpsManager Main;
 
     public List<Gun> Guns;
+    public List<Gun> GunsAtSpawn;
+
     public Gun SelectedGun = null;
+    public int SelectedGunIndexAtSpawn = -1;
     public Transform bulletOrigin;
     public GameObject HitEffect;
     public GameObject BloodEffect;
@@ -80,12 +84,40 @@ public class FpsManager : MonoBehaviour
         UIManager.main.UpdateGunKeys();
     }
 
+    public void SaveSpawnGuns()
+    {
+        GunsAtSpawn = Guns.Select(gun => new Gun(gun)).ToList();
+        SelectedGunIndexAtSpawn = Guns.FindIndex(x => x == SelectedGun);
+    }
+
+    public void ResetGuns()
+    {
+        for (int i = 0; i < Guns.Count; i++)
+        {
+            Guns[i].CurrentStatus = new (GunsAtSpawn[i].CurrentStatus);
+            Guns[i].Available = GunsAtSpawn[i].Available;
+        }
+
+        UIManager.main.UpdateGunKeys();
+        fpsShooter.SelectGun(Guns[SelectedGunIndexAtSpawn]);
+        UIManager.main.SetAmmo(SelectedGun);
+        UIManager.main.SetGun(SelectedGun);
+    }
+
     [System.Serializable]
     public class Gun {
         public bool Available;
         public GunConfig Config;
         public GunStatus CurrentStatus;
         public FpsGun GunModel;
+
+        public Gun(Gun gun)
+        {
+            this.Available = gun.Available;
+            this.Config = gun.Config;
+            this.CurrentStatus = new GunStatus(gun.CurrentStatus);
+            this.GunModel = gun.GunModel;
+        }
     }
 
     [System.Serializable]
@@ -107,5 +139,11 @@ public class FpsManager : MonoBehaviour
     public class GunStatus {
         public int CurrentAmmo;
         public int AmmoInMagazine;
+
+        public GunStatus(GunStatus gunStatus)
+        {
+            this.CurrentAmmo = gunStatus.CurrentAmmo;
+            this.AmmoInMagazine = gunStatus.AmmoInMagazine;
+        }
     }
 }

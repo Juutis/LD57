@@ -73,6 +73,11 @@ public class MapManager : MonoBehaviour
         mapObjects.Remove(pickupKey.GetComponent<MapPrefab>());
     }
 
+    public void ResetKeys()
+    {
+        pickedUpKeys.Clear();
+    }
+
     public void CalculateSecrets() {
         int secrets = 0;
         foreach (var layer in mapObjects.GroupBy(m => m.MapId))
