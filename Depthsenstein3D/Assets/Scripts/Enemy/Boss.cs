@@ -1,7 +1,10 @@
+
+using System.Collections.Generic;
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RangedEnemy : MonoBehaviour
+public class Boss : MonoBehaviour
 {
     private PlayerTest player;
     private Animator anim;
@@ -11,7 +14,7 @@ public class RangedEnemy : MonoBehaviour
     public float aggroDistance = 5.0f;
 
     public GameObject DieEffect;
-    public Transform BulletOrigin;
+    public List<Transform> BulletOrigins;
     public float accuracyDegrees = 20.0f;
     public float damage = 5.0f;
     public float minDelayBetweenAttacks = 1.0f;
@@ -33,9 +36,11 @@ public class RangedEnemy : MonoBehaviour
     private State state = State.PATROL;
     private float navMeshY = -0.5f;
 
-    private bool isActive = false;
+    public bool isActive = false;
     private bool dead = false;
     private bool attacking = false;
+
+    public Damageable Body;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,6 +60,25 @@ public class RangedEnemy : MonoBehaviour
         {
             rb.position = transform.position;
         }
+    }
+
+    int timesDied = 0;
+
+    public void BodyKilled() {
+        if (stunned) return;
+        stunned = true;
+        Invoke("ResetBody", 5.0f + timesDied * 2.5f);
+        timesDied++;
+    }
+
+    public void ResetBody() {
+        stunned = false;
+        Body.Reset();
+    }
+
+    public void HeartKilled() {
+        Die();
+        Debug.Log("YOU WIN");
     }
 
     public void Initialize()
@@ -78,7 +102,7 @@ public class RangedEnemy : MonoBehaviour
         {
             return;
         }
-
+        
         switch (state)
         {
             case State.PATROL:
@@ -97,20 +121,12 @@ public class RangedEnemy : MonoBehaviour
         {
             if (canSeePlayer())
             {
-                SoundManager.main.PlaySound(GameSoundType.EnemySeesPlayer);
                 state = State.ATTACK;
+                SoundManager.main.PlaySound(GameSoundType.EnemySeesPlayer);
                 AttackModeNavigation();
             }
         }
-        if (rb.linearVelocity.magnitude > 0.01f)
-        {
-            AnimateRun();
-            lastDir = rb.linearVelocity;
-        }
-        else
-        {
-            AnimateIdle();
-        }
+        AnimateIdle();
     }
 
     private bool playerInAttackRange()
@@ -121,7 +137,7 @@ public class RangedEnemy : MonoBehaviour
     private bool canSeePlayer()
     {
         var dir = player.transform.position - transform.position;
-        if (Physics.Raycast(BulletOrigin.position, dir, out RaycastHit hitInfo, 1000f, playerLosLayers))
+        if (Physics.Raycast(BulletOrigins[1].position, dir, out RaycastHit hitInfo, 1000f, playerLosLayers))
         {
             return hitInfo.collider.gameObject == player.gameObject;
         }
@@ -170,13 +186,26 @@ public class RangedEnemy : MonoBehaviour
         }
     }
 
+    private bool stunned = false;
+
     private void handleAttack()
     {
+        if (!stunned) {
+            var dirToPlayer = player.transform.position - transform.position;
+            dirToPlayer.y = 0;
+            transform.forward = dirToPlayer;
+            anim.Play("Idle");
+        } else {
+            anim.Play("Stunned");
+            return;
+        }
+
         var readyToAttack = nextAttack < Time.time;
+
         //targetRange = attackDistance;
         if (readyToAttack && playerInAttackRange() && canSeePlayer())
         {
-            AnimateAttack();
+            Shoot();
             nextAttack = Time.time + Random.Range(minDelayBetweenAttacks, maxDelayBetweenAttacks);
             attacking = true;
         }
@@ -196,7 +225,7 @@ public class RangedEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isActive || dead)
+        if (!isActive || dead || stunned)
         {
             return;
         }
@@ -304,11 +333,12 @@ public class RangedEnemy : MonoBehaviour
         anim.Play("Die");
         dead = true;
         DisableNavigation();
-        GetComponent<Collider>().enabled = false;
         SoundManager.main.PlaySound(GameSoundType.EnemyDie);
         rb.linearVelocity = Vector3.zero;
         rb.isKinematic = true;
     }
+
+    int nextHead = 0;
 
     public void Shoot()
     {
@@ -316,7 +346,7 @@ public class RangedEnemy : MonoBehaviour
 
         if (projectile == null)
         {
-            var dir = player.transform.position - BulletOrigin.position;
+            var dir = player.transform.position - BulletOrigins[nextHead].position;
             dir.y = 0;
             var inAccuracy = Random.Range(0.0f, 1.0f) * accuracyDegrees;
             var randomRoll = Random.Range(0.0f, 360.0f);
@@ -324,7 +354,7 @@ public class RangedEnemy : MonoBehaviour
             var roll = Quaternion.AngleAxis(randomRoll, dir);
             dir = yaw * dir;
             dir = roll * dir;
-            if (Physics.Raycast(BulletOrigin.position, dir, out RaycastHit hitInfo, 1000f, rayCastLayers))
+            if (Physics.Raycast(BulletOrigins[nextHead].position, dir, out RaycastHit hitInfo, 1000f, rayCastLayers))
             {
                 var other = hitInfo.collider;
                 if (other.gameObject == player.gameObject)
@@ -343,9 +373,11 @@ public class RangedEnemy : MonoBehaviour
         else
         {
             var proj = Instantiate(projectile);
-            proj.transform.position = BulletOrigin.position;
+            proj.transform.position = BulletOrigins[nextHead].position;
             proj.Target = player.transform;
         }
+        nextHead++;
+        if(nextHead > 2) nextHead = 0;
     }
 
     public void AttackDone()
@@ -354,21 +386,6 @@ public class RangedEnemy : MonoBehaviour
         recalculateAttackNavigation();
     }
 
-    public void Melee()
-    {
-        if (dead) return;
-        var dir = player.transform.position - BulletOrigin.position;
-        if (Physics.Raycast(BulletOrigin.position, dir, out RaycastHit hitInfo, attackDistance, rayCastLayers))
-        {
-            var other = hitInfo.collider;
-            if (other.gameObject == player.gameObject)
-            {
-                var effect = Instantiate(FpsManager.Main.BloodEffect);
-                effect.transform.position = hitInfo.point;
-                player.Hurt((int)damage);
-            }
-        }
-    }
 
     public void WasHurt()
     {

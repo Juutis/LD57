@@ -4,6 +4,8 @@ public class MapEnemy : MonoBehaviour
 {
     [SerializeField]
     private RangedEnemy enemy;
+    [SerializeField]
+    private Boss boss;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,11 +21,13 @@ public class MapEnemy : MonoBehaviour
 
     public void ResetPos()
     {
-        enemy.ResetPos();
+        if (enemy != null) enemy.ResetPos();
+        if (boss != null) boss.ResetPos();
     }
 
     public void Initialize()
     {
-        enemy.Initialize();
+        if (enemy != null) enemy.Initialize();
+        if (boss != null) boss.Initialize();
     }
 }

@@ -100,7 +100,9 @@ public enum GameSoundType
     EnemyDie,
     EnemySeesPlayer,
     LorePickup,
-    KeyPickup
+    KeyPickup,
+    ShootShotgun,
+    ShootSMG
 }
 
 

@@ -22,6 +22,12 @@ public class Damageable : MonoBehaviour
         
     }
 
+    public void Reset()
+    {
+        diedAlready = false;
+        CurrentHealth = MaxHealth;
+    }
+
     public void Hurt(float damage) {
         CurrentHealth -= damage;
         if (CurrentHealth <= 0 && !diedAlready) {
