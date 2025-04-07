@@ -178,11 +178,5 @@ public class UIManager : MonoBehaviour
                 txtControlsToggle.text = "<b>Controls:</b> keyboard (press p to toggle)";
             }
         }
-        #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.Q)) 
-        {
-            ShowWin();
-        }
-        #endif
     }
 }
