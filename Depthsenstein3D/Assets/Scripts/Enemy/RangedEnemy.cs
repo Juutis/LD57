@@ -278,6 +278,12 @@ public class RangedEnemy : MonoBehaviour
         }
     }
 
+    public void WasHurt() {
+        if (state == State.PATROL) {
+            state = State.ATTACK;
+        }
+    }
+
 
     public float GetDistanceToTarget()
     {

@@ -88,27 +88,33 @@ public class LevelManager : MonoBehaviour
     public void LoadNextLevel(MapPrefab elevatorSwitch)
     {
         Debug.Log("Loading next level..");
+        MapGenerator.main.Player.FreezeControls();
+        FpsManager.Main.FreezeControls();
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
-        if (currentElevator == null)
-        {
-            Debug.LogError("ElevatorDoors not found!");
-            return;
-        }
+        MapGenerator.main.Player.ElevatorRotate(currentElevator.transform.position, delegate {
+            Debug.Log("rotation completed");
+        
+            if (currentElevator == null)
+            {
+                Debug.LogError("ElevatorDoors not found!");
+                return;
+            }
 
-        currentElevator.CloseDoors(delegate
-        {
-            Debug.Log("DoorsClosed");
+            currentElevator.CloseDoors(delegate
+            {
+                Debug.Log("DoorsClosed");
+            });
+
+            GameObject elevatorContainer = GameObject.FindGameObjectWithTag("Finish");
+            elevatorContainer.tag = "Elevator";
+
+            sceneLoad = SceneManager.LoadSceneAsync(levels[currentLevelNum + 1], LoadSceneMode.Additive);
+            sceneLoadCallback = delegate
+            {
+                LevelManager.main.SetCurrentLevel(currentLevelNum + 1);
+                ElevatorToLoadedLevel(elevatorContainer, elevatorSwitch);
+            };
         });
-
-        GameObject elevatorContainer = GameObject.FindGameObjectWithTag("Finish");
-        elevatorContainer.tag = "Elevator";
-
-        sceneLoad = SceneManager.LoadSceneAsync(levels[currentLevelNum + 1], LoadSceneMode.Additive);
-        sceneLoadCallback = delegate
-        {
-            LevelManager.main.SetCurrentLevel(currentLevelNum + 1);
-            ElevatorToLoadedLevel(elevatorContainer, elevatorSwitch);
-        };
     }
 
     public void RestartLevel()
@@ -179,6 +185,8 @@ public class LevelManager : MonoBehaviour
             {
                 playerSpawnPos = MapGenerator.main.Player.transform.position;
                 playerSpawnRot = MapGenerator.main.Player.transform.rotation;
+                MapGenerator.main.Player.RestoreControls();
+                FpsManager.Main.RestoreControls();
                 Debug.Log("Doors opened");
                 currentLevel = nextLevel;
                 MapGenerator.main.StartEnemies();

@@ -281,6 +281,7 @@ MonoBehaviour:
   bulletOrigin: {fileID: 0}
   HitEffect: {fileID: 5930714590066344127, guid: 1d897d9300c4f3243a4fd109b1c0b752, type: 3}
   BloodEffect: {fileID: 5930714590066344127, guid: c61c5e1121aafef478f2b2a01c6a907b, type: 3}
+  fpsShooter: {fileID: 8102796783397365644}
 --- !u!114 &8102796783397365644
 MonoBehaviour:
   m_ObjectHideFlags: 0

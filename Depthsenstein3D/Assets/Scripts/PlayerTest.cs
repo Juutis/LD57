@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerTest : MonoBehaviour
 {
@@ -14,6 +15,15 @@ public class PlayerTest : MonoBehaviour
     public int MaxHealth = 100;
     public bool Dead = false;
 
+    private bool canAct = true;
+
+    private float elevatorRotateDuration = 0.5f;
+    private float elevatorRotateTimer = 0f;
+    private bool isElevatorRotating = false;
+    private Quaternion startRotation;
+    private Quaternion targetRotation;
+    private UnityAction rotationCallback;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,9 +34,41 @@ public class PlayerTest : MonoBehaviour
         UIManager.main.SetHealth(Health);
     }
 
+    public void FreezeControls() {
+        canAct = false;
+    }
+
+    public void RestoreControls() {
+        canAct = true;
+    }
+
+    public void ElevatorRotate(Vector3 target, UnityAction rotationCallback) {
+        this.rotationCallback = rotationCallback;
+        isElevatorRotating = true;
+        elevatorRotateTimer = 0f;
+        startRotation = transform.rotation;
+        Vector3 direction = target - transform.position;
+        targetRotation = Quaternion.LookRotation(direction);
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (isElevatorRotating) {
+            elevatorRotateTimer += Time.deltaTime;
+            float t = elevatorRotateTimer / elevatorRotateDuration;
+            // 3. Use Quaternion.Lerp
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
+
+            if (t >= 1.0f)
+            {
+                isElevatorRotating = false;
+                rotationCallback.Invoke();
+            }
+        }
+        if (!canAct) {
+            return;
+        }
         if (UseMouse)
         {
             float x = Input.GetAxisRaw("Horizontal");
