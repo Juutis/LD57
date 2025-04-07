@@ -52,7 +52,13 @@ public class FpsGun : MonoBehaviour
             lastShot = Time.time;
             if (!gun.Config.IsMelee)
             {
-                SoundManager.main.PlaySound(GameSoundType.PistolShoot);
+                if (gun.Config.Name == "Shotgun") {
+                    SoundManager.main.PlaySound(GameSoundType.ShootShotgun);
+                } else if (gun.Config.Name == "SMG") {
+                    SoundManager.main.PlaySound(GameSoundType.ShootSMG);
+                } else {
+                    SoundManager.main.PlaySound(GameSoundType.PistolShoot);
+                }
                 fireBullet();
             }
             else
