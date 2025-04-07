@@ -1,9 +1,11 @@
-
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Timers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Debug = UnityEngine.Debug;
 
 public class LevelManager : MonoBehaviour
 {
@@ -41,6 +43,8 @@ public class LevelManager : MonoBehaviour
     private Vector3 playerSpawnPos = Vector3.zero;
     private Quaternion playerSpawnRot = Quaternion.identity;
 
+    private Stopwatch stopwatch;
+
     private void Awake()
     {
         if (main != null)
@@ -51,11 +55,18 @@ public class LevelManager : MonoBehaviour
         {
             main = this;
         }
+
+        stopwatch = Stopwatch.StartNew();
     }
 
     public void SetCurrentLevel(int level)
     {
         currentLevelNum = level;
+    }
+
+    public Stopwatch GetStopwatch()
+    {
+        return stopwatch;
     }
 
 
@@ -93,9 +104,12 @@ public class LevelManager : MonoBehaviour
     {
         MapGenerator.main.Player.FreezeControls();
         FpsManager.Main.FreezeControls();
-        if (currentLevelNum == 0) {
+        if (currentLevelNum == 0)
+        {
             MusicManager.main.StartMusic(MusicType.Elevator);
-        } else {
+        }
+        else
+        {
             MusicManager.main.SwitchMusic(MusicType.Elevator);
         }
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
@@ -121,7 +135,8 @@ public class LevelManager : MonoBehaviour
 
             sceneLoad = SceneManager.LoadSceneAsync(levels[currentLevelNum + 1], LoadSceneMode.Additive);
             // check level num here if you want ambience
-            if (currentLevelNum == 0) {
+            if (currentLevelNum == 0)
+            {
                 MusicManager.main.FadeOutOutsideAmbience();
             }
             sceneLoadCallback = delegate
@@ -134,6 +149,7 @@ public class LevelManager : MonoBehaviour
 
     public void RestartLevel()
     {
+        stopwatch.Stop();
         Vector3 levelPos = currentLevel.transform.position;
 
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
@@ -162,6 +178,7 @@ public class LevelManager : MonoBehaviour
             UIManager.main.FadeIn();
             currentElevator.OpenDoors(delegate
             {
+                stopwatch.Start();
                 currentLevel = nextLevel;
                 if (elevatorContainer != null)
                 {
@@ -174,6 +191,7 @@ public class LevelManager : MonoBehaviour
 
     public void ElevatorToLoadedLevel(GameObject elevatorContainer, MapPrefab elevatorSwitchPrefab, LevelStats stats)
     {
+        stopwatch.Stop();
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
 
         int levelHeight = -3;
@@ -200,9 +218,12 @@ public class LevelManager : MonoBehaviour
             Destroy(currentLevel.gameObject);
             MapGenerator.main.InitAINavigation();
 
-            if (currentLevelNum == 1) {
+            if (currentLevelNum == 1)
+            {
                 ElevatorFinalStep(currentElevator);
-            } else {
+            }
+            else
+            {
                 UIManager.main.ShowLevelStats(stats, delegate
                 {
                     ElevatorFinalStep(currentElevator);
@@ -212,36 +233,38 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    private void ElevatorFinalStep (ElevatorDoors currentElevator) {
+    private void ElevatorFinalStep(ElevatorDoors currentElevator)
+    {
         currentElevator.OpenDoors(delegate
+        {
+            stopwatch.Start();
+            playerSpawnPos = MapGenerator.main.Player.transform.position;
+            playerSpawnRot = MapGenerator.main.Player.transform.rotation;
+            FpsManager.Main.SaveSpawnGuns();
+
+            MapGenerator.main.Player.RestoreControls();
+            FpsManager.Main.RestoreControls();
+            if (currentLevelNum > 1)
             {
-                playerSpawnPos = MapGenerator.main.Player.transform.position;
-                playerSpawnRot = MapGenerator.main.Player.transform.rotation;
-                FpsManager.Main.SaveSpawnGuns();
+                MusicManager.main.SwitchMusic(MusicType.Game);
+            }
+            else
+            {
+                MusicManager.main.FadeOutMusic();
+                MusicManager.main.FadeInOfficeAmbience();
+            }
+            SoundManager.main.PlaySound(GameSoundType.ElevatorDing);
 
-                MapGenerator.main.Player.RestoreControls();
-                FpsManager.Main.RestoreControls();
-                if (currentLevelNum > 1)
-                {
-                    MusicManager.main.SwitchMusic(MusicType.Game);
-                }
-                else
-                {
-                    MusicManager.main.FadeOutMusic();
-                    MusicManager.main.FadeInOfficeAmbience();
-                }
-                SoundManager.main.PlaySound(GameSoundType.ElevatorDing);
+            //Debug.Log("Doors opened");
 
-                //Debug.Log("Doors opened");
-
-                currentLevel = nextLevel;
-                MapGenerator.main.StartEnemies();
-            });
+            currentLevel = nextLevel;
+            MapGenerator.main.StartEnemies();
+        });
     }
 
     public Sprite GetDestroyedSprite(string name)
     {
-        return altSprites.FirstOrDefault(x =>  x.name == name);
+        return altSprites.FirstOrDefault(x => x.name == name);
     }
 
     private void MoveElevator(float distance, UnityAction finishedCallback)

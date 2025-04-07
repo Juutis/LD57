@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
@@ -25,12 +26,15 @@ public class LevelStatistics : MonoBehaviour
         var maxScore = MapGenerator.main.GetMaxScore();
         var maxLore = MapGenerator.main.GetMaxLore();
         var maxHealth = 100;
+        int ts = (int)LevelManager.main.GetStopwatch().ElapsedMilliseconds;
+
         var singleStats = new List<SingleLevelStat> {
             new SingleLevelStat("Secrets", maxSecrets, secretsFound.Count),
             new SingleLevelStat("Enemies", maxEnemies, enemiesKilled),
             new SingleLevelStat("Score", maxScore, scoreGained),
             new SingleLevelStat("Health", maxHealth, MapGenerator.main.Player.Health),
-            new SingleLevelStat("Lore", maxLore, loreFound)
+            new SingleLevelStat("Lore", maxLore, loreFound),
+            new SingleLevelStat("Total time", 999999, ts)
         };
         LevelStats levelStats  = new LevelStats(singleStats);
         allStats.Add(levelStats);

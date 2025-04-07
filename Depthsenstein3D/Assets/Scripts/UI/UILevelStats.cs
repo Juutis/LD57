@@ -36,9 +36,8 @@ public class UILevelStats : MonoBehaviour
 
         foreach (var stat in levelStats.Stats)
         {
-            //            Debug.Log($"{stat.Name} {stat.Value} / {stat.Max}");
             UILevelSingleStat singleStat = Instantiate(uiLevelSingleStatPrefab, statContainer);
-            singleStat.Initialize(stat);
+            singleStat.Initialize(stat, stat.Name == "Total time");
             singleLevelStats.Add(singleStat);
         }
     }
