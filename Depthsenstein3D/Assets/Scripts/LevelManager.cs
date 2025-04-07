@@ -91,11 +91,12 @@ public class LevelManager : MonoBehaviour
         MapGenerator.main.Player.FreezeControls();
         FpsManager.Main.FreezeControls();
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
-        MapGenerator.main.Player.ElevatorRotate(currentElevator.transform.position, delegate {
+        MapGenerator.main.Player.ElevatorRotate(currentElevator.transform.position, delegate
+        {
             //Debug.Log("rotation completed");
 
             LevelStats stats = MapGenerator.main.Player.Stats.CalculateCurrentLevelStats();
-            
+
 
             if (currentElevator == null)
             {
@@ -176,7 +177,6 @@ public class LevelManager : MonoBehaviour
             //Debug.Log("nO SPAWN");
         }
         Vector3 diff = elevatorSwitchPrefab.transform.position - spawn.transform.position;
-        //Debug.Log($"{elevatorSwitchPrefab.transform.position} - {spawn.transform.position} = {diff}");
         currentLevelTransform = currentLevel.transform.GetComponent<MapGenerator>().Container;
         nextLevelTransform = nextLevel.transform;
 
@@ -185,8 +185,10 @@ public class LevelManager : MonoBehaviour
         MoveElevator(-elevatorTravelDistance, delegate
         {
             elevatorContainer.transform.parent = nextLevel.transform;
+            currentLevel.gameObject.SetActive(false);
             Destroy(currentLevel.gameObject);
             MapGenerator.main.InitAINavigation();
+
             UIManager.main.ShowLevelStats(stats, delegate
             {
                 currentElevator.OpenDoors(delegate
