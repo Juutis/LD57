@@ -48,6 +48,11 @@ public class UIManager : MonoBehaviour
     }
 
 
+    public void ShowDeath(UnityAction hideCallback) {
+        UIShowDialog uiShowDialog = Instantiate(uiShowDialogPrefab, uiShowDialogContainer);
+        uiShowDialog.ShowDeath(hideCallback);
+    }
+
     public void ShowMessage(string message, UnityAction showCallback, UnityAction hideCallback)
     {
         UIShowDialog uiShowDialog = Instantiate(uiShowDialogPrefab, uiShowDialogContainer);

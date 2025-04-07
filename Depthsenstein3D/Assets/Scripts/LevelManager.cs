@@ -1,7 +1,6 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
@@ -90,7 +89,11 @@ public class LevelManager : MonoBehaviour
     {
         MapGenerator.main.Player.FreezeControls();
         FpsManager.Main.FreezeControls();
-        MusicManager.main.SwitchMusic(MusicType.Elevator);
+        if (currentLevelNum == 0) {
+            MusicManager.main.StartMusic(MusicType.Elevator);
+        } else {
+            MusicManager.main.SwitchMusic(MusicType.Elevator);
+        }
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
         MapGenerator.main.ResetKeys();
         UIManager.main.ClearInventory();
@@ -193,27 +196,42 @@ public class LevelManager : MonoBehaviour
             Destroy(currentLevel.gameObject);
             MapGenerator.main.InitAINavigation();
 
-            UIManager.main.ShowLevelStats(stats, delegate
-            {
-                currentElevator.OpenDoors(delegate
+            if (currentLevelNum == 1) {
+                ElevatorFinalStep(currentElevator);
+            } else {
+                UIManager.main.ShowLevelStats(stats, delegate
                 {
-                    playerSpawnPos = MapGenerator.main.Player.transform.position;
-                    playerSpawnRot = MapGenerator.main.Player.transform.rotation;
-                    FpsManager.Main.SaveSpawnGuns();
-
-                    MapGenerator.main.Player.RestoreControls();
-                    FpsManager.Main.RestoreControls();
-                    MusicManager.main.SwitchMusic(MusicType.Game);
-                    SoundManager.main.PlaySound(GameSoundType.ElevatorDing);
-
-                    //Debug.Log("Doors opened");
-
-                    currentLevel = nextLevel;
-                    MapGenerator.main.StartEnemies();
+                    ElevatorFinalStep(currentElevator);
                 });
-            });
+            }
         });
 
+    }
+
+    private void ElevatorFinalStep (ElevatorDoors currentElevator) {
+        currentElevator.OpenDoors(delegate
+            {
+                playerSpawnPos = MapGenerator.main.Player.transform.position;
+                playerSpawnRot = MapGenerator.main.Player.transform.rotation;
+                FpsManager.Main.SaveSpawnGuns();
+
+                MapGenerator.main.Player.RestoreControls();
+                FpsManager.Main.RestoreControls();
+                if (currentLevelNum > 1)
+                {
+                    MusicManager.main.SwitchMusic(MusicType.Game);
+                }
+                else
+                {
+                    MusicManager.main.FadeOutMusic();
+                }
+                SoundManager.main.PlaySound(GameSoundType.ElevatorDing);
+
+                //Debug.Log("Doors opened");
+
+                currentLevel = nextLevel;
+                MapGenerator.main.StartEnemies();
+            });
     }
 
     private void MoveElevator(float distance, UnityAction finishedCallback)
