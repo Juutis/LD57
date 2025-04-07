@@ -88,14 +88,11 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextLevel(MapPrefab elevatorSwitch)
     {
-        //Debug.Log("Loading next level..");
         MapGenerator.main.Player.FreezeControls();
         FpsManager.Main.FreezeControls();
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
         MapGenerator.main.Player.ElevatorRotate(currentElevator.transform.position, delegate
         {
-            //Debug.Log("rotation completed");
-
             LevelStats stats = MapGenerator.main.Player.Stats.CalculateCurrentLevelStats();
 
 
@@ -107,7 +104,6 @@ public class LevelManager : MonoBehaviour
 
             currentElevator.CloseDoors(delegate
             {
-                //Debug.Log("DoorsClosed");
             });
 
             GameObject elevatorContainer = GameObject.FindGameObjectWithTag("Finish");
@@ -200,7 +196,7 @@ public class LevelManager : MonoBehaviour
 
                     MapGenerator.main.Player.RestoreControls();
                     FpsManager.Main.RestoreControls();
-                    //Debug.Log("Doors opened");
+
                     currentLevel = nextLevel;
                     MapGenerator.main.StartEnemies();
                 });
