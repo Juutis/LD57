@@ -69,12 +69,24 @@ PrefabInstance:
       value: -0.05592209
       objectReference: {fileID: 0}
     - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: moveSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
       propertyPath: projectile
       value: 
       objectReference: {fileID: 3218966361157423755, guid: f6c3149e8132d3a48a82486ebed9568d, type: 3}
     - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
       propertyPath: attackDistance
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: maxDelayBetweenAttacks
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: minDelayBetweenAttacks
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5725473735054880837, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
       propertyPath: m_LocalScale.x

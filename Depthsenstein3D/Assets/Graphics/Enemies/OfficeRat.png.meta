@@ -483,6 +483,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: OfficeRat_17
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa5d02f47bede184e86ac523d5b9d0ec
+      internalID: 870941087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -506,6 +528,7 @@ TextureImporter:
       OfficeRat_14: 520080919
       OfficeRat_15: 1038887907
       OfficeRat_16: 1059812318
+      OfficeRat_17: 870941087
       OfficeRat_2: -1697967638
       OfficeRat_3: 374196037
       OfficeRat_4: 1816608928

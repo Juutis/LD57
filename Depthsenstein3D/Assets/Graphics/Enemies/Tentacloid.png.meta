@@ -417,6 +417,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Tentacloid_14
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ec4343c730868f4b810bc15441dbd1f
+      internalID: -1680890503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -437,6 +459,7 @@ TextureImporter:
       Tentacloid_11: -145931502
       Tentacloid_12: 1410417334
       Tentacloid_13: -234153772
+      Tentacloid_14: -1680890503
       Tentacloid_2: -2083820118
       Tentacloid_3: 1574587898
       Tentacloid_4: 367464802
