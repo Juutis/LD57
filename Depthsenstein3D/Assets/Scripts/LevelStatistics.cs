@@ -9,13 +9,29 @@ public class LevelStatistics : MonoBehaviour
 
     private List<int> secretsFound = new();
     public List<int> SecretsFound {get {return secretsFound;} }
+
+    private int secretsFoundTotal = 0;
+    private int secretsMaxTotal = 0;
+    public int SecretsFoundTotal {get {return secretsFoundTotal;}}
     private int enemiesKilled = 0;
     public int EnemiesKilled {get {return enemiesKilled; } set { enemiesKilled = value;} }
+    private int enemiesKilledTotal = 0;
+    private int enemiesMaxTotal = 0;
+
+    public int EnemiesKilledTotal { get { return enemiesKilledTotal; } }
+
     private int scoreGained = 0;
     public int ScoreGained {get {return scoreGained;} set {scoreGained = value;} }
+    private int scoreGainedTotal = 0;
+    private int scoreMaxTotal = 0;
+    public int ScoreGainedTotal { get { return scoreGainedTotal; } }
 
     private int loreFound = 0;
     public int LoreFound { get { return loreFound; } set { loreFound = value; } }
+
+    private int loreFoundTotal = 0;
+    public int LoreFoundTotal {get {return loreFoundTotal;}}
+    private int loreMaxtotal = 0;
 
 
     private List<LevelStats> allStats = new();
@@ -38,8 +54,32 @@ public class LevelStatistics : MonoBehaviour
         };
         LevelStats levelStats  = new LevelStats(singleStats);
         allStats.Add(levelStats);
+
+        secretsMaxTotal += maxSecrets;
+        enemiesMaxTotal += maxEnemies;
+        scoreMaxTotal += maxScore;
+        loreMaxtotal += maxLore;
+
+        secretsFoundTotal += secretsFound.Count;
+        enemiesKilledTotal += enemiesKilled;
+        scoreGainedTotal += scoreGained;
+        loreFoundTotal += loreFound;
         ResetCurrentStats();
         return levelStats;
+    }
+
+    public List<SingleLevelStat> EndStats() {
+        CalculateCurrentLevelStats();
+        int ts = (int)LevelManager.main.GetStopwatch().ElapsedMilliseconds;
+        var singleStats = new List<SingleLevelStat> {
+            new SingleLevelStat("Secrets", secretsMaxTotal, secretsFoundTotal),
+            new SingleLevelStat("Enemies", enemiesMaxTotal, enemiesKilledTotal),
+            new SingleLevelStat("Score", scoreMaxTotal, scoreGainedTotal),
+            new SingleLevelStat("Health", 100, MapGenerator.main.Player.Health),
+            new SingleLevelStat("Lore", loreMaxtotal, loreFoundTotal),
+            new SingleLevelStat("Total time", 999999, ts)
+        };
+        return singleStats;
     }
 
     public void ResetCurrentStats() {
