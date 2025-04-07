@@ -346,6 +346,7 @@ public class RangedEnemy : MonoBehaviour
             var proj = Instantiate(projectile);
             proj.transform.position = BulletOrigin.position;
             proj.Target = player.transform;
+            SoundManager.main.PlaySound(GameSoundType.Laser);
         }
     }
 

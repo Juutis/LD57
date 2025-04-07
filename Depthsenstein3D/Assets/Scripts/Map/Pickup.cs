@@ -73,6 +73,7 @@ public class Pickup : MonoBehaviour
         if (TryGetComponent(out HPPickup hpPickup))
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerTest>().Heal(hpPickup.Value);
+            SoundManager.main.PlaySound(GameSoundType.PickupHP);
         }
 
         if (TryGetComponent(out Gun gun))
