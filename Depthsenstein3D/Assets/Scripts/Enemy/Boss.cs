@@ -378,6 +378,7 @@ public class Boss : MonoBehaviour
             var proj = Instantiate(projectile);
             proj.transform.position = BulletOrigins[nextHead].position;
             proj.Target = player.transform;
+            SoundManager.main.PlaySound(GameSoundType.Laser);
         }
         nextHead++;
         if(nextHead > 2) nextHead = 0;

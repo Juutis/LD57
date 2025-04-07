@@ -103,7 +103,9 @@ public enum GameSoundType
     KeyPickup,
     ShootShotgun,
     ShootSMG,
-    SecretArea
+    SecretArea,
+    Laser,
+    PickupHP
 }
 
 
