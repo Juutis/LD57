@@ -103,3 +103,7 @@ MonoBehaviour:
     prefab: {fileID: 1698918815911979869, guid: cd9a933f128dc7a43b6eb22bb30f708c, type: 3}
   - sprite: {fileID: 1965040902, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
     prefab: {fileID: 1698918815911979869, guid: e18341b82eb8e314b9942edd0c8322e1, type: 3}
+  - sprite: {fileID: -1371092656, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
+    prefab: {fileID: 1698918815911979869, guid: 1a2935f4b121b194f8613239bacd9898, type: 3}
+  - sprite: {fileID: -423360408, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
+    prefab: {fileID: 1698918815911979869, guid: 3ceadf21667c93347a8819c7dea562c5, type: 3}
