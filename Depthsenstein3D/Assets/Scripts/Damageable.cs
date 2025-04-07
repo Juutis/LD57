@@ -7,6 +7,7 @@ public class Damageable : MonoBehaviour
     public float CurrentHealth = 10.0f;
     public UnityEvent DieEvent;
     private bool diedAlready = false;
+    private RangedEnemy enemy;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,6 +26,9 @@ public class Damageable : MonoBehaviour
         if (CurrentHealth <= 0 && !diedAlready) {
             DieEvent.Invoke();
             diedAlready = true;
+        }
+        if (enemy != null) {
+            enemy.WasHurt();
         }
     }
 }
