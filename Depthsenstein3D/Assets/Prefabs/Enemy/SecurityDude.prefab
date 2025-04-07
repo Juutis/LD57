@@ -62,11 +62,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
       propertyPath: attackDistance
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
       propertyPath: accuracyDegrees
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: maxDelayBetweenAttacks
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: minDelayBetweenAttacks
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6731509159151640254, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
       propertyPath: m_Sprite

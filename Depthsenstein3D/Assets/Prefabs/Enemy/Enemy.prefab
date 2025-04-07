@@ -159,8 +159,9 @@ MonoBehaviour:
   BulletOrigin: {fileID: 8747326508200427912}
   accuracyDegrees: 20
   damage: 5
+  minDelayBetweenAttacks: 1.5
+  maxDelayBetweenAttacks: 2
   projectile: {fileID: 0}
-  navigationTarget: {fileID: 2594418190225108531}
 --- !u!1 &2082736919525994225
 GameObject:
   m_ObjectHideFlags: 0

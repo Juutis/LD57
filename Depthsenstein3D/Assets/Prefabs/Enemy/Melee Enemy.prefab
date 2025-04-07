@@ -61,6 +61,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2397607349339124801, guid: 256cd4a79cad32a4ab6a9e97b92bb3c2, type: 3}
     - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: moveSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
+      propertyPath: aggroDistance
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241793049240915657, guid: 74e220f3f90224c4caa5aac56c8c7da6, type: 3}
       propertyPath: attackDistance
       value: 1
       objectReference: {fileID: 0}

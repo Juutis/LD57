@@ -417,6 +417,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: SecurityDude_14
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e32128764a0b8740960f3f6def41b42
+      internalID: -454496044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -437,6 +459,7 @@ TextureImporter:
       SecurityDude_11: 1530117403
       SecurityDude_12: -1481460499
       SecurityDude_13: 1680536969
+      SecurityDude_14: -454496044
       SecurityDude_2: 589710972
       SecurityDude_3: -807181903
       SecurityDude_4: -997567179
