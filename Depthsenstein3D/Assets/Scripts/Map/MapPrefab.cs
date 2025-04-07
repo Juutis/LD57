@@ -45,6 +45,10 @@ public class MapPrefab : MonoBehaviour
             SecretTarget secretTarget = GetComponent<SecretTarget>();
             secretTarget.Initialize(tileMapTileData);
         }
+        else if (mapPrefabType == MapPrefabType.SecretArea){
+            SecretArea secretArea = GetComponent<SecretArea>();
+            secretArea.Initialize(tileMapTileData.MapId);
+        }
         else if (mapPrefabType == MapPrefabType.Door)
         {
             NormalDoor mapDoor = GetComponent<NormalDoor>();
@@ -126,6 +130,7 @@ public enum MapPrefabType
     Clutter,
     LoreMessage,
     SpecialWall,
-    ElevatorDoors
+    ElevatorDoors,
+    SecretArea
 
 }

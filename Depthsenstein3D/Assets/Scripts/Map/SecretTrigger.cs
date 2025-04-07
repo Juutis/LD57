@@ -22,10 +22,6 @@ public class SecretTrigger : MonoBehaviour
             return;
         }
 
-        List<int> secrets = MapGenerator.main.Player.Stats.SecretsFound;
-        if (!secrets.Contains(secretId)) {
-            secrets.Add(secretId);;
-        }
         SoundManager.main.PlaySound(GameSoundType.ActivateTrigger);
         MapGenerator.main.TriggerSecret(this);
 

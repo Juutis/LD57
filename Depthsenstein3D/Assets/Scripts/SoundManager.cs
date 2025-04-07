@@ -102,7 +102,8 @@ public enum GameSoundType
     LorePickup,
     KeyPickup,
     ShootShotgun,
-    ShootSMG
+    ShootSMG,
+    SecretArea
 }
 
 

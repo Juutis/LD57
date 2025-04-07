@@ -193,6 +193,12 @@ public class MapGenerator : MonoBehaviour
         UIManager.main.AddKeyToInventory(pickupKey);
     }
 
+    public void ClearSecretAreas(int mapId)
+    {
+        mapManager.ClearSecretAreas(mapId);
+    }
+    
+
     public void TriggerSecret(SecretTrigger secretTrigger)
     {
         mapManager.TriggerSecret(secretTrigger);

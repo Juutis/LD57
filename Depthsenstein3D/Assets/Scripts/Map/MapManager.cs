@@ -88,8 +88,8 @@ public class MapManager : MonoBehaviour
         {
             foreach (var mapObject in layer)
             {
-                SecretTrigger trigger = mapObject.GetComponent<SecretTrigger>();
-                if (trigger != null)
+                SecretArea area = mapObject.GetComponent<SecretArea>();
+                if (area != null)
                 {
                     secrets += 1;
                     break;
@@ -196,6 +196,17 @@ public class MapManager : MonoBehaviour
     public MapPrefab GetSpawnPoint()
     {
         return spawn;
+    }
+
+    public void ClearSecretAreas(int mapId) {
+        foreach (var mapObject in mapObjects.FindAll(obj => obj.MapId == mapId))
+        {
+            SecretArea target = mapObject.GetComponent<SecretArea>();
+            if (target != null)
+            {
+                Destroy(target.gameObject);
+            }
+        }
     }
 
     public void TriggerSecret(SecretTrigger secretTrigger)
