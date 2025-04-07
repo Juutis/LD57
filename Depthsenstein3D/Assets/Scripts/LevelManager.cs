@@ -70,6 +70,7 @@ public class LevelManager : MonoBehaviour
         }
         if (elevatorIsMoving)
         {
+            ScreenShake.Instance.Shake(0.1f);
             elevatorTimer += Time.deltaTime;
             currentLevelTransform.position = Vector3.Lerp(currentLevelOrigin, currentLevelTarget, elevatorTimer / elevatorDuration);
             nextLevelTransform.position = Vector3.Lerp(nextLevelOrigin, nextLevelTarget, elevatorTimer / elevatorDuration);
@@ -87,16 +88,14 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextLevel(MapPrefab elevatorSwitch)
     {
-        //Debug.Log("Loading next level..");
         MapGenerator.main.Player.FreezeControls();
         FpsManager.Main.FreezeControls();
         MusicManager.main.SwitchMusic(MusicType.Elevator);
         ElevatorDoors currentElevator = currentLevel.GetComponentInChildren<ElevatorDoors>();
-        MapGenerator.main.Player.ElevatorRotate(currentElevator.transform.position, delegate {
-            //Debug.Log("rotation completed");
-
+        MapGenerator.main.Player.ElevatorRotate(currentElevator.transform.position, delegate
+        {
             LevelStats stats = MapGenerator.main.Player.Stats.CalculateCurrentLevelStats();
-            
+
 
             if (currentElevator == null)
             {
@@ -106,7 +105,6 @@ public class LevelManager : MonoBehaviour
 
             currentElevator.CloseDoors(delegate
             {
-                //Debug.Log("DoorsClosed");
             });
 
             GameObject elevatorContainer = GameObject.FindGameObjectWithTag("Finish");
@@ -181,7 +179,6 @@ public class LevelManager : MonoBehaviour
             //Debug.Log("nO SPAWN");
         }
         Vector3 diff = elevatorSwitchPrefab.transform.position - spawn.transform.position;
-        //Debug.Log($"{elevatorSwitchPrefab.transform.position} - {spawn.transform.position} = {diff}");
         currentLevelTransform = currentLevel.transform.GetComponent<MapGenerator>().Container;
         nextLevelTransform = nextLevel.transform;
 
@@ -190,8 +187,10 @@ public class LevelManager : MonoBehaviour
         MoveElevator(-elevatorTravelDistance, delegate
         {
             elevatorContainer.transform.parent = nextLevel.transform;
+            currentLevel.gameObject.SetActive(false);
             Destroy(currentLevel.gameObject);
             MapGenerator.main.InitAINavigation();
+
             UIManager.main.ShowLevelStats(stats, delegate
             {
                 currentElevator.OpenDoors(delegate
@@ -206,6 +205,7 @@ public class LevelManager : MonoBehaviour
                     SoundManager.main.PlaySound(GameSoundType.ElevatorDing);
 
                     //Debug.Log("Doors opened");
+
                     currentLevel = nextLevel;
                     MapGenerator.main.StartEnemies();
                 });

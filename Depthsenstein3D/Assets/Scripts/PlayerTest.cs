@@ -99,7 +99,7 @@ public class PlayerTest : MonoBehaviour
             {
                 GameObject target = hitInfo.collider.gameObject;
 
-                if (target.TryGetComponent(out Door door))
+                if (target.TryGetComponent(out NormalDoor door))
                 {
                     Destroy(door.gameObject);
                     SoundManager.main.PlaySound(GameSoundType.OpenDoor);
@@ -173,6 +173,7 @@ public class PlayerTest : MonoBehaviour
         {
             Die();
         }
+        ScreenShake.Instance.Shake();
     }
 
     public void Die()

@@ -46,7 +46,8 @@ public class MapPrefab : MonoBehaviour
         }
         else if (mapPrefabType == MapPrefabType.Door)
         {
-            transform.GetChild(0).AddComponent<Door>();
+            NormalDoor mapDoor = GetComponent<NormalDoor>();
+            mapDoor.Initialize();
         }
         else if (mapPrefabType == MapPrefabType.LockedDoor)
         {
