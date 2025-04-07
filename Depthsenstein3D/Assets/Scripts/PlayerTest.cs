@@ -91,45 +91,61 @@ public class PlayerTest : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.E))
         {
-            Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 1f, ~0);
+            RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, 1f, ~0);
 
-            Debug.Log($"{(hitInfo.collider != null ? "hit" : "nop")} | ${(hitInfo.collider != null ? hitInfo.collider.gameObject.name : "null")}");
-
-            if (hitInfo.collider != null)
+            foreach (RaycastHit hitInfo in hits)
             {
-                GameObject target = hitInfo.collider.gameObject;
+                bool hasActivatedSomething = true;
+                Debug.Log($"{(hitInfo.collider != null ? "hit" : "nop")} | ${(hitInfo.collider != null ? hitInfo.collider.gameObject.name : "null")}");
 
-                if (target.TryGetComponent(out NormalDoor door))
+                if (hitInfo.collider != null)
                 {
-                    Destroy(door.gameObject);
-                    SoundManager.main.PlaySound(GameSoundType.OpenDoor);
-                }
-                else if (target.TryGetComponent(out SecretTrigger secretTrigger))
-                {
-                    secretTrigger.Trigger();
-                }
-                else if (target.TryGetComponent(out LockedDoor lockedDoor))
-                {
-                    if (lockedDoor.TryToOpen()) {
+                    GameObject target = hitInfo.collider.gameObject;
+
+                    if (target.TryGetComponent(out NormalDoor door))
+                    {
+                        Destroy(door.gameObject);
                         SoundManager.main.PlaySound(GameSoundType.OpenDoor);
-                    } else {
-                        SoundManager.main.PlaySound(GameSoundType.Prod);
                     }
-                }
-                else if (target.TryGetComponent(out ElevatorDoors elevatorDoors)) {
-                    Debug.Log("Elevator");
-                    SoundManager.main.PlaySound(GameSoundType.ElevatorOpen);
-                    elevatorDoors.OpenDoorsFromPlayerAction(delegate {
-                        SoundManager.main.PlaySound(GameSoundType.ElevatorDing);
-                        Debug.Log("Doors opened");
-                    });
-                }
-                else if (target.TryGetComponent(out ElevatorSwitch elevatorSwitch))
-                {
-                    elevatorSwitch.Use();
-                }
-                else {
-                    SoundManager.main.PlaySound(GameSoundType.Prod);
+                    else if (target.TryGetComponent(out SecretTrigger secretTrigger))
+                    {
+                        secretTrigger.Trigger();
+                    }
+                    else if (target.TryGetComponent(out LockedDoor lockedDoor))
+                    {
+                        if (lockedDoor.TryToOpen())
+                        {
+                            SoundManager.main.PlaySound(GameSoundType.OpenDoor);
+                        }
+                        else
+                        {
+                            SoundManager.main.PlaySound(GameSoundType.Prod);
+                        }
+                    }
+                    else if (target.TryGetComponent(out ElevatorDoors elevatorDoors))
+                    {
+                        Debug.Log("Elevator");
+                        SoundManager.main.PlaySound(GameSoundType.ElevatorOpen);
+                        elevatorDoors.OpenDoorsFromPlayerAction(delegate
+                        {
+                            SoundManager.main.PlaySound(GameSoundType.ElevatorDing);
+                            Debug.Log("Doors opened");
+                        });
+                    }
+                    else if (target.TryGetComponent(out ElevatorSwitch elevatorSwitch))
+                    {
+                        elevatorSwitch.Use();
+                    }
+                    else
+                    {
+                        SoundManager.main.PlaySound(GameSoundType.Prod);
+                        hasActivatedSomething = false;
+                    }
+
+                    if (hasActivatedSomething)
+                    {
+                        break;
+                    }
                 }
             }
         }
