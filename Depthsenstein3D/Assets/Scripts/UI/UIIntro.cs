@@ -93,10 +93,8 @@ public class UIIntro : MonoBehaviour
             return;
         }
         if (state == UIIntroState.Start) {
-            if (Input.anyKeyDown) {
-                state = UIIntroState.FirstScreen;
-                NextMessage();
-            }
+            state = UIIntroState.FirstScreen;
+            NextMessage();
         }
         if (state == UIIntroState.Finished) {
             return;

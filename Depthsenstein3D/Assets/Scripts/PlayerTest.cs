@@ -197,7 +197,11 @@ public class PlayerTest : MonoBehaviour
         if (Dead) return;
         Dead = true;
         Debug.Log("YOU DIED");
-        LevelManager.main.RestartLevel();
+        Time.timeScale = 0;
+        UIManager.main.ShowDeath(delegate {
+            LevelManager.main.RestartLevel();
+            Time.timeScale = 1;
+        });
     }
 
     public void ResetPlayer(Vector3 spawnPos, Quaternion spawnRot)

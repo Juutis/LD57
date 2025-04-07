@@ -10,7 +10,6 @@ public class MusicManager : MonoBehaviour
 
     public static MusicManager main;
     private AudioSource elevatorMusic;
-    private AudioSource menuMusic;
     private AudioSource gameMusic;
 
 
@@ -18,16 +17,11 @@ public class MusicManager : MonoBehaviour
     private AudioClip gameMusicClip;
     [SerializeField]
     private AudioClip elevatorMusicClip;
-    [SerializeField]
-    private AudioClip menuMusicClip;
-
     private List<AudioFade> fades = new List<AudioFade>();
 
 
     [SerializeField]
     float volumeelevator = 0.5f;
-    [SerializeField]
-    float volumeMenu = 0.5f;
     [SerializeField]
     float volumeGame = 0.5f;
 
@@ -52,7 +46,6 @@ public class MusicManager : MonoBehaviour
     {
         InitializeAudioSources();
         main = this;
-        StartMusic(MusicType.Menu);
     }
 
     void Start()
@@ -72,11 +65,6 @@ public class MusicManager : MonoBehaviour
     public void StartMusic(MusicType musicType)
     {
         InitializeAudioSources();
-        if (musicType == MusicType.Menu)
-        {
-            currentMusic = menuMusic;
-            currentMusic.volume = volumeMenu;
-        }
         if (musicType == MusicType.Game)
         {
             currentMusic = gameMusic;
@@ -96,11 +84,6 @@ public class MusicManager : MonoBehaviour
     public void SwitchMusic(MusicType musicType)
     {
         AudioSource newSource = null;
-        if (musicType == MusicType.Menu)
-        {
-            newSource = menuMusic;
-            newSource.volume = volumeMenu;
-        }
         if (musicType == MusicType.Game)
         {
             newSource = gameMusic;
@@ -130,10 +113,6 @@ public class MusicManager : MonoBehaviour
         if (elevatorMusic == null)
         {
             elevatorMusic = InitializeAudioSource("elevator music", elevatorMusicClip);
-        }
-        if (menuMusic == null)
-        {
-            menuMusic = InitializeAudioSource("Menu music", menuMusicClip);
         }
     }
 
@@ -196,7 +175,6 @@ public class MusicManager : MonoBehaviour
 
 public enum MusicType
 {
-    Menu,
     Game,
     Elevator
 }
