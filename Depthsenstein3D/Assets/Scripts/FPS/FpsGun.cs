@@ -106,6 +106,7 @@ public class FpsGun : MonoBehaviour
     }
 
     private void fireBullet() {
+        bool bulletHitEnemy = false;
         for(var i = 0; i < gun.Config.ProjectileCount; i++) {
             var dir = bulletOrigin.forward;
             var inAccuracy = Random.Range(0.0f, 1.0f) * gun.Config.AccuracyDegrees;
@@ -120,7 +121,7 @@ public class FpsGun : MonoBehaviour
                     var effect = Instantiate(FpsManager.Main.BloodEffect);
                     effect.transform.position = hitInfo.point;
                     // invoke to separate gunshot & hit
-                    Invoke("PlayHitSound", 0.1f);
+                    bulletHitEnemy = true;
                     justWallWasHit = false;
                 } else {
                     var effect = Instantiate(FpsManager.Main.HitEffect);
@@ -136,6 +137,9 @@ public class FpsGun : MonoBehaviour
                     }
                 }
             }
+        }
+        if (bulletHitEnemy) {
+            Invoke("PlayHitSound", 0.1f);
         }
     }
 
