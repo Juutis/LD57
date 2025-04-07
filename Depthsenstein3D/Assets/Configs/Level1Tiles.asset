@@ -85,3 +85,17 @@ MonoBehaviour:
     prefab: {fileID: 1698918815911979869, guid: abb2c95bc6213e04280baebf6e812003, type: 3}
   - sprite: {fileID: 467121946, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
     prefab: {fileID: 1698918815911979869, guid: abb2c95bc6213e04280baebf6e812003, type: 3}
+  - sprite: {fileID: 467121946, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
+    prefab: {fileID: 1698918815911979869, guid: abb2c95bc6213e04280baebf6e812003, type: 3}
+  - sprite: {fileID: -1241499550, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
+    prefab: {fileID: 1698918815911979869, guid: abb2c95bc6213e04280baebf6e812003, type: 3}
+  - sprite: {fileID: -1241499550, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
+    prefab: {fileID: 1698918815911979869, guid: abb2c95bc6213e04280baebf6e812003, type: 3}
+  - sprite: {fileID: -1241499550, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
+    prefab: {fileID: 1698918815911979869, guid: abb2c95bc6213e04280baebf6e812003, type: 3}
+  - sprite: {fileID: -1241499550, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
+    prefab: {fileID: 1698918815911979869, guid: abb2c95bc6213e04280baebf6e812003, type: 3}
+  - sprite: {fileID: -1241499550, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
+    prefab: {fileID: 1698918815911979869, guid: abb2c95bc6213e04280baebf6e812003, type: 3}
+  - sprite: {fileID: -1241499550, guid: 03afee723ac49514a9bd0ac8bff02e9c, type: 3}
+    prefab: {fileID: 1698918815911979869, guid: abb2c95bc6213e04280baebf6e812003, type: 3}
