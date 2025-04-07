@@ -13,6 +13,7 @@ public class Damageable : MonoBehaviour
     void Start()
     {
         CurrentHealth = MaxHealth;
+        enemy = GetComponent<RangedEnemy>();
     }
 
     // Update is called once per frame
