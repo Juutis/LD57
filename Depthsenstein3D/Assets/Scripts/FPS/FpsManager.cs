@@ -10,6 +10,19 @@ public class FpsManager : MonoBehaviour
     public Transform bulletOrigin;
     public GameObject HitEffect;
     public GameObject BloodEffect;
+    [SerializeField]
+
+    private FpsShooter fpsShooter;
+
+    public void FreezeControls()
+    {
+        fpsShooter.FreezeControls();
+    }
+
+    public void RestoreControls()
+    {
+        fpsShooter.RestoreControls();
+    }
 
     void Awake()
     {

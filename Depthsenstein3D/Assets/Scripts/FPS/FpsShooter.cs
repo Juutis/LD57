@@ -8,6 +8,8 @@ public class FpsShooter : MonoBehaviour
     private FpsManager.Gun desiredGun;
     private State state = State.ARMING;
 
+    private bool canAct = true;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,9 +17,23 @@ public class FpsShooter : MonoBehaviour
         selectGun(selectedGun);
     }
 
+
+    public void FreezeControls()
+    {
+        canAct = false;
+    }
+
+    public void RestoreControls()
+    {
+        canAct = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (!canAct) {
+            return;
+        }
         if (Input.GetKey(KeyCode.Mouse0) && state == State.READY) {
             selectedGun().GunModel.Shoot();
         }

@@ -50,7 +50,7 @@ public class UIShowDialog : MonoBehaviour
     }
 
     void Update() {
-        if (!isHiding && isShown && Input.GetKeyDown(KeyCode.Space)) {
+        if (!isHiding && isShown && Input.GetKeyDown(KeyCode.E)) {
             Hide();
         }
     }
