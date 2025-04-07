@@ -9,6 +9,7 @@ public class ScreenShake : MonoBehaviour
     private float triggered = -1;
     private float duration = 0.1f;
     private CinemachineBasicMultiChannelPerlin noise;
+    private float shakeAmplitude = 1.0f;
 
     void Awake() {
         Instance = this;
@@ -26,14 +27,15 @@ public class ScreenShake : MonoBehaviour
     {
         if (triggered > 0 && triggered > Time.time - duration) {
             var t = (Time.time - triggered) / duration;
-            var amp = Mathf.Lerp(1.0f, 0.0f, t);
+            var amp = Mathf.Lerp(shakeAmplitude, 0.0f, t);
             noise.AmplitudeGain = amp;
         } else {
             noise.AmplitudeGain = 0.0f;
         }
     }
 
-    public void Shake() {
+    public void Shake(float amplitude = 1.0f) {
+        shakeAmplitude = amplitude;
         triggered = Time.time;
     }
 }

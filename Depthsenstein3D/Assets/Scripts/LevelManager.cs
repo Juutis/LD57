@@ -70,6 +70,7 @@ public class LevelManager : MonoBehaviour
         }
         if (elevatorIsMoving)
         {
+            ScreenShake.Instance.Shake(0.1f);
             elevatorTimer += Time.deltaTime;
             currentLevelTransform.position = Vector3.Lerp(currentLevelOrigin, currentLevelTarget, elevatorTimer / elevatorDuration);
             nextLevelTransform.position = Vector3.Lerp(nextLevelOrigin, nextLevelTarget, elevatorTimer / elevatorDuration);
