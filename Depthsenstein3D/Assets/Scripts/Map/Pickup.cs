@@ -4,7 +4,7 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
 
-    private float minDistance = 0.5f;
+    private float minDistance = 0.75f;
     private float distanceCheckInterval = 0.1f;
     private float distanceCheckTimer = 0.1f;
 

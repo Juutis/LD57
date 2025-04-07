@@ -47,7 +47,6 @@ public class PlayerTest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 1f, ~0);
-            Debug.DrawLine(transform.position, transform.position + transform.forward, Color.red, 5f);
 
             Debug.Log($"{(hitInfo.collider != null ? "hit" : "nop")} | ${(hitInfo.collider != null ? hitInfo.collider.gameObject.name : "null")}");
 
